@@ -1,8 +1,18 @@
-import React from 'react'
+import React from "react";
+import MainLayout from '../layout/MainLayout.jsx';
+import  {useLocation} from 'react-router-dom';
 
-const blogPage = () => {
-  return (
-      <><div>blogPage</div><h1>dsfgsdgf</h1></>
-  )
+function BlogPage(props){
+    const location = useLocation();
+    const { email, password } = location.state;
+    return( 
+        <MainLayout logged_in = {true}>
+            <div>{email}</div>
+            <div>{password}</div>
+            <div>Blog</div>
+        </MainLayout>
+ 
+    ) 
+    
 }
-export default blogPage
+export default BlogPage;
