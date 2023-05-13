@@ -1,50 +1,35 @@
 import logo from './logo.svg';
-import './assets/App.css';
-import Header from './components/Header.js';
-import React, { Component, useState } from 'react';
-import { BrowserRouter , Router, Link, Route, Routes} from "react-router-dom";
 
+import './App.css';
+import Person from './/componenets/user.jsx';
+import  Counter from './/componenets/counter.jsx';
+import  HomePage from './/componenets/HomePAGE.jsx';
+import NavigationBar from './/componenets/NavigationBar.jsx';
+import React from 'react';
+import BlogPage from './/pages/BlogPage';
+import TrainingProgramas from './/pages/TrainingPrograms.jsx';
+import Login from './/pages/LoginPage.jsx';
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+// import 'react-native-gesture-handler';
 
+// import { createNativeStackNavigator } from '@react-navigation/native-stack';
+// import { createStackNavigator } from '@react-navigation/stack';
+// const Stack = createStackNavigator();
+
+//Functional component
 function App() {
   return (
     <div className="App">
-      <Router>
-      <div>
-          <h1>hiifi</h1>
-          <Link to="/">  </Link>
-          <Link to="/blogPage"> <blogPage/> </Link>
-        </div>
-        <Routes>
-          <Route path="/" exact>
-          <homePage/>
-          </Route>
-          
-          <Route path="/blogPage">
-            <blogPage />
-          </Route>
-          
-        </Routes>
-      </Router>
-      
-      
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/Apppppp.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-        <Header />
-        <homePage />
-        <blogPage />
-        <h1>fdsgs</h1>
-        <blogPage></blogPage>
+    <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="blog" element={<BlogPage />} />
+          <Route path="training" element={<TrainingProgramas />} />
+          <Route path="login" element={<Login />} />
+        </Routes>
+       
+    </BrowserRouter>
       </header>
     </div>
   );
