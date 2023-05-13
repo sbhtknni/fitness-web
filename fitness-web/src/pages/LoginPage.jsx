@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import MainLayout from '../layout/MainLayout.jsx';
-import { Link,useParams,useNavigate } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import BlogPage from './BlogPage.jsx';
 import {
   createBrowserRouter,

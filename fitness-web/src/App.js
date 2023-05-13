@@ -32,12 +32,6 @@ function App() {
       </header>
     </div>
 
-    // <NavigationContainer>
-    //   <Stack.Navigator>
-    //     <Stack.Screen name="Home" component={HomeScreen} />
-    //     <Stack.Screen name="Other" component={OtherScreen} />
-    //   </Stack.Navigator>
-    // </NavigationContainer>
   );
 }
 
