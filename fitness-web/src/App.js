@@ -6,7 +6,7 @@ import  Counter from './/componenets/counter.jsx';
 import  HomePage from './/componenets/HomePAGE.jsx';
 import NavigationBar from './/componenets/NavigationBar.jsx';
 import React from 'react';
-import BlogPage from './/pages/BlogPage';
+import BlogPage from './/pages/BlogPage.jsx';
 import TrainingProgramas from './/pages/TrainingPrograms.jsx';
 import Login from './/pages/LoginPage.jsx';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';

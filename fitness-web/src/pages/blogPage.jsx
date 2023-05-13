@@ -7,7 +7,7 @@ function BlogPage(props){
     const { email, password } = location.state;
     return( 
         <MainLayout logged_in = {true}>
-            <div>{email}</div>
+            <div>email = {email}</div>
             <div>{password}</div>
             <div>Blog</div>
         </MainLayout>
