@@ -1,10 +1,8 @@
 import React from 'react';
 
-
-
-
 export default function Person(props) {
     const { name } = props;
+    //style
     const style= {
         
         color:'blue',
@@ -16,7 +14,6 @@ export default function Person(props) {
 
     return (
         <div >
-            <h1>Hi!</h1>
             <p style={style} >My name is {name}</p>
             <p>1+1={1+1}</p>
         </div>
