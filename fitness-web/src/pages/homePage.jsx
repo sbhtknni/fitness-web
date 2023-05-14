@@ -5,4 +5,4 @@ const homePage = () => {
     <div className='page'>homePage</div>
   )
 }
-export default homePage
+export default homePage;

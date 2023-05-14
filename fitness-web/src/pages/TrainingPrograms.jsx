@@ -1,13 +1,13 @@
-import React from "react";
+import React from 'react'
 import MainLayout from '../layout/MainLayout.jsx';
+import YoutubeTrainingsPrograms from '../hooks/TrainingPrograms/YoutubeTrainingsPrograms.jsx';
 
-function TrainingProgramas(){
-    return( 
-        <MainLayout>
-            <div>Training Progs</div>
-        </MainLayout>
- 
-    ) 
+const TrainingProgramas = () => {
     
-}
-export default TrainingProgramas;
+    return (
+        <MainLayout>
+           <YoutubeTrainingsPrograms/>
+        </MainLayout>
+    )
+};
+export default TrainingProgramas 
