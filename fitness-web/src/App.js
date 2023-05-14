@@ -1,5 +1,4 @@
 import logo from './logo.svg';
-
 import './App.css';
 import Person from './/componenets/user.jsx';
 import  Counter from './/componenets/counter.jsx';
