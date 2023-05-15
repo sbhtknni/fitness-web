@@ -1,9 +1,5 @@
-import logo from './logo.svg';
 import './App.css';
-import Person from './/componenets/user.jsx';
-import  Counter from './/componenets/counter.jsx';
 import  HomePage from './/componenets/HomePAGE.jsx';
-import NavigationBar from './/componenets/NavigationBar.jsx';
 import React from 'react';
 import BlogPage from './/pages/BlogPage.jsx';
 import TrainingProgramas from './/pages/TrainingPrograms.jsx';
