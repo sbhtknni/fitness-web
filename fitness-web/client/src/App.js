@@ -1,5 +1,5 @@
 import './App.css';
-import  HomePage from './/componenets/HomePAGE.jsx';
+import  HomePage from './/pages/HomePAGE.jsx';
 import React from 'react';
 import BlogPage from './/pages/BlogPage.jsx';
 import TrainingProgramas from './/pages/TrainingPrograms.jsx';
@@ -14,8 +14,12 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 //Functional component
 function App() {
   return (
+
+  
     <div className="App">
+    
       <header className="App-header">
+    
     <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
