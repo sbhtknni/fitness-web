@@ -6,8 +6,10 @@ export function NavigationBar(props) {
       const { logged_in } = props;
     return (
       <nav class="navbar navbar-dark bg-dark navbar navbar-expand-lg navbar sticky-top">
-    <a class="navbar-brand" href="/">Navbar</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+ <a class="navbar-brand" href="#">
+    <img src=".//assets/dumbbell.png" width="30" height="30" class="d-inline-block align-top" alt=""></img>
+    Bootstrap
+  </a>      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarNavDropdown">
