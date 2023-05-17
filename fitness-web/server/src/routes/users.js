@@ -7,11 +7,10 @@ const router = express.Router();   //Create Router
 
 router.post('/register', async (req, res) => {
     const { email, password } = req.body;
-    console.log(email, password);
-    console.log("here" , req.body.email, req.body.password);
+    console.log("here" , req.body.email);
 
 
-    const user= await UserModel.findOne(  {email: email }    );
+    const user= await UserModel.findOne(  {email }    );
     res.json( user);
 
 });   
