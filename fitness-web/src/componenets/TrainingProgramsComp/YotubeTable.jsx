@@ -1,5 +1,4 @@
 import React from 'react';
-
 function YotubeTable({ videos }) {
   return (
     <div>
