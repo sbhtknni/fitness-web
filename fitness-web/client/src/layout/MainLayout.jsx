@@ -5,12 +5,15 @@ function MainLayout(props){
     const {logged_in} = props;
     console.log(props);
     return( 
-    <div className="App">
+     <div>
         <NavigationBar logged_in={logged_in} > </NavigationBar>
-        <header className="App-header">
-        <div>{children}</div>
-        </header>
+        <div className="App">
+         <header className="App-header">
+         <div>{children}</div>
+            </header>
     </div>
+     </div>   
+ 
     ) 
     
 }

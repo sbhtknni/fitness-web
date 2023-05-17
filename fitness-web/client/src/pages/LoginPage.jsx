@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import MainLayout from '../layout/MainLayout.jsx';
 import { useNavigate } from 'react-router-dom';
+import RadioButton from '../componenets/radioButton.jsx';
 import { checkUserExists, addUser } from '../services/usersDB';
 
 
@@ -23,6 +24,7 @@ export default function Login(props) {
   return (
 
     <MainLayout>
+      <RadioButton></RadioButton>
     <div className="login-register-form">
       <h2>Login</h2>
       <form onSubmit={handleSubmit}>
@@ -48,10 +50,16 @@ export default function Login(props) {
             required
           />
         </div>
-        <button type="submit">Login</button>
+        <button class="btn btn-outline-primary" type="submit">Login</button>
+        <button type="button" class="btn btn-outline-secondary">Secondary</button>
+
       </form>
+        
+      
     </div>
+    
     </MainLayout>
+    
   );
 }
 

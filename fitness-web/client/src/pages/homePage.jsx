@@ -16,12 +16,11 @@ export default function HomePage(props) {
     return (
       
         <MainLayout>
-         
             <div className="home-page">
                 <h1 style={style}>Welcome to my Fitness Web</h1>
                 <p>My name is {name}</p>
                 <p>My name is {name}</p>
-        
+            
             </div>
         </MainLayout>
     )
