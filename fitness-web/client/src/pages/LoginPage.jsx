@@ -21,25 +21,20 @@ export function Login(props) {
     try{
       //1:10:11
       const response = await axios.post("http://localhost:3002/auth/login",{email:email,password:password})
-      alert("Login Successfully!")
+      // alert("Login Successfully!")
+      const message = response.data.message;
+      
       setCookies("access_token",response.data.token);
+      alert(message)
       window.localStorage.setItem("userId",response.data.userID);
       // navigate('/blog',{state : {email:email , password:password}} );
-      navigate('/blog' );
+      navigate('/blog');
+
+      // alert(response.status.);
       console.log(response.status)
-      if (response.status === 200) {
-        alert(response.data.message);
-        setCookies("access_token", response.data.token);
-        window.localStorage.setItem("userId", response.data.userID);
-        navigate('/blog');
-      } else {
-        // Handle other status codes
-        // Example: 400 Bad Request
-        alert(response.data.message);
-        console.error("Bad Request:", response);
       }
-    } catch (err) {
-      
+     catch (err) {
+      alert(err.response.data.message)
       console.error(err);
     }
   };
