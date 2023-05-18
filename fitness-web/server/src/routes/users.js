@@ -27,6 +27,7 @@ router.post('/login', async (req, res) => {
     
     const { email, password } = req.body;
     try {
+        console.log("email:",email,"password:",password)
         const user = await UserModel.findOne({ email });
     
         if (!user) {
