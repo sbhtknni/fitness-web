@@ -16,6 +16,7 @@ export function Login(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    
 
     navigate('/blog',{state : {email:email , password:password}} );
 
@@ -39,12 +40,12 @@ export function Login(props) {
               <p class="text-white-50 mb-5">Please enter your login and password!</p>
 
               <div class="form-outline form-white mb-4">
-                <input type="email" id="email" class="form-control form-control-lg" />
+                <input type="email" id="email" class="form-control form-control-lg" onChange={(event)=>setEmail(event.target.value)} />
                 <label class="form-label" for="typeEmailX">Email</label>
               </div>
 
               <div class="form-outline form-white mb-4">
-                <input type="password" id="password" class="form-control form-control-lg" />
+                <input type="password" id="password" class="form-control form-control-lg" onChange={(event)=>setPassword(event.target.value)} />
                 <label class="form-label" for="typePasswordX">Password</label>
               </div>
 
