@@ -16,6 +16,7 @@ export function Login(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    
 
     navigate('/blog',{state : {email:email , password:password}} );
 
@@ -25,7 +26,7 @@ export function Login(props) {
   return (
     <>
     <NavigationBar></NavigationBar>
-      <RadioButton></RadioButton>
+    <form onSubmit={handleSubmit}>
       <section class="vh-500 gradient-custom">
   <div class="container py-4 h-100">
     <div class="row d-flex justify-content-center align-items-center h-400">
@@ -39,29 +40,25 @@ export function Login(props) {
               <p class="text-white-50 mb-5">Please enter your login and password!</p>
 
               <div class="form-outline form-white mb-4">
-                <input type="email" id="typeEmailX" class="form-control form-control-lg" />
+                <input type="email" id="email" class="form-control form-control-lg" onChange={(event)=>setEmail(event.target.value)} />
                 <label class="form-label" for="typeEmailX">Email</label>
               </div>
 
               <div class="form-outline form-white mb-4">
-                <input type="password" id="typePasswordX" class="form-control form-control-lg" />
+                <input type="password" id="password" class="form-control form-control-lg" onChange={(event)=>setPassword(event.target.value)} />
                 <label class="form-label" for="typePasswordX">Password</label>
               </div>
 
               <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
 
-              <button class="btn btn-outline-light btn-lg px-5" type="submit">Login</button>
+              <button class="btn btn-outline-light btn-lg px-5" type="submit" >Login</button>
 
-              <div class="d-flex justify-content-center text-center mt-4 pt-1">
-                <a href="#!" class="text-white"><i class="fab fa-facebook-f fa-lg"></i></a>
-                <a href="#!" class="text-white"><i class="fab fa-twitter fa-lg mx-4 px-2"></i></a>
-                <a href="#!" class="text-white"><i class="fab fa-google fa-lg"></i></a>
-              </div>
+       
 
             </div>
 
             <div>
-              <p class="mb-0">Don't have an account? <a href="/register" class="text-white-50 fw-bold">Sign Up</a>
+              <p class="mb-0">Don't have an account?  <br></br><a href="/register" class="text-white-50 fw-bold">Sign Up</a>
               </p>
             </div>
 
@@ -70,7 +67,9 @@ export function Login(props) {
       </div>
     </div>
   </div>
+  <RadioButton></RadioButton>
 </section>
+</form>
     </>
   );
 }
@@ -97,11 +96,15 @@ export function Register() {
   </style>
 
   {/* <!-- Jumbotron --> */}
-  <div class="container py-4">
-    <div class="row g-0 align-items-center">
-      <div class="col-lg-6 mb-5 mb-lg-0">
-        <div class="card cascading-right" >
-          <div class="card-body p-5 shadow-5 text-center">
+  <NavigationBar></NavigationBar>
+  
+  <div class="container py-4 h-100">
+    <div class="row d-flex justify-content-center align-items-center h-400">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div class="card bg-dark text-white" >
+          <div class="card-body p-5 text-center">
+
+            <div class="mb-md-5 mt-md-4 pb-5">
             <h2 class="fw-bold mb-5">Sign up now</h2>
             <form>
               {/* <!-- 2 column grid layout with text inputs for the first and last names --> */}
@@ -162,7 +165,7 @@ export function Register() {
           </div>
         </div>
       </div>
-
+  </div>
       <div class="col-lg-6 mb-5 mb-lg-0">
         <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" class="w-100 rounded-4 shadow-4"
           alt="" />
