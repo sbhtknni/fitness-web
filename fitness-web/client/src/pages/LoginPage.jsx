@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 import MainLayout from '../layout/MainLayout.jsx';
 import { useNavigate } from 'react-router-dom';
 import RadioButton from '../componenets/radioButton.jsx';
-import { checkUserExists, addUser } from '../services/usersDB';
 import NavigationBar from '../componenets/NavigationBar.jsx';
-
-
+//For fetching api
+import axios from 'axios';
+import {useCookies} from "react-cookie"
+import { connected } from 'process';
 
 
 export function Login(props) {
@@ -13,15 +14,36 @@ export function Login(props) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
-  const handleSubmit = (event) => {
+  const [,setCookies] = useCookies(["access_token"])
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    
-
-    navigate('/blog',{state : {email:email , password:password}} );
-
+    //Send Post Request to the api
+    try{
+      //1:10:11
+      const response = await axios.post("http://localhost:3002/auth/login",{email:email,password:password})
+      alert("Login Successfully!")
+      setCookies("access_token",response.data.token);
+      window.localStorage.setItem("userId",response.data.userID);
+      // navigate('/blog',{state : {email:email , password:password}} );
+      navigate('/blog' );
+      console.log(response.status)
+      if (response.status === 200) {
+        alert(response.data.message);
+        setCookies("access_token", response.data.token);
+        window.localStorage.setItem("userId", response.data.userID);
+        navigate('/blog');
+      } else {
+        // Handle other status codes
+        // Example: 400 Bad Request
+        alert(response.data.message);
+        console.error("Bad Request:", response);
+      }
+    } catch (err) {
+      
+      console.error(err);
+    }
   };
-
+  
 
   return (
     <>
@@ -38,14 +60,22 @@ export function Login(props) {
 
               <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
               <p class="text-white-50 mb-5">Please enter your login and password!</p>
-
+            {/* Email */}
               <div class="form-outline form-white mb-4">
-                <input type="email" id="email" class="form-control form-control-lg" onChange={(event)=>setEmail(event.target.value)} />
+                <input
+                type="email" 
+                id="email"
+                class="form-control form-control-lg"
+                onChange={(event)=>setEmail(event.target.value)} />
                 <label class="form-label" for="typeEmailX">Email</label>
               </div>
+            {/* Password */}
 
               <div class="form-outline form-white mb-4">
-                <input type="password" id="password" class="form-control form-control-lg" onChange={(event)=>setPassword(event.target.value)} />
+                <input type="password" 
+                id="password"
+                class="form-control form-control-lg"
+                onChange={(event)=>setPassword(event.target.value)} />
                 <label class="form-label" for="typePasswordX">Password</label>
               </div>
 
@@ -75,27 +105,16 @@ export function Login(props) {
 }
 
 export function Register() {
+
     const handleSubmit = (event) => {
     event.preventDefault();
     // Logic for handling form submission goes here
+
   };
 
   return (
   // <!-- Section: Design Block -->
 <section class="text-center text-lg-start  vh-500 gradient-custom">
-  <style>
-  {/* .cascading-right {
-      margin-right: -50px;
-    }
-
-    @media (max-width: 991.98px) {
-      .cascading-right {
-        margin-right: 0;
-      }
-    } */}
-  </style>
-
-  {/* <!-- Jumbotron --> */}
   <NavigationBar></NavigationBar>
   
   <div class="container py-4 h-100">
@@ -111,7 +130,12 @@ export function Register() {
               <div class="row">
                 <div class="col-md-6 mb-4">
                   <div class="form-outline">
-                    <input type="text" id="form3Example1" class="form-control" />
+                    <input 
+                        type="text" 
+                        id="form3Example1"
+                        class="form-control"
+                        
+                      />
                     <label class="form-label" for="form3Example1">First name</label>
                   </div>
                 </div>
@@ -173,55 +197,6 @@ export function Register() {
     </div>
   </div>
 </section>
-  // const [username, setUsername] = useState('');
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
-
-  // const handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   // Logic for handling form submission goes here
-  // };
-
-  // return (
-  //   <div>
-  //     <h2>Register</h2>
-  //     <form onSubmit={handleSubmit}>
-  //       <div>
-  //         <label htmlFor="username">Username</label>
-  //         <input
-  //           type="text"
-  //           id="username"
-  //           name="username"
-  //           value={username}
-  //           onChange={(event) => setUsername(event.target.value)}
-  //           required
-  //         />
-  //       </div>
-  //       <div>
-  //         <label htmlFor="email">Email</label>
-  //         <input
-  //           type="email"
-  //           id="email"
-  //           name="email"
-  //           value={email}
-  //           onChange={(event) => setEmail(event.target.value)}
-  //           required
-  //         />
-  //       </div>
-  //       <div>
-  //         <label htmlFor="password">Password</label>
-  //         <input
-  //           type="password"
-  //           id="password"
-  //           name="password"
-  //           value={password}
-  //           onChange={(event) => setPassword(event.target.value)}
-  //           required
-  //         />
-  //       </div>
-  //       <button type="submit">Register</button>
-  //     </form>
-  //   </div>
   );
 }
 
