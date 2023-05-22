@@ -32,21 +32,20 @@ router.post('/login', async (req, res) => {
         const user = await UserModel.findOne({ email });
     
         if (!user) {
-          return res.status(400).json({ msg: "User does not exist" });
+          return res.status(400).json({ message: "User does not exist" });
         }
     
     
         const isMatch = await bcrypt.compare(password, user.password);
     
         if (!isMatch) {
-          return res.status(400).json({ msg: "Incorrect password" });
+          return res.status(400).json({ message: "Incorrect password" });
         }
         // The token contains information about the user's identity.
         const token =jwt.sign({ id: user._id }, "secret");
-        res.json({token,UserID: user._id, message: "logged in successfully" });
+        res.status(200).json({token,userID: user._id, message: "logged in successfully" });
       } catch (error) {
-        res.status(500).json({ msg: "Server Error" });
-        console.error("----------The ERROR---------\n",error);
+        res.status(500).json({ message: "Server Error" });
       }
 });
 
