@@ -12,12 +12,14 @@ router.post('/register', async (req, res) => {
     const saltRounds = 10; // Number of salt rounds
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     const bmi = BMICalculation(weight,height);
-  const newUser = new UserModel({email,password:hashedPassword,firstName,lastName,height,weight,bmi});
+    const newUser = new UserModel({email,password:hashedPassword,firstName,lastName,height,weight,bmi});
       await newUser.save();
       console.log("User saved successfully");
-      res.json({messege : "User registerd successfully"});
+      res.status(200).json({messege : "User registerd successfully"});
 
-    } catch (error) {
+  } catch (error) {
+      res.status(500).json({ msg: "Server Error" });
+
       console.error("Error saving user:", error);
     }
 
@@ -27,7 +29,6 @@ router.post('/login', async (req, res) => {
     
     const { email, password } = req.body;
     try {
-        console.log("email:",email,"password:",password)
         const user = await UserModel.findOne({ email });
     
         if (!user) {
