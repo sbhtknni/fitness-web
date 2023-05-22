@@ -25,6 +25,8 @@ export function Login(props) {
       
       setCookies("access_token",response.data.token);
       alert(message)
+      alert("---")
+      alert(response.data.token)
       window.localStorage.setItem("userId",response.data.userID);
       // navigate('/blog',{state : {email:email , password:password}} );
       navigate('/blog');
@@ -33,6 +35,7 @@ export function Login(props) {
       console.log(response.status)
       }
      catch (err) {
+      
       alert(err.response.data.message)
       console.error(err);
     }
