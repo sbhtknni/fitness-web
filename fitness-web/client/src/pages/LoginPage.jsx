@@ -38,9 +38,13 @@ export function Login(props) {
 
               <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
               <p class="text-white-50 mb-5">Please enter your login and password!</p>
-
+              {/*EMAIL */}
               <div class="form-outline form-white mb-4">
-                <input type="email" id="email" class="form-control form-control-lg" onChange={(event)=>setEmail(event.target.value)} />
+                        <input
+                          type="email"
+                          id="email"
+                          class="form-control form-control-lg"
+                          onChange={(event) => setEmail(event.target.value)} />
                 <label class="form-label" for="typeEmailX">Email</label>
               </div>
 
@@ -125,7 +129,9 @@ export function Register() {
 
               {/* <!-- Email input --> */}
               <div class="form-outline mb-4">
-                <input type="email" id="form3Example3" class="form-control" />
+                      <input
+                        type="email"
+                        id="form3Example3" class="form-control" />
                 <label class="form-label" for="form3Example3">Email address</label>
               </div>
 
