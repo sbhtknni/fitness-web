@@ -6,7 +6,6 @@ import NavigationBar from '../componenets/NavigationBar.jsx';
 //For fetching api
 import axios from 'axios';
 import {useCookies} from "react-cookie"
-import { connected } from 'process';
 
 
 export function Login(props) {
