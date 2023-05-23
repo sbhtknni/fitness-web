@@ -5,6 +5,12 @@ import { useCookies } from 'react-cookie';
 export function NavigationBar(props) {
   const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
 
+  const Logout = () => {
+    removeCookie("access_token");
+    window.localStorage.removeItem("userId");
+    
+  }
+  
     return (
       <nav class="navbar navbar-dark bg-dark navbar navbar-expand-lg navbar sticky-top">
  <a class="navbar-brand" href="#">
@@ -22,7 +28,7 @@ export function NavigationBar(props) {
           if{!cookies.access_token ? ( <li class="nav-item">
             <a class="nav-link" href="/auth">Login</a>
           </li>) : (<li class="nav-item">
-            <a class="nav-link" href="/auth"     onClick={(event)=>removeCookie("access_token")}  >Logout</a>
+            <a class="nav-link" href="/auth"     onClick={Logout()} >Logout</a>
            
           </li>)};
 
