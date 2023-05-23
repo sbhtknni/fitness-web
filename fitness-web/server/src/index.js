@@ -6,6 +6,7 @@ import cors from 'cors';
 import mongoose  from 'mongoose';
 
 import {usersRouter} from './routes/users.js';
+import {trainingsRouter} from './routes/trainings.js';
 
 
 const app = express();
@@ -13,6 +14,7 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 app.use('/auth', usersRouter);
+app.use('/trainings', trainingsRouter);
 const uri ="mongodb+srv://romharel:JOu6QaJuEstS0Bka@fitness-web.u0isjzc.mongodb.net/fitness-web?retryWrites=true&w=majority"
 mongoose.connect( uri ,{ useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
