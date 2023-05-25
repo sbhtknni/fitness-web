@@ -110,116 +110,141 @@ export function Register() {
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
 
+  const forms = document.querySelectorAll('.needs-validation');
+
+  (() => {
+    'use strict';
+    // Loop over them and prevent submission
+    Array.prototype.slice.call(forms).forEach((form) => {
+      form.addEventListener('submit', (event) => {
+        if (!form.checkValidity()) {
+          event.preventDefault();
+          event.stopPropagation();
+        }
+        form.classList.add('was-validated');
+      }, false);
+    });
+  })();
+
   // Logic for handling form submission goes here
-  // TODO: is this rellevant?
-  const [, setCookies] = useCookies(["access_token"])
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     //Send Post Request to the api
     try {
-      //1:10:11
       const response = await axios.post("http://localhost:3002/auth/register", { email: email, password: password, firstName: firstName, lastName: lastName, height: height, weight: weight })
-
-      setCookies("access_token", response.data.token);     
-      alert(response.data.token)
       window.localStorage.setItem("userId", response.data.userID);
-      // TODO: Navigate to the rellevant page
       navigate('/auth');
 
       // alert(response.status.);
       console.log(response.status)
     }
     catch (err) {
-
+      //TODO: enter model for error
+      alert("not registered")
       alert(err.response.data.message)
       console.error(err);
     }
 
   };
 
+
   return (
     <>
       <NavigationBar></NavigationBar>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit} class="row g-3 needs-validation" noValidate>
         <section class="text-center text-lg-start  vh-500 gradient-custom">
           <div class="container py-4 h-100">
             <div class="row d-flex justify-content-center align-items-center h-400">
               <div class="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div class="card bg-dark text-white">
                   <div class="card-body p-5 text-center">
-
                     <div class="mb-md-5 mt-md-4 pb-5">
                       <h2 class="fw-bold mb-5">Sign up now</h2>
-                      
-                        {/* <!-- 2 column grid layout with text inputs for the first and last names --> */}
-                        <div class="row">
-                          <div class="col-md-6 mb-4">
-                            <div class="form-outline">
-                              {/* <!-- FirstName input --> */}
-                              <input
-                                type="FirstName"
-                                id="FirstName"
-                                class="form-control"
-                                onChange={(event) => setfirstName(event.target.value)} />
-                              <label class="form-label" for="typeFirstNameX">First Name</label>
-                            </div>
+
+                      {/* <!-- 2 column grid layout with text inputs for the first and last names --> */}
+                      <div class="row">
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            {/* <!-- FirstName input --> */}
+                            <input
+                              type="text"
+                              id="FirstName"
+                              class="form-control"
+                              required
+                              onChange={(event) => setfirstName(event.target.value)} />
+                            <label class="form-label" for="typeFirstNameX">First Name</label>
+                            <div class="invalid-feedback">Please enter First Name</div>
                           </div>
-                          <div class="col-md-6 mb-4">
-                            <div class="form-outline">
-                              {/* <!-- LastName input --> */}
-                              <input type="LastName"
-                                id="LastName"
-                                class="form-control"
-                                onChange={(event) => setLastName(event.target.value)} />
-                              <label class="form-label" for="typeLastNameX">Last Name</label>
-                            </div>
+                        </div>
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            {/* <!-- LastName input --> */}
+                            <input type="text"
+                              id="LastName"
+                              class="form-control"
+                              required
+                              onChange={(event) => setLastName(event.target.value)} />
+                            <label class="form-label" for="typeLastNameX">Last Name</label>
+                            <div class="invalid-feedback">Please enter Last Name</div>
+                          </div>
+                        </div>
+                      </div>
+
+                      {/* <!-- Email input --> */}
+                      <div class="form-outline mb-4">
+                        <input
+                          type="email"
+                          id="email"
+                          class="form-control"
+                          required
+                          onChange={(event) => setEmail(event.target.value)} />
+                        <label class="form-label" for="typeEmailX">Email address</label>
+                        <div class="invalid-feedback">Please enter a valid email address</div>
+                      </div>
+
+                      {/* <!-- Password input --> */}
+
+                      <div class="form-outline mb-4">
+                        <input type="password" class="form-control" id="validationCustom01" required
+                          onChange={(event) => setPassword(event.target.value)} />
+                        <label for="validationCustom01" class="form-label">Password</label>
+                        <div class="invalid-feedback">Please enter Password</div>
+                      </div>
+
+                      {/* <!-- Height input --> */}
+                      <div class="row">
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            <input
+                              type="number"
+                              id="Height"
+                              class="form-control"
+                              required
+                              min={0}
+                              onChange={(event) => setHeight(event.target.value)} />
+                            <label class="form-label" for="typeHeightX">Height</label>
+                            <div class="invalid-feedback">Please enter Height</div>
                           </div>
                         </div>
 
-                        {/* <!-- Email input --> */}
-                        <div class="form-outline mb-4">
-                          <input
-                            type="email"
-                            id="email"
-                            class="form-control"
-                            onChange={(event) => setEmail(event.target.value)} />
-                          <label class="form-label" for="typeEmailX">Email address</label>
-                        </div>
-
-                        {/* <!-- Password input --> */}
-                        <div class="form-outline mb-4">
-                          <input type="password" id="password" class="form-control"
-                            onChange={(event) => setPassword(event.target.value)} />
-                          <label class="form-label" for="typePasswordX">Password</label>
-                        </div>
-
-                        <div class="row">
-                          <div class="col-md-6 mb-4">
-                            <div class="form-outline">
-                              {/* <!-- Height input --> */}
-                              <input
-                                type="Height"
-                                id="Height"
-                                class="form-control"
-                                onChange={(event) => setHeight(event.target.value)} />
-                              <label class="form-label" for="typeHeightX">Height</label>
-                            </div>
-                          </div>
-                          <div class="col-md-6 mb-4">
-                            <div class="form-outline">
-                              {/* <!-- Weight input --> */}
-                              <input type="Weight"
-                                id="Weight"
-                                class="form-control"
-                                onChange={(event) => setWeight(event.target.value)} />
-                              <label class="form-label" for="typeWeightX">Weight</label>
-                            </div>
+                        {/* <!-- Weight input --> */}
+                        <div class="col-md-6 mb-4">
+                          <div class="form-outline">
+                            <input type="number"
+                              id="Weight"
+                              class="form-control"
+                              required
+                              min={0}
+                              onChange={(event) => setWeight(event.target.value)} />
+                            <label class="form-label" for="typeWeightX">Weight</label>
+                            <div class="invalid-feedback">Please enter Weight</div>
                           </div>
                         </div>
+                      </div>
 
-                        {/* <!-- Submit button --> */}
-                        <button  class="btn btn-primary btn-block mb-4" type="submit"> Sign up </button>
-                     
+                      {/* <!-- Submit button --> */}
+                      <button class="btn btn-primary btn-block mb-4" type="submit"> Sign up </button>
                     </div>
                   </div>
                 </div>
@@ -230,9 +255,9 @@ export function Register() {
               </div>
             </div>
           </div>
-          <RadioButton></RadioButton>
         </section>
-      </form></>
+      </form>
+    </>
 
   );
 }

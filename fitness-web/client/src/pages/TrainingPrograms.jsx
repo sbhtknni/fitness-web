@@ -1,15 +1,15 @@
-// import React from 'react'
-// import MainLayout from '../layout/MainLayout.jsx';
-// import YoutubeTrainingsPrograms from '../hooks/TrainingProgramsHook/YoutubeTrainingsPrograms.jsx';
-// // import TrainingInformation from '../componenets/TrainingProgramsComp/TrainingInformation.jsx';
+ import React from 'react'
+ import MainLayout from '../layout/MainLayout.jsx';
+ import YoutubeTrainingsPrograms from '../hooks/TrainingProgramsHook/YoutubeTrainingsPrograms.jsx';
+ import TrainingInformation from '../componenets/TrainingProgramsComp/TrainingInformation.jsx';
 
-// const TrainingProgramas = () => {
+ const TrainingProgramas = () => {
     
-//     return (
-//         <MainLayout>
-//             <YoutubeTrainingsPrograms />
-//             {/* <TrainingInformation/> */}
-//         </MainLayout>
-//     )
-// };
-// export default TrainingProgramas 
+     return (
+         <MainLayout>
+            <YoutubeTrainingsPrograms />
+             { <TrainingInformation/> }
+         </MainLayout>
+     )
+ };
+ export default TrainingProgramas 
