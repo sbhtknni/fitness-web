@@ -5,6 +5,7 @@ import Modal from '../componenets/modal';
 export function DropdownForm() {
   const [selectedTraining, setSelectedTraining] = useState();
   const [trainings, setTrainings] = useState([]);
+  const [newWeight, setNewWeight] = useState();
 
   useEffect(() => {
     const fetchTrainings = async () => {
@@ -29,7 +30,7 @@ export function DropdownForm() {
   
     const add_Training_Program = async () => {
       try {
-        const response = await axios.post('http://localhost:3002/trainings', {userID : localStorage.getItem('userId') , trainingName : selectedTraining.name});
+        const response = await axios.post('http://localhost:3002/trainings', {userID : localStorage.getItem('userId') , trainingName : selectedTraining.name , new_weight:newWeight });
       }
         catch (error) {
         console.error('Error fetching trainings:', error);
@@ -42,10 +43,9 @@ export function DropdownForm() {
       event.preventDefault();
       // Handle form submission logic here
     };
-  
-    const handleNumberChange = (event) => {
-      setNumber(event.target.value);
-    };
+
+    
+    
 
   return (
     <>
@@ -94,11 +94,11 @@ export function DropdownForm() {
             <form className="needs-validation justify-content-centers" noValidate onSubmit={handleSubmit}>
     <div class="">
       <div class="form-outline">
-        <input type="number" class="form-control input-primary" id="validationCustom01" min="0" onChange={handleNumberChange} required />
-        <label for="validationCustom01" class="form-label">Enter Weight</label>
+        <input type="number" class="form-control input-primary" id="newWeight" min="0" onChange={(event) => setNewWeight(event.target.value)} required  />
+        <label for="newWeight" class="form-label">Enter Weight</label>
         <div class="invalid-feedback">Weight must be greater than 1.</div>
       </div>
-      <button class="btn btn-primary" type="submit" disabled={number === 1} >
+      <button class="btn btn-primary" type="submit" disabled={number === 1} onClick={add_Training_Program} >
         Submit form
         {/* <Modal ></Modal> */}
 

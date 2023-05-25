@@ -49,7 +49,7 @@ router.post('/login', async (req, res) => {
       }
 });
 
-function BMICalculation(weight, height) {
+export function BMICalculation(weight, height) {
   // Convert height to meters
   const heightInMeters = height / 100;
 

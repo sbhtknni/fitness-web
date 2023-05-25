@@ -2,6 +2,7 @@ import express from "express";
 import mongoose from "mongoose";
 import { TrainingModel } from "../models/Training.js";
 import { UserModel } from "../models/Users.js";
+import { BMICalculation } from "..//routes/users.js";
 
 const router = express.Router();
 
@@ -17,7 +18,8 @@ router.get("/", async (req, res) => {
 
 //Add training to user
 router.post("/", async (req, res) => {
-    const { userID, trainingName } = req.body;
+    const { userID, trainingName,new_weight } = req.body;
+    console.log("userID", userID,"weight",new_weight,"trainingName",trainingName);
     try {
       const user = await UserModel.findById(userID);
   
@@ -36,12 +38,14 @@ router.post("/", async (req, res) => {
   
       const selectedTraining = {
         trainingId: training._id,
-        weight: user.weight,
+        weight: parseInt(new_weight,10),
         startDate: new Date(),
       };
   
       console.log("selectedTraining", selectedTraining);
       user.selectedTrainings.push(selectedTraining);
+      user.weight = parseInt(new_weight,10);
+      user.bmi = BMICalculation(user.weight,user.height);
       console.log("User updated:", user);
   
       await user.save();
