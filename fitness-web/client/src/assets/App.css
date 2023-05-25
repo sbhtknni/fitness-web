@@ -1,6 +1,38 @@
 .App {
   text-align: center;
 }
+.navigation-bar{
+  text-align: center;
+
+  background-color: #282c34;
+  display: flex;
+  flex-direction: row;
+  color: white; 
+  padding: 10px 16px; 
+  margin-bottom: 16px;
+}
+.navigation-bar-logo{
+  color: white; 
+  font-size: 24px;
+  width: 50px;
+  height: 50px;
+  margin-right: 16px;
+}
+.navigation-bar-menu{
+  text-align: center;
+
+  display: flex;
+  list-style-type: none;
+  gap :30px;
+  align-items: center;
+
+}
+.navigation-bar-link {
+  color: white;
+  text-decoration: none;
+  font-size: 16px;
+  font-weight: 600;
+}
 
 .App-logo {
   height: 40vmin;
@@ -9,20 +41,21 @@
 
 @media (prefers-reduced-motion: no-preference) {
   .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+    animation: App-logo-spin infinite 30s linear;
   }
 }
 
-.App-header {
+/* .App-header {
   background-color: #282c34;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
   color: white;
-}
+  gap :30px;
+
+} */
 
 .App-link {
   color: #61dafb;
@@ -36,3 +69,13 @@
     transform: rotate(360deg);
   }
 }
+.gradient-custom {
+  /* fallback for old browsers */
+  background: #6a11cb;
+  
+  /* Chrome 10-25, Safari 5.1-6 */
+  background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
+  
+  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1),rgb(122, 251, 122))
+  }

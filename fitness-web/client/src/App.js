@@ -1,5 +1,5 @@
-import './App.css';
-import  HomePage from './/pages/HomePAGE.jsx';
+import './assets/App.css';
+import  HomePage from './pages/HomePAGE.jsx';
 import React from 'react';
 import BlogPage from './/pages/BlogPage.jsx';
 import TrainingProgramas from './/pages/TrainingPrograms.jsx';
