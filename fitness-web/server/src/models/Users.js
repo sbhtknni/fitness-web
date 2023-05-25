@@ -25,8 +25,8 @@ const UserSchema = new mongoose.Schema({
     selectedTrainings: [
         {
             trainingId: { type: mongoose.Schema.Types.ObjectId, ref: "trainings" },
+            weight: { type: Number, required: true, min: Number.MIN_SAFE_INTEGER, max: Number.MAX_SAFE_INTEGER },
             startDate: { type: Date, required: true },
-            endDate: { type: Date }
         }
     ]
 });

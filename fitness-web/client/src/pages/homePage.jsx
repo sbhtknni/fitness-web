@@ -1,5 +1,6 @@
 import React from 'react';
 import MainLayout from '../layout/MainLayout.jsx';
+import Modal from '../componenets/modal.jsx';
 
 export default function HomePage(props) {
     const { name } = props;
@@ -14,15 +15,9 @@ export default function HomePage(props) {
     // }
 //create new html page
     return (
-      
         <MainLayout>
-            <div className="home-page">
-                <h1 style={style}>Welcome to my Fitness Web</h1>
-                <p>My name is {name}</p>
-                <p>My name is {name}</p>
-            
-            </div>
-        </MainLayout>
+  <Modal Isleftbutoon="false" title="Training added succefully" information ="good" rightbutton="g" ></Modal>
+  </MainLayout>
     )
 }
 
