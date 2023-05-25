@@ -123,6 +123,7 @@ export function Register() {
       setCookies("access_token", response.data.token);     
       alert(response.data.token)
       window.localStorage.setItem("userId", response.data.userID);
+      // TODO: Navigate to the rellevant page
       navigate('/auth');
 
       // alert(response.status.);
