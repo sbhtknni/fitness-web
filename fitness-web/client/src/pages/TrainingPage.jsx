@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import NavigationBar from '../componenets/NavigationBar';
 import axios from 'axios';
+import ReactPlayer from 'react-player';
 import Modal from '../componenets/modal';
+import RadioButton from '../componenets/radioButton';
+import MainLayout from '../layout/MainLayout.jsx';
+
 export function DropdownForm() {
   const [selectedTraining, setSelectedTraining] = useState();
   const [trainings, setTrainings] = useState([]);
@@ -21,56 +25,38 @@ export function DropdownForm() {
     fetchTrainings();
   }, []);
 
-  const handleTrainingChange = (event) => {
-    const trainingIndex = parseInt(event.target.value);
-    const selectedTraining = trainings[trainingIndex];
+  const handleTrainingChange = (option) => {
+    const selectedTraining = trainings.find((training) => training.name === option);
     setSelectedTraining(selectedTraining);
   };
-  
-  
-    const add_Training_Program = async () => {
-      try {
-        const response = await axios.post('http://localhost:3002/trainings', {userID : localStorage.getItem('userId') , trainingName : selectedTraining.name , new_weight:newWeight });
-      }
-        catch (error) {
-        console.error('Error fetching trainings:', error);
-      }
+
+  const addTrainingProgram = async () => {
+    try {
+      await axios.post('http://localhost:3002/trainings', {
+        userID: localStorage.getItem('userId'),
+        trainingName: selectedTraining.name,
+        new_weight: newWeight
+      });
+    } catch (error) {
+      console.error('Error adding training program:', error);
     }
-  
-    const [number, setNumber] = useState('');
+  };
 
-    const handleSubmit = (event) => {
-      event.preventDefault();
-      // Handle form submission logic here
-    };
-
-    
-    
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    // Handle form submission logic here
+  };
 
   return (
-    <>
-
-      <NavigationBar />
+    <MainLayout>
+      
       <div className="container">
         <h3>Select a training:</h3>
-        <div className="btn-group shadow-0">
-          {trainings.map((training, index) => (
-            <div key={index} className="form-check">
-              <input
-                type="radio"
-                id={`training-${index}`}
-                name="training"
-                value={index}
-                onChange={handleTrainingChange}
-                checked={selectedTraining && selectedTraining.name === training.name}
-                className="form-check-input"
-              />
-              <label htmlFor={`training-${index}`} className="form-check-label">
-                {training.name}
-              </label>
-            </div>
-          ))}
-        </div>
+        <RadioButton
+          options={trainings.map((training) => training.name)}
+          selectedOption={selectedTraining ? selectedTraining.name : ''}
+          onOptionChange={handleTrainingChange}
+        />
 
         {selectedTraining && (
           <div>
@@ -79,10 +65,7 @@ export function DropdownForm() {
               {selectedTraining.videoUrls.map((url, index) => (
                 <div key={index} className="col">
                   <div className="card h-100">
-                    <video controls className="card-img-top">
-                      <source src={url} type="video/mp4" />
-                      Your browser does not support the video tag.
-                    </video>
+                    <ReactPlayer url={url} controls width="100%" height="auto" />
                     <div className="card-body">
                       <h5 className="card-title">Video {index + 1}</h5>
                     </div>
@@ -90,34 +73,39 @@ export function DropdownForm() {
                 </div>
               ))}
             </div>
-            <div class="d-flex justify-content-center">
-            <form className="needs-validation justify-content-centers" noValidate onSubmit={handleSubmit}>
-    <div class="">
-      <div class="form-outline">
-        <input type="number" class="form-control input-primary" id="newWeight" min="0" onChange={(event) => setNewWeight(event.target.value)} required  />
-        <label for="newWeight" class="form-label">Enter Weight</label>
-        <div class="invalid-feedback">Weight must be greater than 1.</div>
-      </div>
-      <button class="btn btn-primary" type="submit" disabled={number === 1} onClick={add_Training_Program} >
-        Submit form
-        {/* <Modal ></Modal> */}
 
-      </button>
-      
-    </div>
-</form>
-</div>
-
+            <div className="d-flex justify-content-center">
+              <form className="needs-validation justify-content-center" noValidate onSubmit={handleSubmit}>
+                <div className="">
+                  <div className="form-outline">
+                    <input
+                      type="number"
+                      className="form-control input-primary"
+                      id="newWeight"
+                      min="0"
+                      onChange={(event) => setNewWeight(event.target.value)}
+                      required
+                    />
+                    <label htmlFor="newWeight" className="form-label">
+                      Enter Weight
+                    </label>
+                    <div className="invalid-feedback">Weight must be greater than 1.</div>
+                  </div>
+                  <button
+                    className="btn btn-primary"
+                    type="submit"
+                    onClick={addTrainingProgram}
+                  >
+                    Submit form
+                  </button>
+                </div>
+              </form>
+            </div>
           </div>
-          
         )}
-        
       </div>
+     </MainLayout>
 
-
-
-
-    </>
   );
 }
 

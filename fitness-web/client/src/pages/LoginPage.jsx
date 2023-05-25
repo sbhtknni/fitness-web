@@ -40,6 +40,8 @@ export function Login(props) {
       const message = response.data.message;
 
       setCookies('access_token', response.data.token);
+      <Modal></Modal>
+
       alert(message);
       alert('---');
       alert(response.data.token);
@@ -116,10 +118,13 @@ export function Login(props) {
                           Forgot password?
                         </a>
                       </p>
+                        <Modal className="btn btn-outline-light btn-lg px-5"  type="submit"   button_props = " Login"/>
 
                       <button className="btn btn-outline-light btn-lg px-5" type="submit" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
                         Login
+
                       </button>
+
                     </div>
 
                     <div>

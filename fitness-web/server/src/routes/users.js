@@ -49,6 +49,45 @@ router.post('/login', async (req, res) => {
       }
 });
 
+//get user by id
+router.get('/:id', async (req, res) => {
+  const id = req.params.id;
+  try {
+    const user = await UserModel.findById(id);
+    if (!user) {
+      return res.status(400).json({ message: "User does not exist" });
+    }
+    res.status(200).json({user});
+  } catch (error) {
+    res.status(500).json({ message: "Server Error" });
+  }
+
+});
+//update user
+router.put('/update/:id', async (req, res) => {
+  const { userID } = req.body;
+  const { email,password,firstName,lastName,height,weight } = req.body;
+  try {
+    const user = await UserModel.findById(userID);
+    if (!user) {
+      return res.status(400).json({ message: "User does not exist" });
+    }
+    const saltRounds = 10; // Number of salt rounds
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+
+    const bmi = BMICalculation(weight,height);
+
+    const newUser = new UserModel({email,password:hashedPassword,firstName,lastName,height,weight,bmi});
+    await newUser.save();
+    console.log("User saved successfully");
+    res.status(200).json({messege : "User updated successfully"});
+  } catch (error) {
+    res.status(500).json({ message: "Server Error" });
+  }
+});
+
+    
+
 export function BMICalculation(weight, height) {
   // Convert height to meters
   const heightInMeters = height / 100;
