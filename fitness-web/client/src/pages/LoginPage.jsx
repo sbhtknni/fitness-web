@@ -79,8 +79,6 @@ export function Login(props) {
 
                       <button class="btn btn-outline-light btn-lg px-5" type="submit" >Login</button>
 
-
-
                     </div>
 
                     <div>
@@ -113,7 +111,7 @@ export function Register() {
   const [weight, setWeight] = useState('');
 
   // Logic for handling form submission goes here
-
+  // TODO: is this rellevant?
   const [, setCookies] = useCookies(["access_token"])
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -121,16 +119,11 @@ export function Register() {
     try {
       //1:10:11
       const response = await axios.post("http://localhost:3002/auth/register", { email: email, password: password, firstName: firstName, lastName: lastName, height: height, weight: weight })
-      alert("Register Successfully!")
-      const message = response.data.message;
 
-      setCookies("access_token", response.data.token);
-      alert(message)
-      alert("---")
+      setCookies("access_token", response.data.token);     
       alert(response.data.token)
       window.localStorage.setItem("userId", response.data.userID);
-      // navigate('/blog',{state : {email:email , password:password}} );
-      navigate('/blog');
+      navigate('/auth');
 
       // alert(response.status.);
       console.log(response.status)
@@ -144,7 +137,6 @@ export function Register() {
   };
 
   return (
-    // <!-- Section: Design Block -->
     <>
       <NavigationBar></NavigationBar>
       <form onSubmit={handleSubmit}>
@@ -157,7 +149,7 @@ export function Register() {
 
                     <div class="mb-md-5 mt-md-4 pb-5">
                       <h2 class="fw-bold mb-5">Sign up now</h2>
-                      <form>
+                      
                         {/* <!-- 2 column grid layout with text inputs for the first and last names --> */}
                         <div class="row">
                           <div class="col-md-6 mb-4">
@@ -225,10 +217,8 @@ export function Register() {
                         </div>
 
                         {/* <!-- Submit button --> */}
-                        <button type="submit" class="btn btn-primary btn-block mb-4">
-                          Sign up
-                        </button>
-                      </form>
+                        <button  class="btn btn-primary btn-block mb-4" type="submit"> Sign up </button>
+                     
                     </div>
                   </div>
                 </div>
