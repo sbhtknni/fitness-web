@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import RadioButton from '../componenets/radioButton.jsx';
 import NavigationBar from '../componenets/NavigationBar.jsx';
+import Modal from '../componenets/modal';
+
 //For fetching api
 import axios from 'axios';
 import { useCookies } from "react-cookie"
@@ -12,86 +14,127 @@ export function Login(props) {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [, setCookies] = useCookies(["access_token"])
+  const [, setCookies] = useCookies(['access_token']);
+  const [emailValid, setEmailValid] = useState(false);
+  const [passwordValid, setPasswordValid] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState(false);
+  const [submittedPassword, setSubmittedPassword] = useState(false);
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    //Send Post Request to the api
+
+    const form = event.currentTarget;
+    if (!form.checkValidity()) {
+      event.stopPropagation();
+      setSubmittedEmail(true);
+      setSubmittedPassword(true);
+      return;
+    }
+
     try {
-      //1:10:11
-      const response = await axios.post("http://localhost:3002/auth/login", { email: email, password: password })
-      // alert("Login Successfully!")
+      const response = await axios.post('http://localhost:3002/auth/login', {
+        email: email,
+        password: password,
+      });
+
       const message = response.data.message;
 
-      setCookies("access_token", response.data.token);
-      alert(message)
-      alert("---")
-      alert(response.data.token)
-      window.localStorage.setItem("userId", response.data.userID);
-      // navigate('/blog',{state : {email:email , password:password}} );
+      setCookies('access_token', response.data.token);
+      alert(message);
+      alert('---');
+      alert(response.data.token);
+      window.localStorage.setItem('userId', response.data.userID);
       navigate('/blog');
 
-      // alert(response.status.);
-      console.log(response.status)
-    }
-    catch (err) {
-
-      alert(err.response.data.message)
+      console.log(response.status);
+    } catch (err) {
+      alert(err.response.data.message);
       console.error(err);
     }
   };
 
+  const handleEmailChange = (event) => {
+    setEmail(event.target.value);
+    setEmailValid(event.target.checkValidity());
+    setSubmittedEmail(false);
+  };
+
+  const handlePasswordChange = (event) => {
+    setPassword(event.target.value);
+    setPasswordValid(event.target.checkValidity());
+    setSubmittedPassword(false);
+  };
 
   return (
     <>
-      <NavigationBar></NavigationBar>
-      <form onSubmit={handleSubmit}>
-        <section class="vh-500 gradient-custom">
-          <div class="container py-4 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-400">
-              <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                <div class="card bg-dark text-white" >
-                  <div class="card-body p-5 text-center">
+      <NavigationBar />
+      <form onSubmit={handleSubmit} className="needs-validation" noValidate>
+        <section className="vh-500 gradient-custom">
+          <div className="container py-4 h-100">
+            <div className="row d-flex justify-content-center align-items-center h-400">
+              <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div className="card bg-dark text-white">
+                  <div className="card-body p-5 text-center">
+                    <div className="mb-md-5 mt-md-4 pb-5">
+                      <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
+                      <p className="text-white-50 mb-5">Please enter your login and password!</p>
 
-                    <div class="mb-md-5 mt-md-4 pb-5">
-
-                      <h2 class="fw-bold mb-2 text-uppercase">Login</h2>
-                      <p class="text-white-50 mb-5">Please enter your login and password!</p>
-                      {/* Email */}
-                      <div class="form-outline form-white mb-4">
+                      <div className="form-outline form-white mb-6">
+                        <label className="form-label" htmlFor="typeEmailX">
+                          Email
+                        </label>
                         <input
                           type="email"
                           id="email"
-                          class="form-control form-control-lg"
-                          onChange={(event) => setEmail(event.target.value)} />
-                        <label class="form-label" for="typeEmailX">Email</label>
+                          className={`form-control form-control-lg ${submittedEmail && !emailValid ? 'is-invalid' : ''}`}
+                          required
+                          value={email}
+                          onChange={handleEmailChange}
+                        />
+                        {submittedEmail && !emailValid && <div className="invalid-feedback">Please enter a valid email address.</div>}
+                        {emailValid && <div className="valid-feedback">Looks good!</div>}
                       </div>
-                      {/* Password */}
 
-                      <div class="form-outline form-white mb-4">
-                        <input type="password"
+                      <div className="form-outline form-white mb-6">
+                        <label className="form-label" htmlFor="typePasswordX">
+                          Password
+                        </label>
+                        <input
+                          type="password"
                           id="password"
-                          class="form-control form-control-lg"
-                          onChange={(event) => setPassword(event.target.value)} />
-                        <label class="form-label" for="typePasswordX">Password</label>
+                          className={`form-control form-control-lg ${submittedPassword && !passwordValid ? 'is-invalid' : ''}`}
+                          required
+                          value={password}
+                          onChange={handlePasswordChange}
+                        />
+                        {submittedPassword && !passwordValid && <div className="invalid-feedback">Please enter a password.</div>}
+                        {passwordValid && <div className="valid-feedback">Looks good!</div>}
                       </div>
 
-                      <p class="small mb-5 pb-lg-2"><a class="text-white-50" href="#!">Forgot password?</a></p>
+                      <p className="small mb-5 pb-lg-2">
+                        <a className="text-white-50" href="#!">
+                          Forgot password?
+                        </a>
+                      </p>
 
-                      <button class="btn btn-outline-light btn-lg px-5" type="submit" >Login</button>
-
+                      <button className="btn btn-outline-light btn-lg px-5" type="submit" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+                        Login
+                      </button>
                     </div>
 
                     <div>
-                      <p class="mb-0">Don't have an account?  <br></br><a href="/register" class="text-white-50 fw-bold">Sign Up</a>
+                      <p className="mb-0">
+                        Don't have an account? <br />
+                        <a href="/register" className="text-white-50 fw-bold">
+                          Sign Up
+                        </a>
                       </p>
                     </div>
-
                   </div>
                 </div>
               </div>
             </div>
           </div>
-          <RadioButton></RadioButton>
         </section>
       </form>
     </>
