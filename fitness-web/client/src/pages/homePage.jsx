@@ -2,6 +2,9 @@ import MainLayout from '../layout/MainLayout.jsx';
 import Modal from '../componenets/modal.jsx';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
+import {Line} from 'react-chartjs-2';
+import GraphComponent from '../componenets/graphComponent.jsx';
+import { calculateAverage, calculateMax, calculateMin, calculateVariance, calculateStandardDeviation, calculateMedian, calculatePopularName } from '../controller/utils/util_home_page.js';
 
 export default function HomePage(props) {
     const [Email, setEmail] = useState();
@@ -10,6 +13,7 @@ export default function HomePage(props) {
     const [LastName, setLastName] = useState();
     const [height, setHeight] = useState();
     const [weight, setWeight] = useState();
+    const [selectedTrainings, setselectedTrainings] = useState([]);
 
  
 
@@ -25,6 +29,8 @@ export default function HomePage(props) {
             setLastName(data.user.lastName);
             setHeight(data.user.height);
             setWeight(data.user.weight);
+            setselectedTrainings(data.user.selectedTrainings              );
+ 
             
           } catch (error) {
             console.error('Error fetching trainings:', error);
@@ -180,7 +186,10 @@ export default function HomePage(props) {
                     </div>
                   </div>
                 </div>
-                {/* ---------- */}
+                <div className="container">
+      <h1>גרף אימונים</h1>
+      <GraphComponent selectedTrainings={selectedTrainings} />
+    </div>
                 <div class="col-sm-6 mb-3">
                   <div class="card h-100">
                     <div class="card-body">

@@ -38,6 +38,7 @@ router.post("/", async (req, res) => {
   
       const selectedTraining = {
         trainingId: training._id,
+        name: training.name,
         weight: parseInt(new_weight,10),
         startDate: new Date(),
       };
