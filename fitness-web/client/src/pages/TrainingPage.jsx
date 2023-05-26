@@ -124,6 +124,7 @@ export function TrainingForm() {
             <Modal.Title>Add Training Program</Modal.Title>
           </Modal.Header>
           <Modal.Body>
+            {/* Three Options to SHow */}
             {modalOption === 'emptyInput' && <p>Please enter a weight value.</p>}
             {modalOption === 'error' && <p>Error occurred while adding the training program.</p>}
             {modalOption === 'success' && <p>Training program added successfully.</p>}
