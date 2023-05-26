@@ -1,57 +1,50 @@
-
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export function Modal( props) {
-    const {title, information, onOptionChange ,Isleftbutoon,leftbutton,rightbutton,afterClick , button_props} = props;
+export function Modal(props) {
+  const { title, information, closeModal, leftButton, rightButton, afterClick, buttonProps } = props;
 
+  const handleConfirmClick = () => {
+    closeModal(); // Close the modal before navigating
+    afterClick(); // Perform the action after clicking the confirm button
+  };
 
   return (
     <>
+      {/* Button to trigger the modal */}
+      <button type="button" className="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+        {buttonProps}
+      </button>
 
-{/* <!-- Button trigger modal --> */}
-
-        {/* // <!-- Button trigger modal --> */}
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-          {button_props}
-        </button>
-        
-        {/* // <!-- Modal --> */}a
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel"> {title}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
+      {/* Modal */}
+      <div className="modal fade" id="exampleModal" tabIndex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div className="modal-dialog" role="document">
+          <div className="modal-content">
+            <div className="modal-header">
+              <h5 className="modal-title" id="exampleModalLabel">
+                {title}
+              </h5>
+              <button type="button" className="close" data-dismiss="modal" aria-label="Close" onClick={closeModal}>
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div className="modal-body">{information}</div>
+            <div className="modal-footer">
+              {leftButton && (
+                <button type="button" className="btn btn-secondary" onClick={closeModal}>
+                  {leftButton}
                 </button>
-              </div>
-              <div class="modal-body">
-                {information}
-              </div>
-              <div class="modal-footer">
-  {Isleftbutoon === "true" ? (
-    <div>
-      <button type="button" class="btn btn-secondary" data-dismiss="modal">
-      {leftbutton}
-      </button>
-      <button type="button" class="btn btn-primary" onClick={afterClick}>
-        {rightbutton}
-      </button>
-    </div>
-  ) : (
-    <div>
-      <button type="button" class="btn btn-primary">
-      {rightbutton}
-      </button>
-    </div>
-  )}
-</div>
-
+              )}
+              <button type="button" className="btn btn-primary" onClick={handleConfirmClick}>
+                {rightButton}
+              </button>
             </div>
           </div>
         </div>
-        </>
+      </div>
+    </>
   );
 }
+
 
 export default Modal;

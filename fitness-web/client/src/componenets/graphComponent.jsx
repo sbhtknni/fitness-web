@@ -3,8 +3,14 @@ import { Line } from 'react-chartjs-2';
 
 function GraphComponent({ selectedTrainings }) {
   // Extracting the dates, weights, and training names from selectedTrainings
-  const dates = selectedTrainings.map((training) => training.startDate);
-  const weights = selectedTrainings.map((training) => training.weight);
+  const dates = selectedTrainings.map((training) => {
+    const date = new Date(training.startDate);
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    return `${day}/${month}/${year}`;
+  });
+    const weights = selectedTrainings.map((training) => training.weight);
   const trainingNames  = selectedTrainings.map((training) => training.name);
   const totalTrainings = selectedTrainings.length;
 

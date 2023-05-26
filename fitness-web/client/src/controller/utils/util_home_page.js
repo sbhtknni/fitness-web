@@ -6,7 +6,6 @@ export function calculateAverage  (weights)   {
     }
     return sum / weights.length;
 }
-// export function averageWeight = calculateAverage(weights);
 
 export function calculateMax  (weights)   {
     let max = weights[0];
@@ -78,4 +77,9 @@ export function calculatePopularName (trainingNames)   {
     }
     return maxName;
 }
+
+export function currentTrainingName (trainingNames) {
+    return trainingNames[trainingNames.length - 1];
+}
+
 // export function popularTrainingName = pupolarName(trainingNames);

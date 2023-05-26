@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import RadioButton from '../componenets/radioButton.jsx';
 import NavigationBar from '../componenets/NavigationBar.jsx';
 import Modal from '../componenets/modal';
+
 
 //For fetching api
 import axios from 'axios';
@@ -46,7 +46,7 @@ export function Login(props) {
       alert('---');
       alert(response.data.token);
       window.localStorage.setItem('userId', response.data.userID);
-      navigate('/blog');
+      navigate('/');
 
       console.log(response.status);
     } catch (err) {
