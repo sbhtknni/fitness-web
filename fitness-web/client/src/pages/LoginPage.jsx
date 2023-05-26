@@ -46,7 +46,7 @@ export function Login(props) {
       alert('---');
       alert(response.data.token);
       window.localStorage.setItem('userId', response.data.userID);
-      navigate('/blog');
+      navigate('/');
 
       console.log(response.status);
     } catch (err) {

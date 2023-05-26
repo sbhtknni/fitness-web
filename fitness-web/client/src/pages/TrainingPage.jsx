@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import NavigationBar from '../componenets/NavigationBar';
 import axios from 'axios';
 import ReactPlayer from 'react-player';
 import Modal from '../componenets/modal';

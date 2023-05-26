@@ -1,55 +1,56 @@
 import MainLayout from '../layout/MainLayout.jsx';
 import Modal from '../componenets/modal.jsx';
+import ChartToTrainings from '../componenets/ChartToTrainings.jsx';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 
 export default function HomePage(props) {
-    const [Email, setEmail] = useState();
-    const [BMI, setBMI] = useState();
-    const [FirstName, setFirstName] = useState();
-    const [LastName, setLastName] = useState();
-    const [height, setHeight] = useState();
-    const [weight, setWeight] = useState();
+  const [Email, setEmail] = useState();
+  const [BMI, setBMI] = useState();
+  const [FirstName, setFirstName] = useState();
+  const [LastName, setLastName] = useState();
+  const [height, setHeight] = useState();
+  const [weight, setWeight] = useState();
 
- 
 
-    useEffect(() => {
-        const fetchTrainings = async () => {
-          try {
-            const response = await axios.get(`http://localhost:3002/auth/${localStorage.getItem('userId')}`);
-            const data = response.data;
-            console.log(data);
-            setEmail(data.user.email);
-            setBMI(data.user.bmi);
-            setFirstName(data.user.firstName);
-            setLastName(data.user.lastName);
-            setHeight(data.user.height);
-            setWeight(data.user.weight);
-            
-          } catch (error) {
-            console.error('Error fetching trainings:', error);
-          }
-        };
-    
-        fetchTrainings();
-      }, []);
 
-      
-    const { name } = props;
-    //style
+  useEffect(() => {
+    const fetchTrainings = async () => {
+      try {
+        const response = await axios.get(`http://localhost:3002/auth/${localStorage.getItem('userId')}`);
+        const data = response.data;
+        console.log(data);
+        setEmail(data.user.email);
+        setBMI(data.user.bmi);
+        setFirstName(data.user.firstName);
+        setLastName(data.user.lastName);
+        setHeight(data.user.height);
+        setWeight(data.user.weight);
 
-    // if (name.length >3) {
-    //     style.color='red'
-    // }
-//create new html page
-    return (
-        <MainLayout>
-       <div class="container">
-    <div class="main-body">
+      } catch (error) {
+        console.error('Error fetching trainings:', error);
+      }
+    };
 
-      
+    fetchTrainings();
+  }, []);
+
+
+  const { name } = props;
+  //style
+
+  // if (name.length >3) {
+  //     style.color='red'
+  // }
+  //create new html page
+  return (
+    <MainLayout>
+      <div class="container">
+        <div class="main-body">
+
+
           {/* <!-- /Breadcrumb --> */}
-    
+
           <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
               <div class="card">
@@ -57,7 +58,7 @@ export default function HomePage(props) {
                   <div class="d-flex flex-column align-items-center text-center">
                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150"></img>
                     <div class="mt-3">
-                      <h4>{FirstName +" "+LastName}</h4>
+                      <h4>{FirstName + " " + LastName}</h4>
                       <p class="text-secondary mb-1">Full Stack Developer</p>
                       <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
                       <button class="btn btn-primary">Follow</button>
@@ -99,8 +100,8 @@ export default function HomePage(props) {
                       <h6 class="mb-0">Full Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                    {FirstName +" "+LastName}
-                                        </div>
+                      {FirstName + " " + LastName}
+                    </div>
                   </div>
                   <hr></hr>
                   <div class="row">
@@ -108,8 +109,8 @@ export default function HomePage(props) {
                       <h6 class="mb-0">Email</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                    {Email}   
-                </div>
+                      {Email}
+                    </div>
                   </div>
                   <hr></hr>
                   <div class="row">
@@ -117,7 +118,7 @@ export default function HomePage(props) {
                       <h6 class="mb-0">Height</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        {height} cm
+                      {height} cm
                     </div>
                   </div>
                   <hr></hr>
@@ -126,8 +127,8 @@ export default function HomePage(props) {
                       <h6 class="mb-0">Weight</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                {weight} kg        
-                         </div>
+                      {weight} kg
+                    </div>
                   </div>
                   <hr></hr>
                   <div class="row">
@@ -135,8 +136,8 @@ export default function HomePage(props) {
                       <h6 class="mb-0">BMI</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                        {BMI} kg/m2
-                  </div>
+                      {BMI} kg/m2
+                    </div>
                   </div>
                   <hr></hr>
                   <div class="row">
@@ -163,15 +164,15 @@ export default function HomePage(props) {
                       </div>
                       <small>Website Markup</small>
                       <div class="progress mb-3">
-                        <div class="progress-bar bg-primary" role="progressbar"   aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <small>One Page</small>
                       <div class="progress mb-3" >
-                        <div class="progress-bar bg-primary" role="progressbar"  aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <small>Mobile Template</small>
                       <div class="progress mb-3"  >
-                        <div class="progress-bar bg-primary" role="progressbar"  aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <small>Backend API</small>
                       <div class="progress mb-3" >
@@ -187,23 +188,23 @@ export default function HomePage(props) {
                       <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Project Status</h6>
                       <small>Web Design</small>
                       <div class="progress mb-3">
-                        <div class="progress-bar bg-primary" role="progressbar"   aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <small>Website Markup</small>
                       <div class="progress mb-3" >
-                        <div class="progress-bar bg-primary" role="progressbar"  aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <small>One Page</small>
                       <div class="progress mb-3" >
-                        <div class="progress-bar bg-primary" role="progressbar"   aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <small>Mobile Template</small>
                       <div class="progress mb-3"  >
-                        <div class="progress-bar bg-primary" role="progressbar"  aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                       <small>Backend API</small>
                       <div class="progress mb-3" >
-                        <div class="progress-bar bg-primary" role="progressbar"   aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
                       </div>
                     </div>
                   </div>
@@ -216,8 +217,13 @@ export default function HomePage(props) {
           </div>
 
         </div>
-    </div>
+      </div>
+      <div>
+        hello
+        <canvas id="ChartToTrainings"></canvas>
+        <ChartToTrainings />
+      </div>
     </MainLayout>
-    )
+  )
 }
 
