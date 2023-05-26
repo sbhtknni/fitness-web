@@ -59,7 +59,7 @@ export function calculateMedian  (weights)   {
 }
 // export function medianWeight = calculateMedian(weights);
 
-export function pupolarName (trainingNames)   {
+export function calculatePopularName (trainingNames)   {
     const nameCount = {};
     for(let i = 0; i < trainingNames.length; i++){
         if(nameCount[trainingNames[i]]){

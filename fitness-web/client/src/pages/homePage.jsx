@@ -29,7 +29,21 @@ export default function HomePage(props) {
             setLastName(data.user.lastName);
             setHeight(data.user.height);
             setWeight(data.user.weight);
-            setselectedTrainings(data.user.selectedTrainings              );
+            setselectedTrainings(data.user.selectedTrainings);         
+            const dates = selectedTrainings.map((training) => training.startDate);
+            const weights = selectedTrainings.map((training) => training.weight);
+            const trainingNames  = selectedTrainings.map((training) => training.name);  
+            const totalTrainings = selectedTrainings.length;
+            const AverageWeight = calculateAverage(weights);
+            // console.log("----",AverageWeight);
+            const MaxWeight = calculateMax(weights);
+            const MinWeight = calculateMin(weights);
+            const VarianceWeight = calculateVariance(weights);
+            const StandardDeviationWeight = calculateStandardDeviation(weights);
+            const MedianWeight = calculateMedian(weights);
+            const PopularNameWeight = calculatePopularName(trainingNames);
+          
+
  
             
           } catch (error) {
@@ -105,8 +119,8 @@ export default function HomePage(props) {
                       <h6 class="mb-0">Full Name</h6>
                     </div>
                     <div class="col-sm-9 text-secondary">
-                    {FirstName +" "+LastName}
-                                        </div>
+                    {FirstName +" "+LastName}   
+                      </div>
                   </div>
                   <hr></hr>
                   <div class="row">
@@ -134,6 +148,24 @@ export default function HomePage(props) {
                     <div class="col-sm-9 text-secondary">
                 {weight} kg        
                          </div>
+                  </div>
+                  <hr></hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">BMI</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                        {BMI} kg/m2
+                  </div>
+                  </div>
+                  <hr></hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Average </h6>
+                    </div>
+                    {/* <div class="col-sm-9 text-secondary">
+                        {AverageWeight} kg/m2
+                  </div> */}
                   </div>
                   <hr></hr>
                   <div class="row">
