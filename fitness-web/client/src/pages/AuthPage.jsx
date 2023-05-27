@@ -69,7 +69,7 @@ export function Login(props) {
   const handleModalClose = () => {
     setShowModal(false);
     if (modalOption === 'success') {
-      navigate('/');
+      navigate('/userpage');
     }
   };
 
@@ -178,6 +178,8 @@ export function Register() {
   const [lastName, setLastName] = useState('');
   const [height, setHeight] = useState('');
   const [weight, setWeight] = useState('');
+  const [showModal, setShowModal] = useState(false);
+  const [modalOption, setModalOption] = useState('');
 
   const forms = document.querySelectorAll('.needs-validation');
 
@@ -203,7 +205,8 @@ export function Register() {
     try {
       const response = await axios.post("http://localhost:3002/auth/register", { email: email, password: password, firstName: firstName, lastName: lastName, height: height, weight: weight })
       window.localStorage.setItem("userId", response.data.userID);
-      navigate('/auth');
+      setModalOption('success');
+      setShowModal(true);
 
       // alert(response.status.);
       console.log(response.status)
@@ -215,6 +218,12 @@ export function Register() {
       console.error(err);
     }
 
+  };
+  const handleModalClose = () => {
+    setShowModal(false);
+    if (modalOption === 'success') {
+      navigate('/auth/login');
+    }
   };
 
 
@@ -291,9 +300,10 @@ export function Register() {
                               className="form-control"
                               required
                               min={0}
+                              max={210}
                               onChange={(event) => setHeight(event.target.value)} />
                             <label className="form-label" for="typeHeightX">Height</label>
-                            <div className="invalid-feedback">Please enter Height</div>
+                            <div className="invalid-feedback">Please enter vaild Height</div>
                           </div>
                         </div>
 
@@ -305,6 +315,7 @@ export function Register() {
                               className="form-control"
                               required
                               min={0}
+                              max ={250}
                               onChange={(event) => setWeight(event.target.value)} />
                             <label className="form-label" for="typeWeightX">Weight</label>
                             <div className="invalid-feedback">Please enter Weight</div>
@@ -326,6 +337,21 @@ export function Register() {
           </div>
         </section>
       </form>
+
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Login</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {/* Two Options to SHow */}
+            {modalOption === 'error' && <p>Error occurred while trying to login ,  User Name or Password Incorrect  .</p>}
+            {modalOption === 'success' && <p>Signed Up Successfully , Let's Log In!</p>}
+          </Modal.Body>
+          <Modal.Footer>
+          {modalOption === 'success' &&   <Button variant="primary" onClick={handleModalClose}> OK </Button>}
+            <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
+          </Modal.Footer>
+        </Modal>
     </>
 
   );

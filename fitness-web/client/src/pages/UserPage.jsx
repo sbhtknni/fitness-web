@@ -5,7 +5,7 @@ import GraphComponent from '../componenets/graphComponent.jsx';
 import ChartTrainigGraph from '../componenets/ChartTrainingGraph.jsx';
 import { calculateAverage, calculateMax, calculateMin, calculateVariance, calculateStandardDeviation, calculateMedian, calculatePopularName, currentTrainingName } from '../controller/utils/util_home_page.js';
 
-export default function HomePage(props) {
+export default function UserPage(props) {
   const [Email, setEmail] = useState();
   const [BMI, setBMI] = useState();
   const [FirstName, setFirstName] = useState();

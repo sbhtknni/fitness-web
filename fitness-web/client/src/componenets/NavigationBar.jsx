@@ -12,36 +12,52 @@ export function NavigationBar(props) {
 
   }
   
+  const handleLinkClick = (muscle) => {
+    window.localStorage.setItem('selectedTrainingInfo', muscle);
+  };
+
     return (
-      <nav className="navbar navbar-dark bg-dark navbar navbar-expand-lg navbar sticky-top">
- <a className="navbar-brand" href="/">
-    <img src="https://gymgearmentors.com/wp-content/uploads/2022/08/cropped-Orange-Black-White-Minimalist-Fitness-Gym-Logo-3-1.png" width="30" height="30" className="d-inline-block align-top" alt=""></img>
-    Fitness
-  </a>      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+<nav className="navbar navbar-dark bg-dark navbar navbar-expand-lg navbar sticky-top">
+      <Link className="navbar-brand" to="/">
+        <img src="https://gymgearmentors.com/wp-content/uploads/2022/08/cropped-Orange-Black-White-Minimalist-Fitness-Gym-Logo-3-1.png" width="30" height="30" className="d-inline-block align-top" alt="" />
+        Fitness
+      </Link>
+      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse" id="navbarNavDropdown">
         <ul className="navbar-nav">
-          <li className="nav-item active">
-            <a className="nav-link" href="/">Home <span className="sr-only">(current)</span></a>
+         
+          {!cookies.access_token ? 
+          (
+            <li className="nav-item">
+              <Link className="nav-link" to="/auth/login">Login</Link>
+            </li>
+     
+          ) 
+          
+          :
+          
+          (
+            <>
+           <li className="nav-item active">
+            <Link className="nav-link" to="/userpage">User Page <span className="sr-only">(current)</span></Link>
           </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/auth/login" onClick={Logout}>Logout</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/training">Trainings</Link>
+            </li>
+            </>
+
+          )}
         
-          {!cookies.access_token ? ( <li className="nav-item">
-            <a className="nav-link" href="/auth">Login</a>
-          </li>) : (<li className="nav-item">
-            <a className="nav-link" href="/auth"     onClick={Logout} >Logout</a>
-           
-          </li>)}
 
-
-
-          <li className="nav-item">
-            <a className="nav-link" href="/training">Trainings</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <li className="nav-item dropdown">
+            <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Training information
-            </a>
+            </Link>
             <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <Link
                 className="dropdown-item"
