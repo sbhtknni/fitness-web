@@ -15,7 +15,9 @@ export function NavigationBar(props) {
 
   const handleLinkClick = (muscle) => {
     window.localStorage.setItem('selectedTrainingInfo', muscle);
+    window.location.reload();
   };
+
 
 
   return (

@@ -6,13 +6,11 @@ const router = express.Router();
 // Get muscleInformation by muscle name
 router.get("/:muscleName", async (req, res) => {
     const muscleName = req.params.muscleName;
-    console.log(muscleName);
     try {
         const musclesInformation = await MusclesInformation.findOne({ muscle:muscleName});
         if (!musclesInformation) {
             return res.status(400).json({ message: "MusclesInformation does not exist" });
           }
-        console.log("MusclesInformation found");
         return res.status(200).json({musclesInformation, message: "All musclesInformation sent" }); 
     } catch (error) {
         res.json(error,{ message: error.message });
