@@ -8,7 +8,8 @@ export function NavigationBar(props) {
   const Logout = () => {
     removeCookie("access_token");
     window.localStorage.removeItem("userId");
-    
+    window.localStorage.removeItem("selectedTrainingInfo");
+
   }
   
     return (
@@ -32,25 +33,57 @@ export function NavigationBar(props) {
            
           </li>)}
 
-         
+
 
           <li className="nav-item">
             <a className="nav-link" href="/training">Trainings</a>
           </li>
-          <li className="nav-item dropdown">
-            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown link
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Training information
             </a>
             <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a className="dropdown-item" href="/2">Action</a>
-              <a className="dropdown-item" href="/2">Another action</a>
-              <a className="dropdown-item" href="/2">Something else here</a>
+              <Link
+                className="dropdown-item"
+                to="/TrainingProgramas"
+                onClick={() => handleLinkClick('Back')}
+              >
+                Back
+              </Link>
+              <Link
+                className="dropdown-item"
+                to="/TrainingProgramas"
+                onClick={() => handleLinkClick('Chest')}
+              >
+                Chest
+              </Link>
+              <Link
+                className="dropdown-item"
+                to="/TrainingProgramas"
+                onClick={() => handleLinkClick('Legs')}
+              >
+                Legs
+              </Link>
+              <Link
+                className="dropdown-item"
+                to="/TrainingProgramas"
+                onClick={() => handleLinkClick('Hands')}
+              >
+                Hands
+              </Link>
+              <Link
+                className="dropdown-item"
+                to="/TrainingProgramas"
+                onClick={() => handleLinkClick('Shoulders')}
+              >
+                Shoulders
+              </Link>
             </div>
           </li>
         </ul>
       </div>
     </nav>
 
-          )
+  )
 }
 export default NavigationBar;

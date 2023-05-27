@@ -37,7 +37,7 @@ const chartOptions = {
           if (context.parsed.y !== null) {
 
             const trainingName = trainingNames[context.dataIndex] ; // Get the corresponding training name
-            return `${label}: ${context.parsed.y} kg ->(${trainingName})`;
+            return `${label}: ${context.parsed.y} kg -> (${trainingName})`;
           }
           return null;
         },
