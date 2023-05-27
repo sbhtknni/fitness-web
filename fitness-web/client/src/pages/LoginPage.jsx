@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavigationBar from '../componenets/NavigationBar.jsx';
-import Modal from '../componenets/modal';
+import { Modal, Button } from 'react-bootstrap';
 
 
 //For fetching api
@@ -19,7 +19,9 @@ export function Login(props) {
   const [passwordValid, setPasswordValid] = useState(false);
   const [submittedEmail, setSubmittedEmail] = useState(false);
   const [submittedPassword, setSubmittedPassword] = useState(false);
-
+  const [showModal, setShowModal] = useState(false);
+  const [modalOption, setModalOption] = useState('');
+  const [modalMessage, setModalMessage] = useState('');
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -28,6 +30,7 @@ export function Login(props) {
       event.stopPropagation();
       setSubmittedEmail(true);
       setSubmittedPassword(true);
+
       return;
     }
 
@@ -36,21 +39,17 @@ export function Login(props) {
         email: email,
         password: password,
       });
-
+      setModalOption('success');
+      setShowModal(true);
       const message = response.data.message;
-
+      setModalMessage(message);
       setCookies('access_token', response.data.token);
-      <Modal></Modal>
-
-      alert(message);
-      alert('---');
-      alert(response.data.token);
       window.localStorage.setItem('userId', response.data.userID);
-      navigate('/');
 
       console.log(response.status);
     } catch (err) {
-      alert(err.response.data.message);
+      setModalOption('error');
+      setShowModal(true);
       console.error(err);
     }
   };
@@ -66,6 +65,14 @@ export function Login(props) {
     setPasswordValid(event.target.checkValidity());
     setSubmittedPassword(false);
   };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+    if (modalOption === 'success') {
+      navigate('/');
+    }
+  };
+
 
   return (
     <>
@@ -118,7 +125,6 @@ export function Login(props) {
                           Forgot password?
                         </a>
                       </p>
-                        <Modal className="btn btn-outline-light btn-lg px-5"  type="submit"   button_props = " Login"/>
 
                       <button className="btn btn-outline-light btn-lg px-5" type="submit" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
                         Login
@@ -142,7 +148,22 @@ export function Login(props) {
           </div>
         </section>
       </form>
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Login</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {/* Two Options to SHow */}
+            {modalOption === 'error' && <p>Error occurred while trying to login ,  User Name or Password Incorrect {modalMessage} .</p>}
+            {modalOption === 'success' && <p>Logged In Successfully </p>}
+          </Modal.Body>
+          <Modal.Footer>
+          {modalOption === 'success' &&   <Button variant="primary" onClick={handleModalClose}> OK </Button>}
+            <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
+          </Modal.Footer>
+        </Modal>
     </>
+    
   );
 }
 
@@ -200,104 +221,104 @@ export function Register() {
   return (
     <>
       <NavigationBar></NavigationBar>
-      <form onSubmit={handleSubmit} class="row g-3 needs-validation" noValidate>
-        <section class="text-center text-lg-start  vh-500 gradient-custom">
-          <div class="container py-4 h-100">
-            <div class="row d-flex justify-content-center align-items-center h-400">
-              <div class="col-12 col-md-8 col-lg-6 col-xl-5">
-                <div class="card bg-dark text-white">
-                  <div class="card-body p-5 text-center">
-                    <div class="mb-md-5 mt-md-4 pb-5">
-                      <h2 class="fw-bold mb-5">Sign up now</h2>
+      <form onSubmit={handleSubmit} className="row g-3 needs-validation" noValidate>
+        <section className="text-center text-lg-start  vh-500 gradient-custom">
+          <div className="container py-4 h-100">
+            <div className="row d-flex justify-content-center align-items-center h-400">
+              <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+                <div className="card bg-dark text-white">
+                  <div className="card-body p-5 text-center">
+                    <div className="mb-md-5 mt-md-4 pb-5">
+                      <h2 className="fw-bold mb-5">Sign up now</h2>
 
                       {/* <!-- 2 column grid layout with text inputs for the first and last names --> */}
-                      <div class="row">
-                        <div class="col-md-6 mb-4">
-                          <div class="form-outline">
+                      <div className="row">
+                        <div className="col-md-6 mb-4">
+                          <div className="form-outline">
                             {/* <!-- FirstName input --> */}
                             <input
                               type="text"
                               id="FirstName"
-                              class="form-control"
+                              className="form-control"
                               required
                               onChange={(event) => setfirstName(event.target.value)} />
-                            <label class="form-label" for="typeFirstNameX">First Name</label>
-                            <div class="invalid-feedback">Please enter First Name</div>
+                            <label className="form-label" for="typeFirstNameX">First Name</label>
+                            <div className="invalid-feedback">Please enter First Name</div>
                           </div>
                         </div>
-                        <div class="col-md-6 mb-4">
-                          <div class="form-outline">
+                        <div className="col-md-6 mb-4">
+                          <div className="form-outline">
                             {/* <!-- LastName input --> */}
                             <input type="text"
                               id="LastName"
-                              class="form-control"
+                              className="form-control"
                               required
                               onChange={(event) => setLastName(event.target.value)} />
-                            <label class="form-label" for="typeLastNameX">Last Name</label>
-                            <div class="invalid-feedback">Please enter Last Name</div>
+                            <label className="form-label" for="typeLastNameX">Last Name</label>
+                            <div className="invalid-feedback">Please enter Last Name</div>
                           </div>
                         </div>
                       </div>
 
                       {/* <!-- Email input --> */}
-                      <div class="form-outline mb-4">
+                      <div className="form-outline mb-4">
                         <input
                           type="email"
                           id="email"
-                          class="form-control"
+                          className="form-control"
                           required
                           onChange={(event) => setEmail(event.target.value)} />
-                        <label class="form-label" for="typeEmailX">Email address</label>
-                        <div class="invalid-feedback">Please enter a valid email address</div>
+                        <label className="form-label" for="typeEmailX">Email address</label>
+                        <div className="invalid-feedback">Please enter a valid email address</div>
                       </div>
 
                       {/* <!-- Password input --> */}
 
-                      <div class="form-outline mb-4">
-                        <input type="password" class="form-control" id="validationCustom01" required
+                      <div className="form-outline mb-4">
+                        <input type="password" className="form-control" id="validationCustom01" required
                           onChange={(event) => setPassword(event.target.value)} />
-                        <label for="validationCustom01" class="form-label">Password</label>
-                        <div class="invalid-feedback">Please enter Password</div>
+                        <label for="validationCustom01" className="form-label">Password</label>
+                        <div className="invalid-feedback">Please enter Password</div>
                       </div>
 
                       {/* <!-- Height input --> */}
-                      <div class="row">
-                        <div class="col-md-6 mb-4">
-                          <div class="form-outline">
+                      <div className="row">
+                        <div className="col-md-6 mb-4">
+                          <div className="form-outline">
                             <input
                               type="number"
                               id="Height"
-                              class="form-control"
+                              className="form-control"
                               required
                               min={0}
                               onChange={(event) => setHeight(event.target.value)} />
-                            <label class="form-label" for="typeHeightX">Height</label>
-                            <div class="invalid-feedback">Please enter Height</div>
+                            <label className="form-label" for="typeHeightX">Height</label>
+                            <div className="invalid-feedback">Please enter Height</div>
                           </div>
                         </div>
 
                         {/* <!-- Weight input --> */}
-                        <div class="col-md-6 mb-4">
-                          <div class="form-outline">
+                        <div className="col-md-6 mb-4">
+                          <div className="form-outline">
                             <input type="number"
                               id="Weight"
-                              class="form-control"
+                              className="form-control"
                               required
                               min={0}
                               onChange={(event) => setWeight(event.target.value)} />
-                            <label class="form-label" for="typeWeightX">Weight</label>
-                            <div class="invalid-feedback">Please enter Weight</div>
+                            <label className="form-label" for="typeWeightX">Weight</label>
+                            <div className="invalid-feedback">Please enter Weight</div>
                           </div>
                         </div>
                       </div>
 
                       {/* <!-- Submit button --> */}
-                      <button class="btn btn-primary btn-block mb-4" type="submit"> Sign up </button>
+                      <button className="btn btn-primary btn-block mb-4" type="submit"> Sign up </button>
                     </div>
                   </div>
                 </div>
               </div>
-              <div class="col-lg-6 mb-5 mb-lg-0">
+              <div className="col-lg-6 mb-5 mb-lg-0">
                 <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" class="w-100 rounded-4 shadow-4"
                   alt="" />
               </div>
