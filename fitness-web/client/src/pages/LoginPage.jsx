@@ -37,14 +37,9 @@ export function Login(props) {
         password: password,
       });
 
-      const message = response.data.message;
 
       setCookies('access_token', response.data.token);
       <Modal></Modal>
-
-      alert(message);
-      alert('---');
-      alert(response.data.token);
       window.localStorage.setItem('userId', response.data.userID);
       navigate('/');
 

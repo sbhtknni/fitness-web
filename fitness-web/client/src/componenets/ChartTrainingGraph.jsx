@@ -4,7 +4,6 @@ import 'chartjs-plugin-datalabels';
 
 const ChartTrainigGraph = ({ selectedTrainings }) => {
   const chartRef = React.useRef(null);
-  const weights = selectedTrainings.map((training) => training.weight);
   const trainingNames = [...new Set(selectedTrainings.map((training) => training.name))];
   const totalCount = selectedTrainings.length;
 

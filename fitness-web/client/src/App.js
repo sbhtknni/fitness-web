@@ -2,8 +2,8 @@ import './assets/App.css';
 import  HomePage from './pages/HomePAGE.jsx';
 import React from 'react';
 import BlogPage from './/pages/BlogPage.jsx';
-import TrainingProgramas from './/pages/TrainingPrograms.jsx';
-import {Login,Register} from './/pages/LoginPage.jsx';
+import TrainingProgramas from './pages/TrainingPrograms.jsx';
+import { Login, Register } from './/pages/LoginPage.jsx';
 import {TrainingForm} from './/pages/TrainingPage.jsx';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // import 'react-native-gesture-handler';
@@ -27,6 +27,7 @@ function App() {
           <Route path="training" element={<TrainingForm />} />
           <Route path="auth" element={<Login />} />
           <Route path="register" element={<Register />} />
+          <Route path="TrainingProgramas" element={<TrainingProgramas />} />
         </Routes>
        
     </BrowserRouter>

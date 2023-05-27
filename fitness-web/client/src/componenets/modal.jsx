@@ -1,6 +1,8 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+
+
 export function Modal(props) {
   const { title, information, closeModal, leftButton, rightButton, afterClick, buttonProps } = props;
 

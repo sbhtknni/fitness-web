@@ -1,9 +1,8 @@
 import MainLayout from '../layout/MainLayout.jsx';
-import Modal from '../componenets/modal.jsx';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
-import { Line } from 'react-chartjs-2';
 import GraphComponent from '../componenets/graphComponent.jsx';
+import ChartTrainigGraph from '../componenets/ChartTrainingGraph.jsx';
 import { calculateAverage, calculateMax, calculateMin, calculateVariance, calculateStandardDeviation, calculateMedian, calculatePopularName, currentTrainingName } from '../controller/utils/util_home_page.js';
 
 export default function HomePage(props) {
@@ -216,8 +215,6 @@ export default function HomePage(props) {
                   </td>
                 </tr>
               </table>
-
-
               <div class="row gutters-sm">
                 {/* -------------- */}
                 <div class="col-sm-6 mb-3">
@@ -251,10 +248,7 @@ export default function HomePage(props) {
                     </div>
                   </div>
                 </div>
-                <div className="container">
-                  <h1>גרף אימונים</h1>
-                  <GraphComponent selectedTrainings={selectedTrainings} />
-                </div>
+                
                 <div class="col-sm-6 mb-3">
                   <div class="card h-100">
                     <div class="card-body">
