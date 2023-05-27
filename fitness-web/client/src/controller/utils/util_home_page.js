@@ -6,7 +6,6 @@ export function calculateAverage  (weights)   {
     }
     return sum / weights.length;
 }
-// export function averageWeight = calculateAverage(weights);
 
 export function calculateMax  (weights)   {
     let max = weights[0];
@@ -59,7 +58,7 @@ export function calculateMedian  (weights)   {
 }
 // export function medianWeight = calculateMedian(weights);
 
-export function pupolarName (trainingNames)   {
+export function calculatePopularName (trainingNames)   {
     const nameCount = {};
     for(let i = 0; i < trainingNames.length; i++){
         if(nameCount[trainingNames[i]]){
@@ -78,4 +77,9 @@ export function pupolarName (trainingNames)   {
     }
     return maxName;
 }
+
+export function currentTrainingName (trainingNames) {
+    return trainingNames[trainingNames.length - 1];
+}
+
 // export function popularTrainingName = pupolarName(trainingNames);

@@ -1,11 +1,10 @@
 import MainLayout from '../layout/MainLayout.jsx';
 import Modal from '../componenets/modal.jsx';
-import ChartTrainigGraph from '../componenets/ChartTrainingGraph.jsx';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import { Line } from 'react-chartjs-2';
 import GraphComponent from '../componenets/graphComponent.jsx';
-import { calculateAverage, calculateMax, calculateMin, calculateVariance, calculateStandardDeviation, calculateMedian, calculatePopularName } from '../controller/utils/util_home_page.js';
+import { calculateAverage, calculateMax, calculateMin, calculateVariance, calculateStandardDeviation, calculateMedian, calculatePopularName, currentTrainingName } from '../controller/utils/util_home_page.js';
 
 export default function HomePage(props) {
   const [Email, setEmail] = useState();
@@ -15,15 +14,25 @@ export default function HomePage(props) {
   const [height, setHeight] = useState();
   const [weight, setWeight] = useState();
   const [selectedTrainings, setselectedTrainings] = useState([]);
-
-
-
+  const [AverageWeight, setAverageWeight] = useState();
+  const [MaxWeight, setMaxWeight] = useState();
+  const [MinWeight, setMinWeight] = useState();
+  const [VarianceWeight, setVarianceWeight] = useState();
+  const [StandardDeviationWeight, setStandardDeviationWeight] = useState();
+  const [MedianWeight, setMedianWeight] = useState();
+  const [PopularNameTrain, setPopularNameTrain] = useState();
+  const [currTrainingName, setCurrentTrainingName] = useState();
+  const [dates, setDates] = useState([]);
+  const [weights, setWeights] = useState([]);
+  const [trainingNames, setTrainingNames] = useState([]);
+  const [loading, setLoading] = useState(true);
   useEffect(() => {
     const fetchTrainings = async () => {
       try {
         const response = await axios.get(`http://localhost:3002/auth/${localStorage.getItem('userId')}`);
         const data = response.data;
-        console.log(data);
+        console.log("data", data.user)
+
         setEmail(data.user.email);
         setBMI(data.user.bmi);
         setFirstName(data.user.firstName);
@@ -31,8 +40,10 @@ export default function HomePage(props) {
         setHeight(data.user.height);
         setWeight(data.user.weight);
         setselectedTrainings(data.user.selectedTrainings);
-
-
+        setDates(data.user.selectedTrainings.map((training) => training.startDate));
+        setWeights(data.user.selectedTrainings.map((training) => training.weight));
+        setTrainingNames(data.user.selectedTrainings.map((training) => training.name));
+        setLoading(false); // Set loading to false once data is fetched
       } catch (error) {
         console.error('Error fetching trainings:', error);
       }
@@ -41,19 +52,30 @@ export default function HomePage(props) {
     fetchTrainings();
   }, []);
 
+  useEffect(() => {
+    const calculateStatistics = () => {
+      setAverageWeight(calculateAverage(weights));
+      setMaxWeight(calculateMax(weights));
+      setMinWeight(calculateMin(weights));
+      setVarianceWeight(calculateVariance(weights));
+      setStandardDeviationWeight(calculateStandardDeviation(weights));
+      setMedianWeight(calculateMedian(weights));
+      setPopularNameTrain(calculatePopularName(trainingNames));
+      setCurrentTrainingName(currentTrainingName(trainingNames));
 
-  const { name } = props;
-  //style
+    };
 
-  // if (name.length >3) {
-  //     style.color='red'
-  // }
-  //create new html page
+    calculateStatistics();
+  }, [weights, trainingNames]);
+
+  // Conditionally render the component's content
+  if (loading) {
+    return <div>Loading...</div>; // Show a loading indicator while data is being fetched
+  }
   return (
     <MainLayout>
-      <div class="container" >
+      <div class="container">
         <div class="main-body">
-          {/* <!-- /Breadcrumb --> */}
           <div class="row gutters-sm">
             <div class="col-md-4 mb-3">
               <div class="card">
@@ -62,8 +84,8 @@ export default function HomePage(props) {
                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150"></img>
                     <div class="mt-3">
                       <h4>{FirstName + " " + LastName}</h4>
-                      <p class="text-secondary mb-1">Full Stack Developer</p>
-                      <p class="text-muted font-size-sm">Bay Area, San Francisco, CA</p>
+                      <p class="text-secondary mb-1">Current Training Plane :</p>
+                      <p class="text-muted font-size-sm">{currTrainingName}</p>
                       <button class="btn btn-primary">Follow</button>
                       <button class="btn btn-outline-primary">Message</button>
                     </div>
@@ -144,12 +166,57 @@ export default function HomePage(props) {
                   </div>
                   <hr></hr>
                   <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Average Weight</h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {AverageWeight} kg
+                    </div>
+                  </div>
+                  <hr></hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0">Favorite Training </h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      {PopularNameTrain}
+                    </div>
+                  </div>
+                  <hr></hr>
+                  <div class="row">
                     <div class="col-sm-12">
                       <a class="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
                     </div>
                   </div>
                 </div>
               </div>
+
+              <table>
+                <tr>
+                  <td>
+                    <div className="card" style={{ width: "22.5rem ", height: "20rem" }}>
+
+                      <div className="card-body">
+                        <p className="card-text">Your Min Weight : {MinWeight} kg </p>
+                        <p className="card-text">Your Max Weight: {MaxWeight} kg</p>
+                      </div>
+                    </div>
+                  </td>
+                  <td>
+                    <div className="card" style={{ width: "23rem ", height: "20rem" }}>
+
+                      <div className="card-body">
+                        <p className="card-text">Some Statistics :</p>
+                        <p className="card-text">Variance  : {VarianceWeight} </p>
+                        <p className="card-text">Deviation  : {StandardDeviationWeight}</p>
+                        <p className="card-text">Median Weight : {MedianWeight}</p>
+
+                      </div>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+
 
               <div class="row gutters-sm">
                 {/* -------------- */}
@@ -166,8 +233,8 @@ export default function HomePage(props) {
 
                       </div>
                       <small>Website Markup</small>
-                      <div class="progress mb-3">
-                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100"></div>
+                      <div class="progress">
+                        <div className="progress-bar bg-primary" role="progressbar" style={{ width: `${weight}%` }} aria-valuenow={weight} aria-valuemin={MinWeight} aria-valuemax={MaxWeight}></div>
                       </div>
                       <small>One Page</small>
                       <div class="progress mb-3" >
@@ -184,7 +251,10 @@ export default function HomePage(props) {
                     </div>
                   </div>
                 </div>
-
+                <div className="container">
+                  <h1>גרף אימונים</h1>
+                  <GraphComponent selectedTrainings={selectedTrainings} />
+                </div>
                 <div class="col-sm-6 mb-3">
                   <div class="card h-100">
                     <div class="card-body">
@@ -212,7 +282,6 @@ export default function HomePage(props) {
                     </div>
                   </div>
                 </div>
-
               </div>
             </div>
           </div>
@@ -224,12 +293,10 @@ export default function HomePage(props) {
           </div>
           <div style={{ flex: 1 }}>
             <h3>כמות שימוש בתוכנית מכל סוג</h3>
-            <ChartTrainigGraph selectedTrainings={selectedTrainings} />                  </div>
+            <ChartTrainigGraph selectedTrainings={selectedTrainings} />
+          </div>
         </div>
       </div>
-
-
     </MainLayout>
   )
 }
-
