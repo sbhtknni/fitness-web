@@ -7,6 +7,7 @@ import { Modal, Button } from 'react-bootstrap';
 //For fetching api
 import axios from 'axios';
 import { useCookies } from "react-cookie"
+import MainLayout from '../layout/MainLayout.jsx';
 
 
 export function Login(props) {
@@ -77,16 +78,18 @@ export function Login(props) {
 
   return (
     <>
-      <NavigationBar />
+    <MainLayout>
       <form onSubmit={handleSubmit} className="needs-validation" noValidate>
-        <section className="vh-500 gradient-custom">
-          <div className="container py-4 h-100">
-            <div className="row d-flex justify-content-center align-items-center h-400">
-              <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-                <div className="card bg-dark text-white">
-                  <div className="card-body p-5 text-center">
-                    <div className="mb-md-5 mt-md-4 pb-5">
-                      <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
+      <section class="vh-200 gradient-custom" style={{ minHeight: '100vh' }}>
+        <div class="container py-5 h-300">
+          <div class="row d-flex justify-content-center align-items-center h-300">
+            <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+            <div className="card bg-dark text-white" style={{ borderRadius: '2rem' }}>
+                <div class="card-body p-5 text-center">
+
+                  <div class="mb-md-5 mt-md-4 pb-5">
+
+                      <h2 className="fw-bold mb-2 text-uppercase " >Login</h2>
                       <p className="text-white-50 mb-5">Please enter your login and password!</p>
 
                       <div className="form-outline form-white mb-6">
@@ -123,7 +126,7 @@ export function Login(props) {
 
                      
 
-                      <button className="btn btn-outline-light btn-lg px-5" type="submit" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+                      <button className="btn btn-outline-light btn-lg px-5" type="submit" data-mdb-toggle="modal" data-mdb-target="#exampleModal" style={{ margin: '2vh' }}  >
                         Login
 
                       </button>
@@ -159,6 +162,7 @@ export function Login(props) {
             <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
           </Modal.Footer>
         </Modal>
+        </MainLayout>
     </>
     
   );
@@ -226,10 +230,10 @@ export function Register() {
   return (
     <>
       <NavigationBar></NavigationBar>
-      <form onSubmit={handleSubmit} className="row g-3 needs-validation" noValidate>
-        <section className="text-center text-lg-start  vh-500 gradient-custom">
+      <form onSubmit={handleSubmit} className="needs-validation" noValidate>
+      <section class="vh-200 gradient-custom" style={{ minHeight: '100vh' }}>
           <div className="container py-4 h-100">
-            <div className="row d-flex justify-content-center align-items-center h-400">
+            <div className="row d-flex justify-content-center align-items-center h-300">
               <div className="col-12 col-md-8 col-lg-6 col-xl-5">
                 <div className="card bg-dark text-white">
                   <div className="card-body p-5 text-center">
@@ -328,7 +332,7 @@ export function Register() {
                 </div>
               </div>
               <div className="col-lg-6 mb-5 mb-lg-0">
-                <img src="https://mdbootstrap.com/img/new/ecommerce/vertical/004.jpg" class="w-100 rounded-4 shadow-4"
+                <img src="https://nowosci.beactivetv.pl/wp-content/themes/beactive/img/fitlovers/fitlovers-photo.png"
                   alt="" />
               </div>
             </div>

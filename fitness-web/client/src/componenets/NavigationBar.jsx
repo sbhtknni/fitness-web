@@ -31,7 +31,7 @@ export function NavigationBar(props) {
           (
             <>
                <Link className="navbar-brand" to="/">
-        <img src="https://gymgearmentors.com/wp-content/uploads/2022/08/cropped-Orange-Black-White-Minimalist-Fitness-Gym-Logo-3-1.png" width="30" height="30" className="d-inline-block align-top" alt="" />
+        <img src="https://queenstreetmedical.co.nz/wp-content/uploads/2023/02/qstfsvglogo.png" width="30" height="30" className="d-inline-block align-top" alt="" />
         Fitness
       </Link>
       
@@ -46,7 +46,7 @@ export function NavigationBar(props) {
           (
             <>
                       <Link className="navbar-brand" to="/userpage">
-        <img src="https://gymgearmentors.com/wp-content/uploads/2022/08/cropped-Orange-Black-White-Minimalist-Fitness-Gym-Logo-3-1.png" width="30" height="30" className="d-inline-block align-top" alt="" />
+        <img src="https://queenstreetmedical.co.nz/wp-content/uploads/2023/02/qstfsvglogo.png" width="30" height="30" className="d-inline-block align-top" alt="" />
         Fitness
       </Link>
            <li className="nav-item active">
