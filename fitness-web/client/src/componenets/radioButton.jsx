@@ -10,7 +10,7 @@ function RadioButton(props) {
   };
 
   return (
-    <div className="btn-group btn-group-toggle bg-dark" data-toggle="buttons">
+    <div className="btn-group btn-group-toggle" data-toggle="buttons">
       {options.map((option) => (
         <label
           key={option}

@@ -6,6 +6,7 @@ import TrainingProgramas from './pages/TrainingPrograms.jsx';
 import { Login, Register } from './/pages/AuthPage.jsx';
 import {TrainingForm} from './/pages/TrainingPage.jsx';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
 // import 'react-native-gesture-handler';
 
 // import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -22,7 +23,8 @@ function App() {
     
     <BrowserRouter>
         <Routes>
-          <Route path="/userpage" element={<UserPage />} />
+          <Route path="/" element={<HomePage />} />
+          <Route path="userpage" element={<UserPage />} />
           <Route path="blog" element={<BlogPage />} />
           <Route path="training" element={<TrainingForm />} />
           <Route path="auth/login" element={<Login />} />

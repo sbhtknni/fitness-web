@@ -22,6 +22,7 @@ export function Login(props) {
   const [showModal, setShowModal] = useState(false);
   const [modalOption, setModalOption] = useState('');
   const [modalMessage, setModalMessage] = useState('');
+
   const handleSubmit = async (event) => {
     event.preventDefault();
 
@@ -120,11 +121,7 @@ export function Login(props) {
                         {passwordValid && <div className="valid-feedback">Looks good!</div>}
                       </div>
 
-                      <p className="small mb-5 pb-lg-2">
-                        <a className="text-white-50" href="#!">
-                          Forgot password?
-                        </a>
-                      </p>
+                     
 
                       <button className="btn btn-outline-light btn-lg px-5" type="submit" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
                         Login
@@ -136,7 +133,7 @@ export function Login(props) {
                     <div>
                       <p className="mb-0">
                         Don't have an account? <br />
-                        <a href="/register" className="text-white-50 fw-bold">
+                        <a href="/auth/register" className="text-white-50 fw-bold">
                           Sign Up
                         </a>
                       </p>
@@ -204,7 +201,6 @@ export function Register() {
     //Send Post Request to the api
     try {
       const response = await axios.post("http://localhost:3002/auth/register", { email: email, password: password, firstName: firstName, lastName: lastName, height: height, weight: weight })
-      window.localStorage.setItem("userId", response.data.userID);
       setModalOption('success');
       setShowModal(true);
 
@@ -213,8 +209,8 @@ export function Register() {
     }
     catch (err) {
       //TODO: enter model for error
-      alert("not registered")
-      alert(err.response.data.message)
+      setModalOption('error');
+      setShowModal(true);
       console.error(err);
     }
 
@@ -295,7 +291,7 @@ export function Register() {
                         <div className="col-md-6 mb-4">
                           <div className="form-outline">
                             <input
-                              type="number"
+                              type="double"
                               id="Height"
                               className="form-control"
                               required
@@ -310,7 +306,7 @@ export function Register() {
                         {/* <!-- Weight input --> */}
                         <div className="col-md-6 mb-4">
                           <div className="form-outline">
-                            <input type="number"
+                            <input type="double"
                               id="Weight"
                               className="form-control"
                               required
@@ -324,8 +320,10 @@ export function Register() {
                       </div>
 
                       {/* <!-- Submit button --> */}
-                      <button className="btn btn-primary btn-block mb-4" type="submit"> Sign up </button>
-                    </div>
+    <button className="btn btn-outline-light btn-lg px-5" type="submit" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+                        Sign Up
+
+                      </button>                    </div>
                   </div>
                 </div>
               </div>
@@ -340,11 +338,11 @@ export function Register() {
 
       <Modal show={showModal} onHide={() => setShowModal(false)}>
           <Modal.Header closeButton>
-            <Modal.Title>Login</Modal.Title>
+            <Modal.Title>Sign Up</Modal.Title>
           </Modal.Header>
           <Modal.Body>
             {/* Two Options to SHow */}
-            {modalOption === 'error' && <p>Error occurred while trying to login ,  User Name or Password Incorrect  .</p>}
+            {modalOption === 'error' && <p>Fill ALL Fields  .</p>}
             {modalOption === 'success' && <p>Signed Up Successfully , Let's Log In!</p>}
           </Modal.Body>
           <Modal.Footer>

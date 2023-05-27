@@ -18,28 +18,37 @@ export function NavigationBar(props) {
 
     return (
 <nav className="navbar navbar-dark bg-dark navbar navbar-expand-lg navbar sticky-top">
-      <Link className="navbar-brand" to="/">
-        <img src="https://gymgearmentors.com/wp-content/uploads/2022/08/cropped-Orange-Black-White-Minimalist-Fitness-Gym-Logo-3-1.png" width="30" height="30" className="d-inline-block align-top" alt="" />
-        Fitness
-      </Link>
+   
       <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse" id="navbarNavDropdown">
         <ul className="navbar-nav">
-         
+        {/* <li className="nav-item active">
+            <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
+          </li> */}
           {!cookies.access_token ? 
           (
+            <>
+               <Link className="navbar-brand" to="/">
+        <img src="https://gymgearmentors.com/wp-content/uploads/2022/08/cropped-Orange-Black-White-Minimalist-Fitness-Gym-Logo-3-1.png" width="30" height="30" className="d-inline-block align-top" alt="" />
+        Fitness
+      </Link>
+      
             <li className="nav-item">
               <Link className="nav-link" to="/auth/login">Login</Link>
             </li>
-     
+            </>
           ) 
           
           :
           
           (
             <>
+                      <Link className="navbar-brand" to="/userpage">
+        <img src="https://gymgearmentors.com/wp-content/uploads/2022/08/cropped-Orange-Black-White-Minimalist-Fitness-Gym-Logo-3-1.png" width="30" height="30" className="d-inline-block align-top" alt="" />
+        Fitness
+      </Link>
            <li className="nav-item active">
             <Link className="nav-link" to="/userpage">User Page <span className="sr-only">(current)</span></Link>
           </li>
@@ -53,7 +62,7 @@ export function NavigationBar(props) {
 
           )}
         
-
+      
           <li className="nav-item dropdown">
             <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Training information

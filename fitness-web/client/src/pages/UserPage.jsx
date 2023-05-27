@@ -4,8 +4,12 @@ import React, { useState, useEffect } from 'react';
 import GraphComponent from '../componenets/graphComponent.jsx';
 import ChartTrainigGraph from '../componenets/ChartTrainingGraph.jsx';
 import { calculateAverage, calculateMax, calculateMin, calculateVariance, calculateStandardDeviation, calculateMedian, calculatePopularName, currentTrainingName } from '../controller/utils/util_home_page.js';
+import { Modal, Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
 
 export default function UserPage(props) {
+  const navigate = useNavigate();
+
   const [Email, setEmail] = useState();
   const [BMI, setBMI] = useState();
   const [FirstName, setFirstName] = useState();
@@ -25,6 +29,13 @@ export default function UserPage(props) {
   const [weights, setWeights] = useState([]);
   const [trainingNames, setTrainingNames] = useState([]);
   const [loading, setLoading] = useState(true);
+//Modal 
+  const [showModal, setShowModal] = useState(false);
+  const [modalOption, setModalOption] = useState('');
+  const [modalMessage, setModalMessage] = useState('');
+
+  const [showEditModal, setShowEditModal] = useState(false);
+  const [editFieldValue, setEditFieldValue] = useState('');
   useEffect(() => {
     const fetchTrainings = async () => {
       try {
@@ -61,15 +72,84 @@ export default function UserPage(props) {
       setMedianWeight(calculateMedian(weights));
       setPopularNameTrain(calculatePopularName(trainingNames));
       setCurrentTrainingName(currentTrainingName(trainingNames));
-
+ 
+      
     };
 
     calculateStatistics();
   }, [weights, trainingNames]);
 
+  
+  const modal_handle = () => {
+    try {
+    
+      setModalOption('success');
+      setShowModal(true);
+  
+    } catch (err) {
+      setModalOption('error');
+      setShowModal(true);
+      console.error(err);
+    }
+  };
+
+  const handleModalClose = () => {
+    setShowModal(false);
+    if (modalOption === 'success') {
+      navigate('/training');
+    }
+  };
+  const handleEditButtonClick = () => {
+    setShowEditModal(true);
+  };
+
+  const handleEditFieldChange = (e) => {
+    setEditFieldValue(e.target.value);
+  };
+
+  const handleSaveButtonClick = async () => {
+    // Perform any necessary validation or processing of the input value
+    // Update the value or perform any other necessary actions
+    setHeight(editFieldValue);
+  
+    const fetchTrainings = async () => {
+      try {
+        const response = await axios.put(
+          `http://localhost:3002/auth/updateHeight/${localStorage.getItem('userId')}`,
+          { height: editFieldValue }
+        );
+        // Update the state or perform any other necessary actions
+        setModalMessage('Height updated successfully');
+        const data = response.data.trainings;
+      } catch (error) {
+        // Handle the error case
+        setModalOption('error');
+        setModalMessage('Error updating height');
+        console.error('Error updating height:', error);
+      }
+    };
+  
+    try {
+      // Call the fetchTrainings function
+      await fetchTrainings();
+  
+      // Close the edit modal
+      setShowEditModal(false);
+    } catch (error) {
+      console.error('Error fetching trainings:', error);
+    }
+  };
+  
+  
   // Conditionally render the component's content
   if (loading) {
-    return <div>Loading...</div>; // Show a loading indicator while data is being fetched
+    return (
+      <div className="spinner-border" role="status">
+      <span className="sr-only">Loading...</span>
+      <h1>Loading....</h1>
+    </div>
+    
+    ) ;// Show a loading indicator while data is being fetched
   }
   return (
     <MainLayout>
@@ -83,10 +163,12 @@ export default function UserPage(props) {
                     <img src="https://bootdey.com/img/Content/avatar/avatar7.png" alt="Admin" class="rounded-circle" width="150"></img>
                     <div class="mt-3">
                       <h4>{FirstName + " " + LastName}</h4>
-                      <p class="text-secondary mb-1">Current Training Plane :</p>
+                      <p class="text-secondary mb-1">Current Training Program :</p>
                       <p class="text-muted font-size-sm">{currTrainingName}</p>
-                      <button class="btn btn-primary">Follow</button>
-                      <button class="btn btn-outline-primary">Message</button>
+                      <button className="btn btn-primary" onClick={modal_handle} data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+                        Change Training Program
+                      </button>
+
                     </div>
                   </div>
                 </div>
@@ -183,43 +265,48 @@ export default function UserPage(props) {
                     </div>
                   </div>
                   <hr></hr>
+                  <button className="btn btn-primary" onClick={handleEditButtonClick}>
+                  Edit Height 
+                </button>
                   <div class="row">
-                    <div class="col-sm-12">
-                      <a class="btn btn-info " target="__blank" href="https://www.bootdey.com/snippets/view/profile-edit-data-and-skills">Edit</a>
-                    </div>
+                  
                   </div>
                 </div>
               </div>
 
-              <table>
-              <tbody>
+    <table>
+    <tbody>
+      <tr>
+        <td>
+          {MinWeight && MaxWeight && (
+            <div className="card" style={{ width: "22.5rem ", height: "20rem" }}>
+              <div className="card-body">
+                <p className="card-text">Your Min Weight: {MinWeight} kg</p>
+                <p className="card-text">Your Max Weight: {MaxWeight} kg</p>
+              </div>
+            </div>
+          )}
+        </td>
+        <td>
+          {VarianceWeight && StandardDeviationWeight && MedianWeight && (
+            <div className="card" style={{ width: "23rem ", height: "20rem" }}>
+              <div className="card-body">
+                <p className="card-text">Some Statistics:</p>
+                <p className="card-text">Variance: {VarianceWeight}</p>
+                <p className="card-text">Deviation: {StandardDeviationWeight}</p>
+                <p className="card-text">Median Weight: {MedianWeight}</p>
+              </div>
+            </div>
+          )}
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-                <tr>
-                  <td>
-                    <div className="card" style={{ width: "22.5rem ", height: "20rem" }}>
 
-                      <div className="card-body">
-                        <p className="card-text">Your Min Weight : {MinWeight} kg </p>
-                        <p className="card-text">Your Max Weight: {MaxWeight} kg</p>
-                      </div>
-                    </div>
-                  </td>
-                  <td>
-                    <div className="card" style={{ width: "23rem ", height: "20rem" }}>
 
-                      <div className="card-body">
-                        <p className="card-text">Some Statistics :</p>
-                        <p className="card-text">Variance  : {VarianceWeight} </p>
-                        <p className="card-text">Deviation  : {StandardDeviationWeight}</p>
-                        <p className="card-text">Median Weight : {MedianWeight}</p>
 
-                      </div>
-                    </div>
-                  </td>
-                </tr>
-                </tbody>
 
-              </table>
               <div class="row gutters-sm">
                 {/* -------------- */}
                 <div class="col-sm-6 mb-3">
@@ -287,7 +374,7 @@ export default function UserPage(props) {
         </div>
         <div style={{ display: 'flex' }}>
           <div style={{ flex: 2, marginRight: '100px' }}>
-            <h1>גרף אימונים</h1>
+            <h1>Practivce Vs wait</h1>
             <GraphComponent selectedTrainings={selectedTrainings} />
           </div>
           <div style={{ flex: 1 }}>
@@ -296,6 +383,47 @@ export default function UserPage(props) {
           </div>
         </div>
       </div>
+      {/* ----------Modal For Change Program---------- */}
+      <Modal show={showModal} onHide={() => setShowModal(false)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Program Change</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {/* Two Options to SHow */}
+            {modalOption === 'success' && <p>Lets Change Program </p>}
+          </Modal.Body>
+          <Modal.Footer>
+          {modalOption === 'success' &&   <Button variant="primary" onClick={handleModalClose}> OK </Button>}
+          </Modal.Footer>
+        </Modal>
+      {/* ----------Modal For Edit Height ---------- */}
+
+        <Modal show={showEditModal} onHide={() => setShowEditModal(false)}>
+        <Modal.Header closeButton>
+          <Modal.Title>Edit Height Field</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>
+          <input
+                          type="number"
+                          value={editFieldValue}
+            onChange={handleEditFieldChange}
+            placeholder="Height cm"
+            required
+
+            min={0}
+            max={210}
+            />
+        </Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setShowEditModal(false)}>
+            Close
+          </Button>
+          <Button variant="primary" onClick={handleSaveButtonClick}>
+            Save Changes
+          </Button>
+        </Modal.Footer>
+        </Modal>
     </MainLayout>
+    
   )
 }
