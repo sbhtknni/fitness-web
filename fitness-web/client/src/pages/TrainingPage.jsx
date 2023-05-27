@@ -63,34 +63,20 @@ export function TrainingForm() {
       <div className="container">
         <h3>Select a training:</h3>
         <br />
+        <div style={{ marginBottom: '20px' }} >
         <RadioButton
           options={trainings.map((training) => training.name)}
           selectedOption={selectedTraining ? selectedTraining.name : ''}
           onOptionChange={handleTrainingChange}
         />
+      </div>
 
+      
 
         {selectedTraining && (
+          
           <div>
-            <br />
-            <h5>Selected Training: {selectedTraining.name}</h5>
-            <h5>Instructions:</h5>
-            <p>{selectedTraining.instructions}</p> 
-
-            <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
-              {selectedTraining.videoUrls.map((url, index) => (
-                <div key={index} className="col">
-                  <div className="card h-100">
-                    <ReactPlayer url={url} controls width="100%" height="auto" />
-                    <div className="card-body">
-                      <h5 className="card-title">Video {index + 1}</h5>
-                    </div>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            <div className="d-flex justify-content-center">
+              <div className="d-flex justify-content-center">
               <form className="needs-validation justify-content-center" noValidate onSubmit={handleSubmit}>
                 <div className="">
                   <div className="form-outline">
@@ -116,6 +102,28 @@ export function TrainingForm() {
                 </div>
               </form>
             </div>
+
+            <br />
+            <h5>Instructions:</h5>
+            <p>{selectedTraining.instructions}</p> 
+
+            <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4">
+              {selectedTraining.videoUrls.map((url, index) => (
+                <div key={index} className="col">
+                  <div className="card h-100">
+                    <ReactPlayer url={url} controls width="100%" height="auto" />
+                    <div className="card-body">
+                      <h5 className="card-title">Video {index + 1}</h5>
+                    </div>
+                    
+                  </div>
+                </div>
+              ))}
+              
+            </div>
+
+            <h5>Selected Training: {selectedTraining.name}</h5>
+
           </div>
         )}
 

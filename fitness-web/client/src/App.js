@@ -1,11 +1,12 @@
 import './assets/App.css';
-import  HomePage from './pages/HomePAGE.jsx';
+import  UserPage from './pages/UserPage.jsx';
 import React from 'react';
 import BlogPage from './/pages/BlogPage.jsx';
 import TrainingProgramas from './pages/TrainingPrograms.jsx';
-import { Login, Register } from './/pages/LoginPage.jsx';
+import { Login, Register } from './/pages/AuthPage.jsx';
 import {TrainingForm} from './/pages/TrainingPage.jsx';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
 // import 'react-native-gesture-handler';
 
 // import { createNativeStackNavigator } from '@react-navigation/native-stack';
@@ -16,17 +17,18 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 function App() {
   return (
 
-    <div className="App">
+    <div className="app-container bg-gradient bg-light ">
     
       <header className="App-header">
     
     <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
+          <Route path="userpage" element={<UserPage />} />
           <Route path="blog" element={<BlogPage />} />
           <Route path="training" element={<TrainingForm />} />
-          <Route path="auth" element={<Login />} />
-          <Route path="register" element={<Register />} />
+          <Route path="auth/login" element={<Login />} />
+          <Route path="auth/register" element={<Register />} />
           <Route path="TrainingProgramas" element={<TrainingProgramas />} />
         </Routes>
        

@@ -11,45 +11,63 @@ export function NavigationBar(props) {
     window.localStorage.removeItem("selectedTrainingInfo");
 
   }
-
-
+  
   const handleLinkClick = (muscle) => {
     window.localStorage.setItem('selectedTrainingInfo', muscle);
     window.location.reload();
   };
 
-
-
-  return (
-    <nav class="navbar navbar-dark bg-dark navbar navbar-expand-lg navbar sticky-top">
-      <a class="navbar-brand" href="/">
-        <img src="https://gymgearmentors.com/wp-content/uploads/2022/08/cropped-Orange-Black-White-Minimalist-Fitness-Gym-Logo-3-1.png" width="30" height="30" class="d-inline-block align-top" alt=""></img>
-        Fitness
-      </a>      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+    return (
+<nav className="navbar navbar-dark bg-dark navbar navbar-expand-lg navbar sticky-top">
+   
+      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span className="navbar-toggler-icon"></span>
       </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
+      <div className="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul className="navbar-nav">
+        {/* <li className="nav-item active">
+            <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
+          </li> */}
+          {!cookies.access_token ? 
+          (
+            <>
+               <Link className="navbar-brand" to="/">
+        <img src="https://queenstreetmedical.co.nz/wp-content/uploads/2023/02/qstfsvglogo.png" width="30" height="30" className="d-inline-block align-top" alt="" />
+        Fitness
+      </Link>
+      
+            <li className="nav-item">
+              <Link className="nav-link" to="/auth/login">Login</Link>
+            </li>
+            </>
+          ) 
+          
+          :
+          
+          (
+            <>
+                      <Link className="navbar-brand" to="/userpage">
+        <img src="https://queenstreetmedical.co.nz/wp-content/uploads/2023/02/qstfsvglogo.png" width="30" height="30" className="d-inline-block align-top" alt="" />
+        Fitness
+      </Link>
+           <li className="nav-item active">
+            <Link className="nav-link" to="/userpage">User Page <span className="sr-only">(current)</span></Link>
           </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/auth/login" onClick={Logout}>Logout</Link>
+            </li>
+            <li className="nav-item">
+              <Link className="nav-link" to="/training">Trainings</Link>
+            </li>
+            </>
 
-          {!cookies.access_token ? (<li class="nav-item">
-            <a class="nav-link" href="/auth">Login</a>
-          </li>) : (<li class="nav-item">
-            <a class="nav-link" href="/auth" onClick={Logout} >Logout</a>
-
-          </li>)}
-
-
-
-          <li class="nav-item">
-            <a class="nav-link" href="/training">Trainings</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          )}
+        
+      
+          <li className="nav-item dropdown">
+            <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Training information
-            </a>
+            </Link>
             <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
               <Link
                 className="dropdown-item"

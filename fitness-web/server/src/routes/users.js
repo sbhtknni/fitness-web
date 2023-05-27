@@ -65,7 +65,7 @@ router.get('/:id', async (req, res) => {
 });
 //update user
 router.put('/update/:id', async (req, res) => {
-  const { userID } = req.body;
+  const userID = req.params.id;
   const { email,password,firstName,lastName,height,weight } = req.body;
   try {
     const user = await UserModel.findById(userID);
@@ -86,7 +86,25 @@ router.put('/update/:id', async (req, res) => {
   }
 });
 
+
+//update user height
+router.put('/updateHeight/:id', async (req, res) => {
+  
+  const userID = req.params.id;
+  const { height } = req.body;
+  console.log(height);
+  try {
+    const user = await UserModel.updateOne({_id:userID},{height:height},{bmi:BMICalculation(user.weight,height)});
+    if (!user) {
+      return res.status(400).json({ message: "User does not exist" });
+    }
+    res.status(200).json({messege : "User height updated successfully"});
+  } catch (error) {
+    res.status(500).json({ message: "Server Error" });
+  }
+
     
+});
 
 export function BMICalculation(weight, height) {
   // Convert height to meters

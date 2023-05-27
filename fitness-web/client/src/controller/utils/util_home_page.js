@@ -13,7 +13,8 @@ export function calculateMax  (weights)   {
             max = weights[i];
         }
     }
-    return max;
+    if(max!=null)   
+         return max.toFixed(2);
 }
 // export function maxWeight = calculateMax(weights);
 
@@ -38,12 +39,12 @@ export function calculateVariance (weights)   {
     for(let i = 0; i < weights.length; i++){
         variance += Math.pow(weights[i] - average, 2);
     }   
-    return variance / weights.length;
+    return (variance / weights.length).toFixed(2);;
 }
 // export function varianceWeight = calculateVariance(weights);
 
 export function calculateStandardDeviation  (weights)   {
-    return Math.sqrt(calculateVariance(weights));
+    return (Math.sqrt(calculateVariance(weights)).toFixed(2));
 }
 // export function standardDeviationWeight = calculateStandardDeviation(weights);
 

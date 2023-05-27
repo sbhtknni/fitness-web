@@ -48,7 +48,6 @@ const chartOptions = {
   return (
     <div>
     <div>
-      <h2>Weight Chart</h2>
       <Line data={chartData} options={chartOptions} />
     </div>
 
