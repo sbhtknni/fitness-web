@@ -150,7 +150,6 @@ export default function UserPage(props) {
     return (
       <div className="spinner-border" role="status">
       <span className="sr-only">Loading...</span>
-      <h1>Loading....</h1>
     </div>
     
     ) ;// Show a loading indicator while data is being fetched

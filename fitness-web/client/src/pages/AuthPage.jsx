@@ -61,9 +61,6 @@ export function Login(props) {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-
-
-
     try {
       const response = await axios.post('http://localhost:3002/auth/login', {
         email: email,
@@ -106,7 +103,7 @@ export function Login(props) {
     <>
       <MainLayout>
 
-        <section className="vh-100 gradient-custom">
+        <section className="vh-100 gradient-custom" >
           <div className="container py-5 h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">
               <div className="col-12 col-md-8 col-lg-6 col-xl-5">
@@ -118,7 +115,7 @@ export function Login(props) {
                       <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
                       <p className="text-white-50 mb-5">Please enter your login and password!</p>
                       {/*start*/}
-                      <form class="row g-3 needs-validation" noValidate>
+                      <form onSubmit={handleSubmit} class="row g-3 needs-validation" noValidate >
                         <div class="form-outline form-white mb-5 "  >
                           <div class="form-outline">
                             <input type="email" class="form-control" id="email" required value={email}
@@ -162,23 +159,31 @@ export function Login(props) {
             </div>
           </div>
         </section>
-       
-        <Modal show={showModal} onHide={() => setShowModal(false)}>
-          <Modal.Header closeButton>
-            <Modal.Title>Login</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            {/* Two Options to SHow */}
-            {modalOption === 'error' && <p>Error occurred while trying to login ,  User Name or Password Incorrect {modalMessage} .</p>}
-            {modalOption === 'success' && <p>Logged In Successfully </p>}
-          </Modal.Body>
-          <Modal.Footer>
-            {modalOption === 'success' && <Button variant="primary" onClick={handleModalClose}> OK </Button>}
-            <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
-          </Modal.Footer>
-        </Modal>
 
-      
+
+
+        {/* <!-- Modal --> */}
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
+              </div>
+              <div class="modal-body">
+                {/* Two Options to SHow */}
+                {modalOption === 'error' && <p>Error occurred while trying to login ,  User Name or Password Incorrect {modalMessage} .</p>}
+                {modalOption === 'success' && <p>Logged In Successfully </p>}
+                {modalOption !== 'success' && modalOption !== 'error' && <p> You need to fill values </p>}
+
+              </div>
+              <div class="modal-footer">
+                {modalOption !== 'success' && <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal" onClick={() => setShowModal(false)} >Close</button>}
+                {modalOption === 'success' && <button type="button" class="btn btn-primary" onClick={handleModalClose}>Lets GO !</button>}
+              </div>
+            </div>
+          </div>
+        </div>
       </MainLayout>
     </>
 
