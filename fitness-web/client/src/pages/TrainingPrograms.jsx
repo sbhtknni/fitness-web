@@ -18,6 +18,7 @@ const TrainingProgramas = () => {
 
                 setMuscle(data.musclesInformation.muscle);
                 setGeneralInformation(data.musclesInformation.generalInformation);
+                console.log(data.musclesInformation.topics.map((info) => info.topic));
                 setTopicsVals(data.musclesInformation.topics.map((info) => info.topic));
                 setInformation(data.musclesInformation.topics.map((info) => info.information));
                 setLink(data.musclesInformation.topics.map((info) => info.link));

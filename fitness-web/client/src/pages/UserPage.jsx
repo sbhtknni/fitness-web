@@ -3,7 +3,7 @@ import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import GraphComponent from '../componenets/graphComponent.jsx';
 import ChartTrainigGraph from '../componenets/ChartTrainingGraph.jsx';
-import { calculateAverage, calculateMax, calculateMin, calculateVariance, calculateStandardDeviation, calculateMedian, calculatePopularName, currentTrainingName } from '../controller/utils/util_home_page.js';
+import {  calculateAverage, calculateMax, calculateMin, calculateVariance, calculateStandardDeviation, calculateMedian, calculatePopularName, currentTrainingName, calculateWeightLoss } from '../controller/utils/util_home_page.js';
 import { Modal, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 
@@ -29,6 +29,7 @@ export default function UserPage(props) {
   const [weights, setWeights] = useState([]);
   const [trainingNames, setTrainingNames] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [weightLossData, setWeightLossData] = useState([]);
 //Modal 
   const [showModal, setShowModal] = useState(false);
   const [modalOption, setModalOption] = useState('');
@@ -50,10 +51,13 @@ export default function UserPage(props) {
         setHeight(data.user.height);
         setWeight(data.user.weight);
         setselectedTrainings(data.user.selectedTrainings);
+        console.log("selectedTrainingssssssss::",selectedTrainings)
+
         setDates(data.user.selectedTrainings.map((training) => training.startDate));
         setWeights(data.user.selectedTrainings.map((training) => training.weight));
         setTrainingNames(data.user.selectedTrainings.map((training) => training.name));
         setLoading(false); // Set loading to false once data is fetched
+
       } catch (error) {
         console.error('Error fetching trainings:', error);
       }
@@ -64,20 +68,22 @@ export default function UserPage(props) {
 
   useEffect(() => {
     const calculateStatistics = () => {
+      console.log(weights);
+      console.log(trainingNames);
+      setWeightLossData(calculateWeightLoss(selectedTrainings));
       setAverageWeight(calculateAverage(weights));
       setMaxWeight(calculateMax(weights));
       setMinWeight(calculateMin(weights));
       setVarianceWeight(calculateVariance(weights));
       setStandardDeviationWeight(calculateStandardDeviation(weights));
-      setMedianWeight(calculateMedian(weights));
       setPopularNameTrain(calculatePopularName(trainingNames));
       setCurrentTrainingName(currentTrainingName(trainingNames));
- 
-      
+      setMedianWeight(calculateMedian(weights));
+
     };
 
     calculateStatistics();
-  }, [weights, trainingNames]);
+  }, [weights, trainingNames,dates,selectedTrainings]);
 
   
   const modal_handle = () => {
@@ -262,6 +268,15 @@ export default function UserPage(props) {
                     </div>
                     <div class="col-sm-9 text-secondary">
                       {PopularNameTrain}
+                    </div>
+                  </div>
+                  <hr></hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <h6 class="mb-0"> Your best training </h6>
+                    </div>
+                    <div class="col-sm-9 text-secondary">
+                      In program {weightLossData.optimalProgram} you lost {weightLossData.maxWeightLoss} kg and is {weightLossData.WeightLossPercentage} % of your weight
                     </div>
                   </div>
                   <hr></hr>
