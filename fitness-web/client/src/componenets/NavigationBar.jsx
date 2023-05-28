@@ -14,7 +14,11 @@ export function NavigationBar(props) {
   
   const handleLinkClick = (muscle) => {
     window.localStorage.setItem('selectedTrainingInfo', muscle);
-    window.location.reload();
+    setTimeout(() => {
+      // Code to refresh the page or trigger navigation after 1 second
+      // Replace with your specific logic here
+      window.location.reload(); // Example: Refresh the page after 1 second
+    }, 20);
   };
 
     return (
