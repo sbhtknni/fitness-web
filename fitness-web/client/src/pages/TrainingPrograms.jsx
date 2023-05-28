@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import MainLayout from '../layout/MainLayout.jsx';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 const TrainingProgramas = () => {
     const [muscle, setMuscle] = useState();
@@ -37,9 +38,9 @@ const TrainingProgramas = () => {
                             <h1 className="display-3">Muscle {muscle}</h1>
                             <p>{generalInformation} </p>
                             <p>
-                                <a className="btn btn-primary btn-lg" href="#" role="button">
-                                    Learn more »
-                                </a>
+                                <Link className="btn btn-primary btn-lg" to="/training" role="button">
+                                Choose workout »
+                                </Link>
                             </p>
                         </div>
                     </div>
@@ -52,7 +53,7 @@ const TrainingProgramas = () => {
                                     {index === 0 ? (
                                         <p>
                                             <a className="btn btn-secondary" href={link[index]} role="button">
-                                                View details »
+                                               Go to the website »
                                             </a>
                                         </p>
                                     ) : index === 1 ? (

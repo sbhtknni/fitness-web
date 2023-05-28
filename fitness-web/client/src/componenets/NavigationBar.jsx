@@ -69,7 +69,7 @@ export function NavigationBar(props) {
         
       
           <li className="nav-item dropdown">
-            <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <Link className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Training information
             </Link>
             <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
