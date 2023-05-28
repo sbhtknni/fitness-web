@@ -355,6 +355,38 @@ export default function UserPage(props) {
                     </div>
                   </div>
                 </div>
+                  <div class="col-sm-6 mb-3">
+                  <div class="card h-100">
+                    <div class="card-body">
+                      <h6 class="d-flex align-items-center mb-3"><i class="material-icons text-info mr-2">assignment</i>Project Status</h6>
+                      <small>Web Design</small>
+                      {/* <div class="progress mb-3"  "height: 5px"> */}
+                      <div class="progress mb-3" >
+
+                        {/* <div class="progress-bar bg-primary" role="progressbar"  "width: 80%" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div> */}
+                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100"></div>
+
+                      </div>
+                      <small>Website Markup</small>
+                      <div class="progress">
+                        <div className="progress-bar bg-primary" role="progressbar" style={{ width: `${weight}%` }} aria-valuenow={weight} aria-valuemin={MinWeight} aria-valuemax={MaxWeight}></div>
+                      </div>
+                      <small>One Page</small>
+                      <div class="progress mb-3" >
+                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="89" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <small>Mobile Template</small>
+                      <div class="progress mb-3"  >
+                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="55" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                      <small>Backend API</small>
+                      <div class="progress mb-3" >
+                        <div class="progress-bar bg-primary" role="progressbar" aria-valuenow="66" aria-valuemin="0" aria-valuemax="100"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
                 
                 <div class="col-sm-6 mb-3">
                   <div class="card h-100">
