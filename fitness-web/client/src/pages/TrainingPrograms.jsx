@@ -18,7 +18,6 @@ const TrainingProgramas = () => {
 
                 setMuscle(data.musclesInformation.muscle);
                 setGeneralInformation(data.musclesInformation.generalInformation);
-                console.log(data.musclesInformation.topics.map((info) => info.topic));
                 setTopicsVals(data.musclesInformation.topics.map((info) => info.topic));
                 setInformation(data.musclesInformation.topics.map((info) => info.information));
                 setLink(data.musclesInformation.topics.map((info) => info.link));
@@ -63,7 +62,7 @@ const TrainingProgramas = () => {
                                         </p>
                                     ) : index === 2 ? (
                                         <p>
-                                            <iframe width="250" height="200" src={link[index]} title="Video" frameborder="0" allowfullscreen></iframe>
+                                            <iframe width="350" height="220" src={link[index]} title="Video" frameborder="0" allowfullscreen></iframe>
                                         </p>
                                     ) : null}
                                 </div>

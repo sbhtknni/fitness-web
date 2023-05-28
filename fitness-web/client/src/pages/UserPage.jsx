@@ -68,8 +68,6 @@ export default function UserPage(props) {
 
   useEffect(() => {
     const calculateStatistics = () => {
-      console.log(weights);
-      console.log(trainingNames);
       setWeightLossData(calculateWeightLoss(selectedTrainings));
       setAverageWeight(calculateAverage(weights));
       setMaxWeight(calculateMax(weights));

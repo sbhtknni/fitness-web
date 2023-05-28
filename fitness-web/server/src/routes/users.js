@@ -92,7 +92,6 @@ router.put('/updateHeight/:id', async (req, res) => {
   
   const userID = req.params.id;
   const { height } = req.body;
-  console.log(height);
   try {
     const user = await UserModel.updateOne({_id:userID},{height:height},{bmi:BMICalculation(user.weight,height)});
     if (!user) {
