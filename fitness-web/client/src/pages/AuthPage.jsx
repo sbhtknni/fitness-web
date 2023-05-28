@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavigationBar from '../componenets/NavigationBar.jsx';
 import { Modal, Button } from 'react-bootstrap';
-
-
 //For fetching api
 import axios from 'axios';
 import { useCookies } from "react-cookie"
@@ -107,7 +105,7 @@ export function Login(props) {
           <div className="container py-5 h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">
               <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-                <div className="card bg-dark text-white" style={{ borderRadius: '1rem' }}>
+                <div className="card bg-dark text-white" style={{ borderRadius: '2rem' }}>
                   <div className="card-body p-5 text-center">
 
                     <div className="mb-md-5 mt-md-4 pb-5">
@@ -362,20 +360,7 @@ export function Register() {
         </section>
       </form>
 
-      <Modal show={showModal} onHide={() => setShowModal(false)}>
-        <Modal.Header closeButton>
-          <Modal.Title>Sign Up</Modal.Title>
-        </Modal.Header>
-        <Modal.Body>
-          {/* Two Options to SHow */}
-          {modalOption === 'error' && <p>Fill ALL Fields  .</p>}
-          {modalOption === 'success' && <p>Signed Up Successfully , Let's Log In!</p>}
-        </Modal.Body>
-        <Modal.Footer>
-          {modalOption === 'success' && <Button variant="primary" onClick={handleModalClose}> OK </Button>}
-          <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
-        </Modal.Footer>
-      </Modal>
+
     </>
 
   );

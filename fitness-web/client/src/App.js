@@ -1,6 +1,6 @@
 import './assets/App.css';
 import  UserPage from './pages/UserPage.jsx';
-import React, {  useEffect } from 'react';
+import React from 'react';
 import BlogPage from './/pages/BlogPage.jsx';
 import TrainingProgramas from './pages/TrainingPrograms.jsx';
 import { Login, Register } from './/pages/AuthPage.jsx';
@@ -15,16 +15,6 @@ import HomePage from './pages/HomePage';
 
 //Functional component
 function App() {
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.js';
-    script.async = true;
-    document.body.appendChild(script);
-
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
   return (
 
     <div className="app-container bg-gradient bg-light ">
