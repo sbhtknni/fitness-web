@@ -8,6 +8,8 @@ import { useCookies } from "react-cookie"
 import MainLayout from '../layout/MainLayout.jsx';
 
 
+
+
 export function Login(props) {
 
   (() => {
@@ -100,7 +102,7 @@ export function Login(props) {
   return (
     <>
       <MainLayout>
-
+      
         <section className="vh-100 gradient-custom" >
           <div className="container py-5 h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">
@@ -114,15 +116,14 @@ export function Login(props) {
                       <p className="text-white-50 mb-5">Please enter your login and password!</p>
                       {/*start*/}
                       <form onSubmit={handleSubmit} class="row g-3 needs-validation" noValidate >
-                        <div class="form-outline form-white mb-5 "  >
-                          <div class="form-outline">
-                            <input type="email" class="form-control" id="email" required value={email}
-                              onChange={handleEmailChange} />
-                            <label for="email" class="form-label">Email</label>
-                            <div class="valid-feedback">Looks good!</div>
+                        <div className="form-outline form-white mb-5">
+                          <div className="form-outline">
+                            <input type="email" className="form-control" id="email" required value={email} onChange={handleEmailChange} />
+                            <label htmlFor="email" className="form-label">Email</label>
+                            <div className="valid-feedback">Looks good!</div>
                           </div>
                         </div>
-
+                       
                         <div class="form-outline form-white mb-5">
                           <div class="form-outline">
                             <input type="password" class="form-control" id="password" required value={password}
@@ -131,6 +132,10 @@ export function Login(props) {
                             <div class="valid-feedback">Looks good!</div>
                           </div>
                         </div>
+
+                  
+
+
                         <div class="col-12">
                           <button class="btn btn-outline-light btn-lg px-5" type="submit" data-mdb-toggle="modal" data-mdb-target="#exampleModal" >Submit form</button>
                         </div>
