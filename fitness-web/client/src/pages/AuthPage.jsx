@@ -30,23 +30,11 @@ import {
 
 export function Login(props) {
 
-  const [formValue, setFormValue] = useState({
-    email: '',
-    password: '',
-  });
-
-  const onChange = (e) => {
-    setFormValue({ ...formValue, [e.target.name]: e.target.value });
-  };
-
-
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [, setCookies] = useCookies(['access_token']);
-  const [emailValid, setEmailValid] = useState(false);
-  const [passwordValid, setPasswordValid] = useState(false);
   const [submittedEmail, setSubmittedEmail] = useState(false);
   const [submittedPassword, setSubmittedPassword] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -97,12 +85,12 @@ export function Login(props) {
   return (
     <>
       <MainLayout>
-        <MDBContainer className="vh-100 gradient-custom" fluid>
+        <MDBContainer onSubmit={handleSubmit} className="vh-100 gradient-custom" fluid>
 
           <MDBRow className='d-flex justify-content-center align-items-center h-100'>
             <MDBCol col='12'>
 
-              <MDBCard className='bg-dark text-white my-5 mx-auto' style={{ borderRadius: '1rem', maxWidth: '400px' }}>
+              <MDBCard className='bg-dark text-white my-5 mx-auto' style={{ borderRadius: '1rem', maxWidth: '400px' }} >
                 <MDBCardBody className='p-5 d-flex flex-column align-items-center mx-auto w-100'>
 
                   <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
@@ -111,9 +99,9 @@ export function Login(props) {
                   <MDBValidation className='row g-3' >
                     <MDBValidationItem feedback='Please choose a Email.' invalid className='col-md-12' >
                       <MDBInput
-                        value={formValue.email}
+                        value={email}
                         name='email'
-                        onChange={onChange}
+                        onChange={handleEmailChange}
                         id='email'
                         required
                         label='Email address'
@@ -126,9 +114,9 @@ export function Login(props) {
 
                     <MDBValidationItem feedback='Please choose a Password.' invalid className='col-md-12'>
                       <MDBInput
-                        value={formValue.password}
+                        value={password}
                         name='password'
-                        onChange={onChange}
+                        onChange={handlePasswordChange}
                         id='password'
                         required
                         label='Password'
@@ -141,7 +129,16 @@ export function Login(props) {
 
                     </MDBValidationItem>
                     <div className='col-12'>
-                      <MDBBtn outline className='mx-1 px-5' color='white' size='lg' type='submit' inputClass='text-white'>
+                      <MDBBtn
+                        outline
+                        className='mx-1 px-5'
+                        color='white'
+                        size='lg'
+                        type='submit'
+                        inputClass='text-white'
+                        data-mdb-toggle="modal"
+                        data-mdb-target="#exampleModal"
+                        style={{ margin: '2vh' }}>
                         Login
                       </MDBBtn>
 
@@ -163,7 +160,7 @@ export function Login(props) {
                   </div>
 
                   <div>
-                    <p className="mb-0">Don't have an account? <a href="#!" class="text-white-50 fw-bold">Sign Up</a></p>
+                    <p className="mb-0">Don't have an account? <a href="auth/register" class="text-white-50 fw-bold">Sign Up</a></p>
 
                   </div>
                 </MDBCardBody>
@@ -188,91 +185,9 @@ export function Login(props) {
             <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
           </Modal.Footer>
         </Modal>
-
-        <section className="vh-100 gradient-custom" >
-          <div className="container py-5 h-100">
-            <div className="row d-flex justify-content-center align-items-center h-100">
-              <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-                <div className="card bg-dark text-white" style={{ borderRadius: '2rem' }}>
-                  <div className="card-body p-5 text-center">
-
-                    <div className="mb-md-5 mt-md-4 pb-5">
-
-                      <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
-                      <p className="text-white-50 mb-5">Please enter your login and password!</p>
-                      {/*start*/}
-                      <form onSubmit={handleSubmit} class="row g-3 needs-validation" noValidate >
-                        <div className="form-outline form-white mb-5">
-                          <div className="form-outline">
-                            <input type="email" className="form-control" id="email" required value={email} onChange={handleEmailChange} />
-                            <label htmlFor="email" className="form-label">Email</label>
-                            <div className="valid-feedback">Looks good!</div>
-                          </div>
-                        </div>
-
-                        <div class="form-outline form-white mb-5">
-                          <div class="form-outline">
-                            <input type="password" class="form-control" id="password" required value={password}
-                              onChange={handlePasswordChange} />
-                            <label for="password" class="form-label">Password</label>
-                            <div class="valid-feedback">Looks good!</div>
-                          </div>
-                        </div>
+        
 
 
-
-
-                        <div class="col-12">
-                          <button class="btn btn-outline-light btn-lg px-5" type="submit" data-mdb-toggle="modal" data-mdb-target="#exampleModal" >Submit form</button>
-                        </div>
-                      </form>
-                      {/*End*/}
-
-                      <p className="small mb-5 pb-lg-2"><a className="text-white-50" href="#!">Forgot password?</a></p>
-
-                      <div className="d-flex justify-content-center text-center mt-4 pt-1">
-                        <a href="#!" className="text-white"><i className="fab fa-facebook-f fa-lg"></i></a>
-                        <a href="#!" className="text-white"><i className="fab fa-twitter fa-lg mx-4 px-2"></i></a>
-                        <a href="#!" className="text-white"><i className="fab fa-google fa-lg"></i></a>
-                      </div>
-
-                    </div>
-
-                    <div>
-                      <p className="mb-0">Don't have an account? <a href="#!" className="text-white-50 fw-bold">Sign Up</a></p>
-                    </div>
-
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-
-
-        {/* <!-- Modal --> */}
-        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Login</h5>
-                <button type="button" class="btn-close" data-mdb-dismiss="modal" aria-label="Close"></button>
-              </div>
-              <div class="modal-body">
-                {/* Two Options to SHow */}
-                {modalOption === 'error' && <p>Error occurred while trying to login ,  User Name or Password Incorrect {modalMessage} .</p>}
-                {modalOption === 'success' && <p>Logged In Successfully </p>}
-                {modalOption !== 'success' && modalOption !== 'error' && <p> You need to fill values </p>}
-
-              </div>
-              <div class="modal-footer">
-                {modalOption !== 'success' && <button type="button" class="btn btn-secondary" data-mdb-dismiss="modal" onClick={() => setShowModal(false)} >Close</button>}
-                {modalOption === 'success' && <button type="button" class="btn btn-primary" onClick={handleModalClose}>Lets GO !</button>}
-              </div>
-            </div>
-          </div>
-        </div>
       </MainLayout>
     </>
 
@@ -295,19 +210,6 @@ export function Register() {
 
   const forms = document.querySelectorAll('.needs-validation');
 
-  (() => {
-    'use strict';
-    // Loop over them and prevent submission
-    Array.prototype.slice.call(forms).forEach((form) => {
-      form.addEventListener('submit', (event) => {
-        if (!form.checkValidity()) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  })();
 
   // Logic for handling form submission goes here
 
@@ -340,7 +242,10 @@ export function Register() {
 
   return (
     <>
-      <NavigationBar></NavigationBar>
+      <MainLayout>
+
+        
+        
       <form onSubmit={handleSubmit} className="needs-validation" noValidate>
         <section class="vh-200 gradient-custom" style={{ minHeight: '100vh' }}>
           <div className="container py-4 h-100">
@@ -450,7 +355,7 @@ export function Register() {
           </div>
         </section>
       </form>
-
+    </MainLayout>
 
     </>
 
