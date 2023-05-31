@@ -1,4 +1,3 @@
-import  {  useEffect } from 'react';
 import React from 'react';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
