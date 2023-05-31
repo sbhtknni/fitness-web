@@ -1,12 +1,14 @@
 
 import  UserPage from './pages/UserPage.jsx';
-import React, {  useEffect } from 'react';
+import React from 'react';
 import BlogPage from './/pages/BlogPage.jsx';
 import TrainingProgramas from './pages/TrainingPrograms.jsx';
 import { Login, Register } from './/pages/AuthPage.jsx';
 import {TrainingForm} from './/pages/TrainingPage.jsx';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
+
+
 
 // import 'react-native-gesture-handler';
 
@@ -16,10 +18,7 @@ import HomePage from './pages/HomePage';
 
 //Functional component
 function App() {
-
-  
-
-    return (
+  return (
 
     
     

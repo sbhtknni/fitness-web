@@ -4,8 +4,12 @@ import React, { useState, useEffect } from 'react';
 import GraphComponent from '../componenets/graphComponent.jsx';
 import ChartTrainigGraph from '../componenets/ChartTrainingGraph.jsx';
 import {  calculateAverage, calculateMax, calculateMin, calculateVariance, calculateStandardDeviation, calculateMedian, calculatePopularName, currentTrainingName, calculateWeightLoss } from '../controller/utils/util_home_page.js';
-import { Modal, Button } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
+
+// bootstrap imports
+import { Modal, Button } from 'react-bootstrap';
+
+
 
 export default function UserPage(props) {
   const navigate = useNavigate();
