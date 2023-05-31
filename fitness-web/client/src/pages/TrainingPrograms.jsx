@@ -3,6 +3,9 @@ import MainLayout from '../layout/MainLayout.jsx';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+// bootstrap imports
+import { MDBBtn } from 'mdb-react-ui-kit';
+
 const TrainingProgramas = () => {
     const [muscle, setMuscle] = useState();
     const [generalInformation, setGeneralInformation] = useState();
@@ -30,6 +33,7 @@ const TrainingProgramas = () => {
     }, [localStorage.getItem('selectedTrainingInfo')]); // Add local storage as a dependency
 
     return (
+
         <MainLayout>
             <body className="vsc-initialized">
                 <main role="main">

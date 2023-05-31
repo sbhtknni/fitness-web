@@ -1,50 +1,45 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import NavigationBar from '../componenets/NavigationBar.jsx';
-import { Modal, Button } from 'react-bootstrap';
 //For fetching api
 import axios from 'axios';
 import { useCookies } from "react-cookie"
 import MainLayout from '../layout/MainLayout.jsx';
+import { Modal, Button } from 'react-bootstrap';
+
+
+
+// bootstrap imports
+import {
+  MDBBtn,
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBCard,
+  MDBCardBody,
+  MDBInput,
+  MDBIcon,
+  MDBValidation,
+  MDBValidationItem,
+
+}
+  from 'mdb-react-ui-kit';
 
 
 
 
 export function Login(props) {
 
-  (() => {
-    'use strict';
+  const [formValue, setFormValue] = useState({
+    email: '',
+    password: '',
+  });
 
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.needs-validation');
+  const onChange = (e) => {
+    setFormValue({ ...formValue, [e.target.name]: e.target.value });
+  };
 
-    // Loop over them and prevent submission
-    Array.prototype.slice.call(forms).forEach((form) => {
-      form.addEventListener('submit', (event) => {
-        if (!form.checkValidity()) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  })();
 
-  useEffect(() => {
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    const forms = document.querySelectorAll('.needs-validation');
-
-    // Loop over them and prevent submission
-    Array.from(forms).forEach((form) => {
-      form.addEventListener('submit', (event) => {
-        if (!form.checkValidity()) {
-          event.preventDefault();
-          event.stopPropagation();
-        }
-        form.classList.add('was-validated');
-      }, false);
-    });
-  }, []);
   const navigate = useNavigate();
 
   const [email, setEmail] = useState('');
@@ -102,7 +97,98 @@ export function Login(props) {
   return (
     <>
       <MainLayout>
-      
+        <MDBContainer className="vh-100 gradient-custom" fluid>
+
+          <MDBRow className='d-flex justify-content-center align-items-center h-100'>
+            <MDBCol col='12'>
+
+              <MDBCard className='bg-dark text-white my-5 mx-auto' style={{ borderRadius: '1rem', maxWidth: '400px' }}>
+                <MDBCardBody className='p-5 d-flex flex-column align-items-center mx-auto w-100'>
+
+                  <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
+                  <p className="text-white-50 mb-5">Please enter your login and password!</p>
+
+                  <MDBValidation className='row g-3' >
+                    <MDBValidationItem feedback='Please choose a Email.' invalid className='col-md-12' >
+                      <MDBInput
+                        value={formValue.email}
+                        name='email'
+                        onChange={onChange}
+                        id='email'
+                        required
+                        label='Email address'
+                        type='email'
+                        size="lg"
+                        labelClass='text-white'
+                        style={{ color: 'white' }}
+                      />
+                    </MDBValidationItem>
+
+                    <MDBValidationItem feedback='Please choose a Password.' invalid className='col-md-12'>
+                      <MDBInput
+                        value={formValue.password}
+                        name='password'
+                        onChange={onChange}
+                        id='password'
+                        required
+                        label='Password'
+                        type='password'
+                        size="lg"
+                        labelClass='text-white'
+                        inputClass='text-white'
+                        style={{ color: 'white' }}
+                      />
+
+                    </MDBValidationItem>
+                    <div className='col-12'>
+                      <MDBBtn outline className='mx-1 px-5' color='white' size='lg' type='submit' inputClass='text-white'>
+                        Login
+                      </MDBBtn>
+
+                    </div>
+                  </MDBValidation>
+
+                  <div className='d-flex flex-row mt-3 mb-5'>
+                    <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
+                      <MDBIcon fab icon='facebook-f' size="lg" />
+                    </MDBBtn>
+
+                    <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
+                      <MDBIcon fab icon='twitter' size="lg" />
+                    </MDBBtn>
+
+                    <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
+                      <MDBIcon fab icon='google' size="lg" />
+                    </MDBBtn>
+                  </div>
+
+                  <div>
+                    <p className="mb-0">Don't have an account? <a href="#!" class="text-white-50 fw-bold">Sign Up</a></p>
+
+                  </div>
+                </MDBCardBody>
+              </MDBCard>
+
+            </MDBCol>
+          </MDBRow>
+
+        </MDBContainer>
+
+        <Modal show={showModal} onHide={() => setShowModal(false)}>
+          <Modal.Header closeButton>
+            <Modal.Title>Login</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {/* Two Options to SHow */}
+            {modalOption === 'error' && <p>Error occurred while trying to login ,  User Name or Password Incorrect {modalMessage} .</p>}
+            {modalOption === 'success' && <p>Logged In Successfully </p>}
+          </Modal.Body>
+          <Modal.Footer>
+            {modalOption === 'success' && <Button variant="primary" onClick={handleModalClose}> OK </Button>}
+            <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
+          </Modal.Footer>
+        </Modal>
+
         <section className="vh-100 gradient-custom" >
           <div className="container py-5 h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">
@@ -123,7 +209,7 @@ export function Login(props) {
                             <div className="valid-feedback">Looks good!</div>
                           </div>
                         </div>
-                       
+
                         <div class="form-outline form-white mb-5">
                           <div class="form-outline">
                             <input type="password" class="form-control" id="password" required value={password}
@@ -133,7 +219,7 @@ export function Login(props) {
                           </div>
                         </div>
 
-                  
+
 
 
                         <div class="col-12">
