@@ -1,19 +1,36 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
+import { React, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import { useCookies } from "react-cookie";
 
+import {
+  MDBContainer,
+  MDBNavbar,
+  MDBNavbarBrand,
+  MDBNavbarToggler,
+  MDBIcon,
+  MDBNavbarNav,
+  MDBNavbarItem,
+  MDBNavbarLink,
+  MDBDropdown,
+  MDBDropdownToggle,
+  MDBDropdownMenu,
+  MDBDropdownItem,
+  MDBCollapse,
+} from "mdb-react-ui-kit";
 export function NavigationBar(props) {
-  const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
+  const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
+  const [showBasic, setShowBasic] = useState(false);
 
+  const navigate = useNavigate();
   const Logout = () => {
     removeCookie("access_token");
     window.localStorage.removeItem("userId");
     window.localStorage.removeItem("selectedTrainingInfo");
+    navigate("/auth/login");
+  };
 
-  }
-  
   const handleLinkClick = (muscle) => {
-    window.localStorage.setItem('selectedTrainingInfo', muscle);
+    window.localStorage.setItem("selectedTrainingInfo", muscle);
     setTimeout(() => {
       // Code to refresh the page or trigger navigation after 1 second
       // Replace with your specific logic here
@@ -21,99 +38,94 @@ export function NavigationBar(props) {
     }, 20);
   };
 
-    return (
-<nav className="navbar navbar-dark bg-dark navbar navbar-expand-lg navbar sticky-top">
-   
-      <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span className="navbar-toggler-icon"></span>
-      </button>
-      <div className="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul className="navbar-nav">
-        {/* <li className="nav-item active">
-            <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
-          </li> */}
-          {!cookies.access_token ? 
-          (
-            <>
-               <Link className="navbar-brand" to="/">
-        <img src="https://queenstreetmedical.co.nz/wp-content/uploads/2023/02/qstfsvglogo.png" width="30" height="30" className="d-inline-block align-top" alt="" />
-        Fitness
-      </Link>
-      
-            <li className="nav-item">
-              <Link className="nav-link" to="/auth/login">Login</Link>
-            </li>
-            </>
-          ) 
+  return (
+    <MDBNavbar dark  expand="lg" light bgColor="dark">
+      <MDBContainer fluid>
+      <MDBNavbarBrand href="/">
           
-          :
-          
-          (
-            <>
-                      <Link className="navbar-brand" to="/userpage">
-        <img src="https://queenstreetmedical.co.nz/wp-content/uploads/2023/02/qstfsvglogo.png" width="30" height="30" className="d-inline-block align-top" alt="" />
-        Fitness
-      </Link>
-           <li className="nav-item active">
-            <Link className="nav-link" to="/userpage">User Page <span className="sr-only">(current)</span></Link>
-          </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/auth/login" onClick={Logout}>Logout</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/training">Trainings</Link>
-            </li>
-            </>
+          <img width="30" height="30" src="https://queenstreetmedical.co.nz/wp-content/uploads/2023/02/qstfsvglogo.png" alt="Logo" />
+          Fitness
+        </MDBNavbarBrand>
 
-          )}
-        
-      
-          <li className="nav-item dropdown">
-            <Link className="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Training information
-            </Link>
-            <div className="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <Link
+        <MDBNavbarToggler
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+          onClick={() => setShowBasic(!showBasic)}>
+          <MDBIcon icon="bars" fas />
+        </MDBNavbarToggler>
+
+        <MDBCollapse navbar show={showBasic}>
+          <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
+            {!cookies.access_token ? (
+                <MDBNavbarItem>
+                  <MDBNavbarLink href="/auth/login">Login</MDBNavbarLink>
+                </MDBNavbarItem>
+                
+            ) : (
+              <>
+           
+                <MDBNavbarItem>
+                  <MDBNavbarLink href="/userpage">User</MDBNavbarLink>
+                </MDBNavbarItem>{" "}
+                {/* <LinkNav navigate_to="/auth/login" navigate_name="Logout" onClick={()=> Logout}  /> */}
+                <li className="nav-item">
+                  <Link className="nav-link" to="/auth/login" onClick={Logout}>
+                    Logout
+                  </Link>
+                </li>
+                <MDBNavbarItem>
+                  <MDBNavbarLink href="/training">Choose Training</MDBNavbarLink>
+                </MDBNavbarItem>
+                <MDBNavbarItem>
+              <MDBDropdown>
+                <MDBDropdownToggle tag="a" className="nav-link" role="button">
+                  Dropdown
+                </MDBDropdownToggle>
+                <MDBDropdownMenu>
+                  <MDBDropdownItem link>Action</MDBDropdownItem>
+                  <MDBDropdownItem link>Another action</MDBDropdownItem>
+                  <MDBDropdownItem link>Something else here</MDBDropdownItem>
+                </MDBDropdownMenu>
+              </MDBDropdown>
+            </MDBNavbarItem>
+              </>
+            )}
+   
+              {/* <Link
                 className="dropdown-item"
                 to="/TrainingProgramas"
-                onClick={() => handleLinkClick('Back')}
-              >
+                onClick={() => handleLinkClick("Back")}>
                 Back
               </Link>
               <Link
                 className="dropdown-item"
                 to="/TrainingProgramas"
-                onClick={() => handleLinkClick('Chest')}
-              >
+                onClick={() => handleLinkClick("Chest")}>
                 Chest
               </Link>
               <Link
                 className="dropdown-item"
                 to="/TrainingProgramas"
-                onClick={() => handleLinkClick('Legs')}
-              >
+                onClick={() => handleLinkClick("Legs")}>
                 Legs
               </Link>
               <Link
                 className="dropdown-item"
                 to="/TrainingProgramas"
-                onClick={() => handleLinkClick('Hands')}
-              >
+                onClick={() => handleLinkClick("Hands")}>
                 Hands
               </Link>
               <Link
                 className="dropdown-item"
                 to="/TrainingProgramas"
-                onClick={() => handleLinkClick('Shoulders')}
-              >
+                onClick={() => handleLinkClick("Shoulders")}>
                 Shoulders
-              </Link>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
-
-  )
+              </Link> */}
+          </MDBNavbarNav>
+        </MDBCollapse>
+      </MDBContainer>
+    </MDBNavbar>
+  );
 }
 export default NavigationBar;

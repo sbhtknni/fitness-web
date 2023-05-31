@@ -1,10 +1,11 @@
 import express from "express";
 import { MusclesInformation } from "../models/MuscleInformation.js";
+import {validateToken} from './validate.js';
 
 const router = express.Router();
 
 // Get muscleInformation by muscle name
-router.get("/:muscleName", async (req, res) => {
+router.get("/:muscleName",validateToken, async (req, res) => {
     const muscleName = req.params.muscleName;
     try {
         const musclesInformation = await MusclesInformation.findOne({ muscle:muscleName});
@@ -18,7 +19,7 @@ router.get("/:muscleName", async (req, res) => {
 });
 
 // Add musclesInformation to database
-router.post("/muscleInformation", async (req, res) => {
+router.post("/muscleInformation",validateToken, async (req, res) => {
     try {
       const { muscle, generalInformation, topics } = req.body;
   

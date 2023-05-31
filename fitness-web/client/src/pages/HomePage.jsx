@@ -1,15 +1,10 @@
 import React from 'react'
 import MainLayout from '../layout/MainLayout.jsx';
 import { Link } from 'react-router-dom';
-import * as mdb from 'mdb-ui-kit'; // lib
-import 'mdb-ui-kit/css/mdb.min.css';
 
 
 
 function HomePage  () {
-    
-
-
     
     return (
         
