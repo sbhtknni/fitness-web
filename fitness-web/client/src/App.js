@@ -16,19 +16,11 @@ import HomePage from './pages/HomePage';
 
 //Functional component
 function App() {
-  useEffect(() => {
-    const script = document.createElement('script');
-    script.src = 'https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.3.1/mdb.min.js';
-    script.async = true;
-    document.body.appendChild(script);
 
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
-  return (
+  
 
-    <div className="app-container bg-gradient bg-light ">
+    return (
+
     
     
     <BrowserRouter>
@@ -38,12 +30,11 @@ function App() {
           <Route path="blog" element={<BlogPage />} />
           <Route path="training" element={<TrainingForm />} />
           <Route path="auth/login" element={<Login />} />
-          <Route path="auth/register" element={<Register />} />
+          <Route path="auth/signup" element={<Register />} />
           <Route path="TrainingProgramas" element={<TrainingProgramas />} />
         </Routes>
        
     </BrowserRouter>
-    </div>
   );
 }
 
