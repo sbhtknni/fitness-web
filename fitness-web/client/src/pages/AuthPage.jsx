@@ -21,6 +21,7 @@ import {
   MDBIcon,
   MDBValidation,
   MDBValidationItem,
+  MDBCheckbox
 
 }
   from 'mdb-react-ui-kit';
@@ -160,7 +161,7 @@ export function Login(props) {
                   </div>
 
                   <div>
-                    <p className="mb-0">Don't have an account? <a href="auth/register" class="text-white-50 fw-bold">Sign Up</a></p>
+                    <p className="mb-0">Don't have an account? <a href="register" class="text-white-50 fw-bold">Sign Up</a></p>
 
                   </div>
                 </MDBCardBody>
@@ -185,7 +186,7 @@ export function Login(props) {
             <Button variant="secondary" onClick={() => setShowModal(false)}>Close</Button>
           </Modal.Footer>
         </Modal>
-        
+
 
 
       </MainLayout>
@@ -243,119 +244,273 @@ export function Register() {
   return (
     <>
       <MainLayout>
+        <MDBContainer onSubmit={handleSubmit} className="vh-100 gradient-custom" fluid>
 
-        
-        
-      <form onSubmit={handleSubmit} className="needs-validation" noValidate>
-        <section class="vh-200 gradient-custom" style={{ minHeight: '100vh' }}>
-          <div className="container py-4 h-100">
-            <div className="row d-flex justify-content-center align-items-center h-300">
-              <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-                <div className="card bg-dark text-white">
-                  <div className="card-body p-5 text-center">
-                    <div className="mb-md-5 mt-md-4 pb-5">
-                      <h2 className="fw-bold mb-5">Sign up now</h2>
+          <MDBRow className='g-0 align-items-center'>
+            <MDBCol col='6'>
 
-                      {/* <!-- 2 column grid layout with text inputs for the first and last names --> */}
-                      <div className="row">
-                        <div className="col-md-6 mb-4">
-                          <div className="form-outline">
-                            {/* <!-- FirstName input --> */}
-                            <input
-                              type="text"
-                              id="FirstName"
-                              className="form-control"
-                              required
-                              onChange={(event) => setfirstName(event.target.value)} />
-                            <label className="form-label" for="typeFirstNameX">First Name</label>
-                            <div className="invalid-feedback">Please enter First Name</div>
+              <MDBCard className='my-5 cascading-right ' style={{background: 'hsla(0, 0%, 100%, 0.55)',  backdropFilter: 'blur(30px)'}} >
+                <MDBCardBody className='p-5 shadow-5 text-center'>
+
+                  <h2 className="fw-bold mb-5 text-uppercase">Sign up  now</h2>
+                  <MDBValidation className='row g-3' >
+
+                    <MDBRow>
+                      <MDBCol col='6'>
+                        <MDBValidationItem feedback='Please choose First name.' invalid className='col-md-12' >
+
+                          <MDBInput
+                            value={email}
+                            name='FirstName'
+                            //onChange={handleEmailChange}
+                            id='FirstName'
+                            required
+                            label='First Name'
+                            type='text'
+                            size="lg"
+                            
+                            wrapperClass='mb-2'
+                          />
+
+                        </MDBValidationItem>
+                      </MDBCol>
+
+
+                      <MDBCol col='6'>
+                        <MDBValidationItem feedback='Please choose a Last name.' invalid className='col-md-6'>
+                          <MDBInput
+                            value={password}
+                            name='LastName'
+                            //onChange={handlePasswordChange}
+                            id='LastName'
+                            required
+                            label='Last Name'
+                            type='text'
+                            size="lg"
+                            labelClass='text-white'
+                            inputClass='text-white'
+                            style={{ color: 'white' }}
+                            wrapperClass='mb-2'
+                          />
+                        </MDBValidationItem>
+                      </MDBCol>
+                    </MDBRow>
+                    <MDBValidationItem feedback='Please choose a Email.' invalid className='col-md-12' >
+                      <MDBInput
+                        value={email}
+                        name='email'
+                        //onChange={handleEmailChange}
+                        id='email'
+                        required
+                        label='Email address'
+                        type='email'
+                        size="lg"
+                        labelClass='text-white'
+                        style={{ color: 'white' }}
+                      />
+                    </MDBValidationItem>
+                    <MDBValidationItem feedback='Please choose a Email.' invalid className='col-md-12' >
+                      <MDBInput
+                        value={email}
+                        name='email'
+                        //onChange={handleEmailChange}
+                        id='email'
+                        required
+                        label='Email address'
+                        type='email'
+                        size="lg"
+                        labelClass='text-white'
+                        style={{ color: 'white' }}
+                      />
+                    </MDBValidationItem>
+                    <MDBValidationItem feedback='Please choose a Email.' invalid className='col-md-12' >
+                      <MDBInput
+                        value={email}
+                        name='email'
+                        //onChange={handleEmailChange}
+                        id='email'
+                        required
+                        label='Email address'
+                        type='email'
+                        size="lg"
+                        labelClass='text-white'
+                        style={{ color: 'white' }}
+                      />
+                    </MDBValidationItem>
+                    <MDBValidationItem feedback='Please choose a Email.' invalid className='col-md-12' >
+                      <MDBInput
+                        value={email}
+                        name='email'
+                        //onChange={handleEmailChange}
+                        id='email'
+                        required
+                        label='Email address'
+                        type='email'
+                        size="lg"
+                        labelClass='text-white'
+                        style={{ color: 'white' }}
+                      />
+                    </MDBValidationItem>
+                    <div className='col-12'>
+                      <MDBBtn
+                        outline
+                        className='mx-1 px-5'
+                        color='white'
+                        size='lg'
+                        type='submit'
+                        inputClass='text-white'
+                        data-mdb-toggle="modal"
+                        data-mdb-target="#exampleModal"
+                        style={{ margin: '2vh' }}>
+                        Login
+                      </MDBBtn>
+
+                    </div>
+                  </MDBValidation>
+
+                  <div className='d-flex flex-row mt-3 mb-5'>
+                    <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
+                      <MDBIcon fab icon='facebook-f' size="lg" />
+                    </MDBBtn>
+
+                    <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
+                      <MDBIcon fab icon='twitter' size="lg" />
+                    </MDBBtn>
+
+                    <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
+                      <MDBIcon fab icon='google' size="lg" />
+                    </MDBBtn>
+                  </div>
+
+                  <div>
+                    <p className="mb-0">Don't have an account? <a href="register" class="text-white-50 fw-bold">Sign Up</a></p>
+
+                  </div>
+                </MDBCardBody>
+              </MDBCard>
+
+            </MDBCol>
+
+            <MDBCol col='6'>
+              <img src="https://nowosci.beactivetv.pl/wp-content/themes/beactive/img/fitlovers/fitlovers-photo.png"
+                alt="" fluid />
+            </MDBCol>
+
+          </MDBRow>
+
+        </MDBContainer>
+
+
+        <form onSubmit={handleSubmit} className="needs-validation" noValidate>
+          <section class="vh-200 gradient-custom" style={{ minHeight: '100vh' }}>
+            <div className="container py-4 h-100">
+              <div className="row d-flex justify-content-center align-items-center h-300">
+                <div className="col-12 col-md-8 col-lg-6 col-xl-5">
+                  <div className="card bg-dark text-white">
+                    <div className="card-body p-5 text-center">
+                      <div className="mb-md-5 mt-md-4 pb-5">
+                        <h2 className="fw-bold mb-5">Sign up now</h2>
+
+                        {/* <!-- 2 column grid layout with text inputs for the first and last names --> */}
+                        <div className="row">
+                          <div className="col-md-6 mb-4">
+                            <div className="form-outline">
+                              {/* <!-- FirstName input --> */}
+                              <input
+                                type="text"
+                                id="FirstName"
+                                className="form-control"
+                                required
+                                onChange={(event) => setfirstName(event.target.value)} />
+                              <label className="form-label" for="typeFirstNameX">First Name</label>
+                              <div className="invalid-feedback">Please enter First Name</div>
+                            </div>
+                          </div>
+                          <div className="col-md-6 mb-4">
+                            <div className="form-outline">
+                              {/* <!-- LastName input --> */}
+                              <input type="text"
+                                id="LastName"
+                                className="form-control"
+                                required
+                                onChange={(event) => setLastName(event.target.value)} />
+                              <label className="form-label" for="typeLastNameX">Last Name</label>
+                              <div className="invalid-feedback">Please enter Last Name</div>
+                            </div>
                           </div>
                         </div>
-                        <div className="col-md-6 mb-4">
-                          <div className="form-outline">
-                            {/* <!-- LastName input --> */}
-                            <input type="text"
-                              id="LastName"
-                              className="form-control"
-                              required
-                              onChange={(event) => setLastName(event.target.value)} />
-                            <label className="form-label" for="typeLastNameX">Last Name</label>
-                            <div className="invalid-feedback">Please enter Last Name</div>
-                          </div>
-                        </div>
-                      </div>
 
-                      {/* <!-- Email input --> */}
-                      <div className="form-outline mb-4">
-                        <input
-                          type="email"
-                          id="email"
-                          className="form-control"
-                          required
-                          onChange={(event) => setEmail(event.target.value)} />
-                        <label className="form-label" for="typeEmailX">Email address</label>
-                        <div className="invalid-feedback">Please enter a valid email address</div>
-                      </div>
-
-                      {/* <!-- Password input --> */}
-
-                      <div className="form-outline mb-4">
-                        <input type="password" className="form-control" id="validationCustom01" required
-                          onChange={(event) => setPassword(event.target.value)} />
-                        <label for="validationCustom01" className="form-label">Password</label>
-                        <div className="invalid-feedback">Please enter Password</div>
-                      </div>
-
-                      {/* <!-- Height input --> */}
-                      <div className="row">
-                        <div className="col-md-6 mb-4">
-                          <div className="form-outline">
-                            <input
-                              type="double"
-                              id="Height"
-                              className="form-control"
-                              required
-                              min={0}
-                              max={210}
-                              onChange={(event) => setHeight(event.target.value)} />
-                            <label className="form-label" for="typeHeightX">Height</label>
-                            <div className="invalid-feedback">Please enter vaild Height</div>
-                          </div>
+                        {/* <!-- Email input --> */}
+                        <div className="form-outline mb-4">
+                          <input
+                            type="email"
+                            id="email"
+                            className="form-control"
+                            required
+                            onChange={(event) => setEmail(event.target.value)} />
+                          <label className="form-label" for="typeEmailX">Email address</label>
+                          <div className="invalid-feedback">Please enter a valid email address</div>
                         </div>
 
-                        {/* <!-- Weight input --> */}
-                        <div className="col-md-6 mb-4">
-                          <div className="form-outline">
-                            <input type="double"
-                              id="Weight"
-                              className="form-control"
-                              required
-                              min={0}
-                              max={250}
-                              onChange={(event) => setWeight(event.target.value)} />
-                            <label className="form-label" for="typeWeightX">Weight</label>
-                            <div className="invalid-feedback">Please enter Weight</div>
+                        {/* <!-- Password input --> */}
+
+                        <div className="form-outline mb-4">
+                          <input type="password" className="form-control" id="validationCustom01" required
+                            onChange={(event) => setPassword(event.target.value)} />
+                          <label for="validationCustom01" className="form-label">Password</label>
+                          <div className="invalid-feedback">Please enter Password</div>
+                        </div>
+
+                        {/* <!-- Height input --> */}
+                        <div className="row">
+                          <div className="col-md-6 mb-4">
+                            <div className="form-outline">
+                              <input
+                                type="double"
+                                id="Height"
+                                className="form-control"
+                                required
+                                min={0}
+                                max={210}
+                                onChange={(event) => setHeight(event.target.value)} />
+                              <label className="form-label" for="typeHeightX">Height</label>
+                              <div className="invalid-feedback">Please enter vaild Height</div>
+                            </div>
+                          </div>
+
+                          {/* <!-- Weight input --> */}
+                          <div className="col-md-6 mb-4">
+                            <div className="form-outline">
+                              <input type="double"
+                                id="Weight"
+                                className="form-control"
+                                required
+                                min={0}
+                                max={250}
+                                onChange={(event) => setWeight(event.target.value)} />
+                              <label className="form-label" for="typeWeightX">Weight</label>
+                              <div className="invalid-feedback">Please enter Weight</div>
+                            </div>
                           </div>
                         </div>
-                      </div>
 
-                      {/* <!-- Submit button --> */}
-                      <button className="btn btn-outline-light btn-lg px-5" type="submit" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
-                        Sign Up
+                        {/* <!-- Submit button --> */}
+                        <button className="btn btn-outline-light btn-lg px-5" type="submit" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
+                          Sign Up
 
-                      </button>                    </div>
+                        </button>                    </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div className="col-lg-6 mb-5 mb-lg-0">
-                <img src="https://nowosci.beactivetv.pl/wp-content/themes/beactive/img/fitlovers/fitlovers-photo.png"
-                  alt="" />
+                <div className="col-lg-6 mb-5 mb-lg-0">
+                  <img src="https://nowosci.beactivetv.pl/wp-content/themes/beactive/img/fitlovers/fitlovers-photo.png"
+                    alt="" />
+                </div>
               </div>
             </div>
-          </div>
-        </section>
-      </form>
-    </MainLayout>
+          </section>
+        </form>
+      </MainLayout>
 
     </>
 
