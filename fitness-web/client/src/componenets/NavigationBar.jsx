@@ -30,12 +30,12 @@ export function NavigationBar(props) {
   };
 
   const handleLinkClick = (muscle) => {
+    navigate("/TrainingProgramas");
     window.localStorage.setItem("selectedTrainingInfo", muscle);
+    
     setTimeout(() => {
-      // Code to refresh the page or trigger navigation after 1 second
-      // Replace with your specific logic here
-      window.location.reload(); // Example: Refresh the page after 1 second
-    }, 20);
+      window.location.reload(); // refresh page
+    }, 100);
   };
 
   return (
@@ -83,9 +83,12 @@ export function NavigationBar(props) {
                   Dropdown
                 </MDBDropdownToggle>
                 <MDBDropdownMenu>
-                  <MDBDropdownItem link>Action</MDBDropdownItem>
-                  <MDBDropdownItem link>Another action</MDBDropdownItem>
-                  <MDBDropdownItem link>Something else here</MDBDropdownItem>
+                  <MDBDropdownItem link onClick={() => handleLinkClick("Back")} >Back</MDBDropdownItem>
+                  <MDBDropdownItem link onClick={() => handleLinkClick("Chest")}>Chest</MDBDropdownItem>
+                  <MDBDropdownItem link onClick={() => handleLinkClick("Legs")}>Legs</MDBDropdownItem>
+                  <MDBDropdownItem link onClick={() => handleLinkClick("Hands")}>Hands</MDBDropdownItem>
+                  <MDBDropdownItem link onClick={() => handleLinkClick("Shoulders")}>Shoulders</MDBDropdownItem>
+                  
                 </MDBDropdownMenu>
               </MDBDropdown>
             </MDBNavbarItem>
