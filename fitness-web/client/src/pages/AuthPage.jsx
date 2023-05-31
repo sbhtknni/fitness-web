@@ -327,7 +327,7 @@ export function Register() {
                     <MDBRow >
 
                       <MDBCol col='5'>
-                        <MDBValidationItem feedback='Choose Weight between 0-250' invalid  >
+                        <MDBValidationItem feedback='Choose height between 0-210' invalid  >
 
                           <MDBInput
                             value={height}
@@ -357,7 +357,7 @@ export function Register() {
                             id='Weight'
                             required
                             min={0}
-                            max={210}
+                            max={250}
                             label='Weight'
                             type='number'
                             size="lg"
