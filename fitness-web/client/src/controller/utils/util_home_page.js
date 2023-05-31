@@ -88,8 +88,7 @@ export function currentTrainingName(trainingNames) {
 // calc the weight loss per program and return the max weight loss program;
 
 export function calculateWeightLoss(selectedTrainings) {
-    
-    
+ 
     
     let optimalProgram = null;
     let maxWeightLoss = 0;

@@ -3,12 +3,16 @@ import jwt from "jsonwebtoken";
 import { UserModel } from "../models/Users.js";
 import bcrypt from "bcryptjs";
 const router = express.Router();   //Create Router
+import {validateToken} from './validate.js';
+
 //Register
 router.post('/register', async (req, res) => {
   try {
+
+
     const { email,password,firstName,lastName,height,weight } = req.body;
     const user= await UserModel.findOne({email } );
-    if (user){return res.status(400).json({msg: "The email already exists"});}
+    if (user){return res.status(400).json({messege: "The email already exists"});}
     const saltRounds = 10; // Number of salt rounds
     const hashedPassword = await bcrypt.hash(password, saltRounds);
     const bmi = BMICalculation(weight,height);
@@ -18,7 +22,7 @@ router.post('/register', async (req, res) => {
       res.status(200).json({messege : "User registerd successfully"});
 
   } catch (error) {
-      res.status(500).json({ msg: "Server Error" });
+      res.status(500).json({ messege: "Server Error" });
 
       console.error("Error saving user:", error);
     }
