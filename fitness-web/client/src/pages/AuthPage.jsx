@@ -19,7 +19,6 @@ import {
   MDBIcon,
   MDBValidation,
   MDBValidationItem,
-  MDBCheckbox,
 } from "mdb-react-ui-kit";
 
 export function Login(props) {
@@ -35,6 +34,7 @@ export function Login(props) {
   const [showModal, setShowModal] = useState(false);
   const [modalOption, setModalOption] = useState("");
   const [modalMessage, setModalMessage] = useState("");
+
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -80,107 +80,71 @@ export function Login(props) {
   return (
     <>
       <MainLayout>
-        <MDBContainer
-          onSubmit={handleSubmit}
-          className="vh-100 gradient-custom"
-          fluid>
-          <MDBRow className="d-flex justify-content-center align-items-center h-100">
-            <MDBCol col="12">
-              <MDBCard
-                className="bg-dark text-white my-5 mx-auto"
-                style={{ borderRadius: "1rem", maxWidth: "400px" }}>
-                <MDBCardBody className="p-5 d-flex flex-column align-items-center mx-auto w-100">
+      <MDBContainer fluid  onSubmit={handleSubmit}  >
+          <MDBRow className='d-flex justify-content-center align-items-center h-100'>
+            <MDBCol col='12'>
+              <MDBCard className='bg-dark text-white my-5 mx-auto' style={{ borderRadius: '1rem', maxWidth: '400px' }} >
+                <MDBCardBody className='p-5 d-flex flex-column align-items-center mx-auto w-100'>
                   <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
-                  <p className="text-white-50 mb-5">
-                    Please enter your login and password!
-                  </p>
-
-                  <MDBValidation className="row g-3">
-                    <MDBValidationItem
-                      feedback="Please choose a Email."
-                      invalid
-                      className="col-md-12">
+                  <p className="text-white-50 mb-5">Please enter your login and password!</p>
+                  <MDBValidation className='row g-3' >
+                    <MDBValidationItem feedback='Please choose a Email.' invalid className='col-md-12' >
                       <MDBInput
                         value={email}
-                        name="email"
+                        name='email'
                         onChange={handleEmailChange}
-                        id="email"
+                        id='email'
                         required
-                        label="Email address"
-                        type="email"
+                        label='Email address'
+                        type='email'
                         size="lg"
-                        labelClass="text-white"
-                        style={{ color: "white" }}
+                        labelClass='text-white'
+                        style={{ color: 'white' }}
                       />
                     </MDBValidationItem>
-
-                    <MDBValidationItem
-                      feedback="Please choose a Password."
-                      invalid
-                      className="col-md-12">
+                    <MDBValidationItem feedback='Please choose a Password.' invalid className='col-md-12'>
                       <MDBInput
                         value={password}
-                        name="password"
+                        name='password'
                         onChange={handlePasswordChange}
-                        id="password"
+                        id='password'
                         required
-                        label="Password"
-                        type="password"
+                        label='Password'
+                        type='password'
                         size="lg"
-                        labelClass="text-white"
-                        inputClass="text-white"
-                        style={{ color: "white" }}
+                        labelClass='text-white'
+                        inputClass='text-white'
+                        style={{ color: 'white' }}
                       />
                     </MDBValidationItem>
-                    <div className="col-12">
+                   <div className="d-flex justify-content-center">
                       <MDBBtn
                         outline
-                        className="mx-1 px-5"
-                        color="white"
-                        size="lg"
-                        type="submit"
-                        inputClass="text-white"
+                        className='mx-2 px-5'
+                        color='white'
+                        size='lg'
+                        type='submit'
+                        inputClass='text-white'
                         data-mdb-toggle="modal"
                         data-mdb-target="#exampleModal"
-                        style={{ margin: "2vh" }}>
+                        style={{ margin: '2vh' }}>
                         Login
                       </MDBBtn>
                     </div>
                   </MDBValidation>
-
-                  <div className="d-flex flex-row mt-3 mb-5">
-                    <MDBBtn
-                      tag="a"
-                      color="none"
-                      className="m-3"
-                      style={{ color: "white" }}>
-                      <MDBIcon fab icon="facebook-f" size="lg" />
+                  <div className='d-flex flex-row mt-3 mb-5'>
+                    <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
+                      <MDBIcon fab icon='facebook-f' size="lg" />
                     </MDBBtn>
-
-                    <MDBBtn
-                      tag="a"
-                      color="none"
-                      className="m-3"
-                      style={{ color: "white" }}>
-                      <MDBIcon fab icon="twitter" size="lg" />
+                    <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
+                      <MDBIcon fab icon='twitter' size="lg" />
                     </MDBBtn>
-
-                    <MDBBtn
-                      tag="a"
-                      color="none"
-                      className="m-3"
-                      style={{ color: "white" }}>
-                      <MDBIcon fab icon="google" size="lg" />
+                    <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
+                      <MDBIcon fab icon='google' size="lg" />
                     </MDBBtn>
                   </div>
-
                   <div>
-                    <p className="mb-0">
-                      Don't have an account?{" "}
-                      <a href="register" class="text-white-50 fw-bold">
-                        Sign Up
-                      </a>
-                    </p>
+                    <p className="mb-0">Don't have an account? <a href="register" class="text-white-50 fw-bold">Sign Up</a></p>
                   </div>
                 </MDBCardBody>
               </MDBCard>
@@ -223,6 +187,8 @@ export function Login(props) {
 }
 
 export default Login;
+
+
 export function Register() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");
@@ -236,23 +202,7 @@ export function Register() {
 
   const forms = document.querySelectorAll(".needs-validation");
 
-  (() => {
-    "use strict";
-    // Loop over them and prevent submission
-    Array.prototype.slice.call(forms).forEach((form) => {
-      form.addEventListener(
-        "submit",
-        (event) => {
-          if (!form.checkValidity()) {
-            event.preventDefault();
-            event.stopPropagation();
-          }
-          form.classList.add("was-validated");
-        },
-        false
-      );
-    });
-  })();
+  
 
   // Logic for handling form submission goes here
 
@@ -337,22 +287,22 @@ export function Register() {
                       </MDBCol>
                     </MDBRow>
 
-                    
+
                     <MDBRow col='5'>
-                    <MDBValidationItem feedback='Please choose a Email.' invalid  >
-                      <MDBInput
-                        value={email}
-                        name='email'
-                        onChange={(event) => setEmail(event.target.value)}
-                        id='email'
-                        required
-                        label='Email'
-                        type='email'
-                        size="lg"
-                        wrapperClass='mb-4'
-                      />
+                      <MDBValidationItem feedback='Please choose a Email.' invalid  >
+                        <MDBInput
+                          value={email}
+                          name='email'
+                          onChange={(event) => setEmail(event.target.value)}
+                          id='email'
+                          required
+                          label='Email'
+                          type='email'
+                          size="lg"
+                          wrapperClass='mb-4'
+                        />
                       </MDBValidationItem>
-                      </MDBRow>
+                    </MDBRow>
 
                     <MDBRow col='5'>
                       <MDBValidationItem feedback='Please choose a Password.' invalid  >
@@ -447,7 +397,7 @@ export function Register() {
         </MDBContainer>
 
 
-        <Modal show={showModal} onHide={handleModalClose}>  
+        <Modal show={showModal} onHide={handleModalClose}>
           <Modal.Header closeButton>
             <Modal.Title>Register</Modal.Title>
           </Modal.Header>
