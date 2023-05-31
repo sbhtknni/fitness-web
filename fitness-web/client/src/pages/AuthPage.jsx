@@ -244,146 +244,148 @@ export function Register() {
   return (
     <>
       <MainLayout>
+
         <MDBContainer onSubmit={handleSubmit} className="vh-100 gradient-custom" fluid>
 
-          <MDBRow className='g-0 align-items-center'>
-            <MDBCol col='6'>
-
-              <MDBCard className='my-5 cascading-right ' style={{background: 'hsla(0, 0%, 100%, 0.55)',  backdropFilter: 'blur(30px)'}} >
+          <MDBRow className='g-0 align-items-center ' >
+            <MDBCol col='5'>
+              <MDBCard className='my-5 cascading-right' style={{ background: 'hsla(0, 0%, 100%, 0.55)', backdropFilter: 'blur(30px)' }}  >
                 <MDBCardBody className='p-5 shadow-5 text-center'>
-
                   <h2 className="fw-bold mb-5 text-uppercase">Sign up  now</h2>
-                  <MDBValidation className='row g-3' >
 
-                    <MDBRow>
-                      <MDBCol col='6'>
-                        <MDBValidationItem feedback='Please choose First name.' invalid className='col-md-12' >
+                  <MDBValidation className='row g-3 align-items-center' >
+
+                    <MDBRow col='3'>
+                      <MDBCol col='3'>
+                        <MDBValidationItem feedback='Please choose First name.' invalid  >
 
                           <MDBInput
-                            value={email}
+                            value={firstName}
                             name='FirstName'
-                            //onChange={handleEmailChange}
+                            onChange={(event) => setfirstName(event.target.value)}
                             id='FirstName'
                             required
                             label='First Name'
                             type='text'
                             size="lg"
-                            
-                            wrapperClass='mb-2'
+                            wrapperClass='mb-4'
                           />
 
                         </MDBValidationItem>
                       </MDBCol>
 
 
-                      <MDBCol col='6'>
-                        <MDBValidationItem feedback='Please choose a Last name.' invalid className='col-md-6'>
+                      <MDBCol col='4'>
+                        <MDBValidationItem feedback='Please choose a Last name.' invalid  >
                           <MDBInput
-                            value={password}
+                            value={lastName}
                             name='LastName'
-                            //onChange={handlePasswordChange}
+                            onChange={(event) => setLastName(event.target.value)}
                             id='LastName'
                             required
                             label='Last Name'
                             type='text'
                             size="lg"
-                            labelClass='text-white'
-                            inputClass='text-white'
-                            style={{ color: 'white' }}
-                            wrapperClass='mb-2'
+                            wrapperClass='mb-4'
                           />
                         </MDBValidationItem>
                       </MDBCol>
                     </MDBRow>
-                    <MDBValidationItem feedback='Please choose a Email.' invalid className='col-md-12' >
+
+                    
+                    <MDBRow col='5'>
+                    <MDBValidationItem feedback='Please choose a Email.' invalid  >
                       <MDBInput
                         value={email}
                         name='email'
-                        //onChange={handleEmailChange}
+                        onChange={(event) => setEmail(event.target.value)}
                         id='email'
                         required
-                        label='Email address'
+                        label='Email'
                         type='email'
                         size="lg"
-                        labelClass='text-white'
-                        style={{ color: 'white' }}
+                        wrapperClass='mb-4'
                       />
-                    </MDBValidationItem>
-                    <MDBValidationItem feedback='Please choose a Email.' invalid className='col-md-12' >
-                      <MDBInput
-                        value={email}
-                        name='email'
-                        //onChange={handleEmailChange}
-                        id='email'
-                        required
-                        label='Email address'
-                        type='email'
-                        size="lg"
-                        labelClass='text-white'
-                        style={{ color: 'white' }}
-                      />
-                    </MDBValidationItem>
-                    <MDBValidationItem feedback='Please choose a Email.' invalid className='col-md-12' >
-                      <MDBInput
-                        value={email}
-                        name='email'
-                        //onChange={handleEmailChange}
-                        id='email'
-                        required
-                        label='Email address'
-                        type='email'
-                        size="lg"
-                        labelClass='text-white'
-                        style={{ color: 'white' }}
-                      />
-                    </MDBValidationItem>
-                    <MDBValidationItem feedback='Please choose a Email.' invalid className='col-md-12' >
-                      <MDBInput
-                        value={email}
-                        name='email'
-                        //onChange={handleEmailChange}
-                        id='email'
-                        required
-                        label='Email address'
-                        type='email'
-                        size="lg"
-                        labelClass='text-white'
-                        style={{ color: 'white' }}
-                      />
-                    </MDBValidationItem>
-                    <div className='col-12'>
+                      </MDBValidationItem>
+                      </MDBRow>
+
+                    <MDBRow col='5'>
+                      <MDBValidationItem feedback='Please choose a Password.' invalid  >
+                        <MDBInput
+                          value={password}
+                          name='password'
+                          onChange={(event) => setPassword(event.target.value)}
+                          id='password'
+                          required
+                          label='Password'
+                          type='password'
+                          size="lg"
+                          wrapperClass='mb-4'
+                        />
+                      </MDBValidationItem>
+                    </MDBRow>
+                    <MDBRow >
+
+                      <MDBCol col='5'>
+                        <MDBValidationItem feedback='Choose Weight between 0-250' invalid  >
+
+                          <MDBInput
+                            value={height}
+                            name='Height'
+                            onChange={(event) => setHeight(event.target.value)}
+                            id='Height'
+                            required
+                            label='Height'
+                            type='number'
+                            min={0}
+                            max={210}
+                            size="lg"
+                            wrapperClass='mb-4'
+
+                          />
+
+                        </MDBValidationItem>
+                      </MDBCol>
+
+
+                      <MDBCol col='5'>
+                        <MDBValidationItem feedback='Choose Weight between 0-250' invalid >
+                          <MDBInput
+                            value={weight}
+                            name='Weight'
+                            onChange={(event) => setWeight(event.target.value)}
+                            id='Weight'
+                            required
+                            min={0}
+                            max={210}
+                            label='Weight'
+                            type='number'
+                            size="lg"
+                            wrapperClass='mb-4'
+
+                          />
+                        </MDBValidationItem>
+                      </MDBCol>
+                    </MDBRow>
+
+                    <div style={{ marginBottom: '20px' }}>
                       <MDBBtn
                         outline
-                        className='mx-1 px-5'
-                        color='white'
+                        className='mx-2 px-5'
+                        color='grey'
                         size='lg'
                         type='submit'
-                        inputClass='text-white'
                         data-mdb-toggle="modal"
                         data-mdb-target="#exampleModal"
-                        style={{ margin: '2vh' }}>
-                        Login
+                      >
+                        Register
                       </MDBBtn>
 
                     </div>
                   </MDBValidation>
 
-                  <div className='d-flex flex-row mt-3 mb-5'>
-                    <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
-                      <MDBIcon fab icon='facebook-f' size="lg" />
-                    </MDBBtn>
-
-                    <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
-                      <MDBIcon fab icon='twitter' size="lg" />
-                    </MDBBtn>
-
-                    <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
-                      <MDBIcon fab icon='google' size="lg" />
-                    </MDBBtn>
-                  </div>
-
-                  <div>
-                    <p className="mb-0">Don't have an account? <a href="register" class="text-white-50 fw-bold">Sign Up</a></p>
+                  <div >
+                    <p className="mb-0"> Have an account? <a href="login" class="fw-bold mb-5"> Log in</a></p>
 
                   </div>
                 </MDBCardBody>
@@ -395,10 +397,12 @@ export function Register() {
               <img src="https://nowosci.beactivetv.pl/wp-content/themes/beactive/img/fitlovers/fitlovers-photo.png"
                 alt="" fluid />
             </MDBCol>
-
           </MDBRow>
 
         </MDBContainer>
+
+
+
 
 
         <form onSubmit={handleSubmit} className="needs-validation" noValidate>
@@ -502,10 +506,7 @@ export function Register() {
                     </div>
                   </div>
                 </div>
-                <div className="col-lg-6 mb-5 mb-lg-0">
-                  <img src="https://nowosci.beactivetv.pl/wp-content/themes/beactive/img/fitlovers/fitlovers-photo.png"
-                    alt="" />
-                </div>
+
               </div>
             </div>
           </section>
