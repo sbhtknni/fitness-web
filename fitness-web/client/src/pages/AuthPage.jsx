@@ -402,115 +402,19 @@ export function Register() {
         </MDBContainer>
 
 
-
-
-
-        <form onSubmit={handleSubmit} className="needs-validation" noValidate>
-          <section class="vh-200 gradient-custom" style={{ minHeight: '100vh' }}>
-            <div className="container py-4 h-100">
-              <div className="row d-flex justify-content-center align-items-center h-300">
-                <div className="col-12 col-md-8 col-lg-6 col-xl-5">
-                  <div className="card bg-dark text-white">
-                    <div className="card-body p-5 text-center">
-                      <div className="mb-md-5 mt-md-4 pb-5">
-                        <h2 className="fw-bold mb-5">Sign up now</h2>
-
-                        {/* <!-- 2 column grid layout with text inputs for the first and last names --> */}
-                        <div className="row">
-                          <div className="col-md-6 mb-4">
-                            <div className="form-outline">
-                              {/* <!-- FirstName input --> */}
-                              <input
-                                type="text"
-                                id="FirstName"
-                                className="form-control"
-                                required
-                                onChange={(event) => setfirstName(event.target.value)} />
-                              <label className="form-label" for="typeFirstNameX">First Name</label>
-                              <div className="invalid-feedback">Please enter First Name</div>
-                            </div>
-                          </div>
-                          <div className="col-md-6 mb-4">
-                            <div className="form-outline">
-                              {/* <!-- LastName input --> */}
-                              <input type="text"
-                                id="LastName"
-                                className="form-control"
-                                required
-                                onChange={(event) => setLastName(event.target.value)} />
-                              <label className="form-label" for="typeLastNameX">Last Name</label>
-                              <div className="invalid-feedback">Please enter Last Name</div>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* <!-- Email input --> */}
-                        <div className="form-outline mb-4">
-                          <input
-                            type="email"
-                            id="email"
-                            className="form-control"
-                            required
-                            onChange={(event) => setEmail(event.target.value)} />
-                          <label className="form-label" for="typeEmailX">Email address</label>
-                          <div className="invalid-feedback">Please enter a valid email address</div>
-                        </div>
-
-                        {/* <!-- Password input --> */}
-
-                        <div className="form-outline mb-4">
-                          <input type="password" className="form-control" id="validationCustom01" required
-                            onChange={(event) => setPassword(event.target.value)} />
-                          <label for="validationCustom01" className="form-label">Password</label>
-                          <div className="invalid-feedback">Please enter Password</div>
-                        </div>
-
-                        {/* <!-- Height input --> */}
-                        <div className="row">
-                          <div className="col-md-6 mb-4">
-                            <div className="form-outline">
-                              <input
-                                type="double"
-                                id="Height"
-                                className="form-control"
-                                required
-                                min={0}
-                                max={210}
-                                onChange={(event) => setHeight(event.target.value)} />
-                              <label className="form-label" for="typeHeightX">Height</label>
-                              <div className="invalid-feedback">Please enter vaild Height</div>
-                            </div>
-                          </div>
-
-                          {/* <!-- Weight input --> */}
-                          <div className="col-md-6 mb-4">
-                            <div className="form-outline">
-                              <input type="double"
-                                id="Weight"
-                                className="form-control"
-                                required
-                                min={0}
-                                max={250}
-                                onChange={(event) => setWeight(event.target.value)} />
-                              <label className="form-label" for="typeWeightX">Weight</label>
-                              <div className="invalid-feedback">Please enter Weight</div>
-                            </div>
-                          </div>
-                        </div>
-
-                        {/* <!-- Submit button --> */}
-                        <button className="btn btn-outline-light btn-lg px-5" type="submit" data-mdb-toggle="modal" data-mdb-target="#exampleModal">
-                          Sign Up
-
-                        </button>                    </div>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-          </section>
-        </form>
+        <Modal show={showModal} onHide={handleModalClose}>  
+          <Modal.Header closeButton>
+            <Modal.Title>Register</Modal.Title>
+          </Modal.Header>
+          <Modal.Body>
+            {modalOption === 'success' ? 'Registration Successful' : 'Registration Failed'}
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={handleModalClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
       </MainLayout>
 
     </>
