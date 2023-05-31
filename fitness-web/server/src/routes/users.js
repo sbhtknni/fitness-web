@@ -47,6 +47,7 @@ router.post('/login', async (req, res) => {
         }
         // The token contains information about the user's identity.
         const token =jwt.sign({ id: user._id }, "secret");
+        console.log("token",token);
         res.status(200).json({token,userID: user._id, message: "logged in successfully" });
       } catch (error) {
         res.status(500).json({ message: "Server Error" });

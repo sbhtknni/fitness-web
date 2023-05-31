@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, {  useState, useEffect } from 'react';
 import axios from 'axios';
 import ReactPlayer from 'react-player';
 import MainLayout from '../layout/MainLayout.jsx';
 import RadioButton from '../componenets/radioButton.jsx';
 import { Modal, Button } from 'react-bootstrap';
-
+import ErrorPage from './ErrorPage.jsx';
+import { useCookies } from "react-cookie";
 
 export function TrainingForm() {
   const [selectedTraining, setSelectedTraining] = useState();
@@ -12,7 +13,12 @@ export function TrainingForm() {
   const [newWeight, setNewWeight] = useState('');
   const [showModal, setShowModal] = useState(false);
   const [modalOption, setModalOption] = useState('');
-
+  const [error_response, setError] = useState(false);
+  //get from cookies access token
+  // Inside your component
+const [cookies] = useCookies(["access_token"]);
+const accessToken = cookies.access_token;
+  
   useEffect(() => {
     const fetchTrainings = async () => {
       try {
@@ -20,7 +26,9 @@ export function TrainingForm() {
         const data = response.data.trainings;
         setTrainings(data);
       } catch (error) {
+        setError(true);
         console.error('Error fetching trainings:', error);
+
       }
     };
 
@@ -57,7 +65,10 @@ export function TrainingForm() {
     event.preventDefault();
     addTrainingProgram();
   };
-
+//Load error page if bad request
+if (error_response) {
+  return <ErrorPage />;
+}
   return (
     <MainLayout>
       <div className="container">

@@ -3,6 +3,7 @@ import mongoose from "mongoose";
 import { TrainingModel } from "../models/Training.js";
 import { UserModel } from "../models/Users.js";
 import { BMICalculation } from "..//routes/users.js";
+import {validateToken} from './validate.js';
 
 const router = express.Router();
 
