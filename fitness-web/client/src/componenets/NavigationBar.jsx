@@ -79,7 +79,7 @@ export function NavigationBar(props) {
                 <MDBNavbarItem>
               <MDBDropdown>
                 <MDBDropdownToggle tag="a" className="nav-link" role="button">
-                  Dropdown
+                Training Programas
                 </MDBDropdownToggle>
                 <MDBDropdownMenu>
                   <MDBDropdownItem link onClick={() => handleLinkClick("Back")} >Back</MDBDropdownItem>

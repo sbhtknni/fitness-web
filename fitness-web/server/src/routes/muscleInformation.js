@@ -5,7 +5,7 @@ import {validateToken} from './validate.js';
 const router = express.Router();
 
 // Get muscleInformation by muscle name
-router.get("/:muscleName",validateToken, async (req, res) => {
+router.get("/:muscleName", async (req, res) => {
     const muscleName = req.params.muscleName;
     try {
         const musclesInformation = await MusclesInformation.findOne({ muscle:muscleName});

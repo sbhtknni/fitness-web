@@ -187,6 +187,8 @@ export function Login(props) {
 
 export default Login;
 
+// Register Page
+
 export function Register() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");

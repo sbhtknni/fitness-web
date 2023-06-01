@@ -15,16 +15,22 @@ const TrainingProgramas = () => {
 
     useEffect(() => {
         const fetchmuscleInformation = async () => {
+            
             try {
-                alert(localStorage.getItem('selectedTrainingInfo'));
                 const response = await axios.get(`http://localhost:3002/muscle/${localStorage.getItem('selectedTrainingInfo')}`);
                 const data = response.data;
-
+        
+                const topics = data.musclesInformation.topics;
+        
+                const topicValues = topics.map((info) => info.topic);
+                const informationValues = topics.map((info) => info.information);
+                const linkValues = topics.map((info) => info.link);
+        
                 setMuscle(data.musclesInformation.muscle);
                 setGeneralInformation(data.musclesInformation.generalInformation);
-                setTopicsVals(data.musclesInformation.topics.map((info) => info.topic));
-                setInformation(data.musclesInformation.topics.map((info) => info.information));
-                setLink(data.musclesInformation.topics.map((info) => info.link));
+                setTopicsVals(topicValues);
+                setInformation(informationValues);
+                setLink(linkValues);
             } catch (error) {
                 console.error('Error fetching muscleInformation:', error);
             }
@@ -78,7 +84,7 @@ const TrainingProgramas = () => {
                 </main>
 
                 <footer className="container">
-                    <p>© Company 2017-2018</p>
+                    <p>© RD company since 2023</p>
                 </footer>
             </body>
 

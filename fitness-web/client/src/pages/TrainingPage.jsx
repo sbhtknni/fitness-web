@@ -10,6 +10,7 @@ import { MDBContainer, MDBInput } from "mdb-react-ui-kit";
 import InstructionsFormatter from "../componenets/TrainingPageComp/InstructionsFormatter.jsx";
 import TrainingModal from "../componenets/TrainingPageComp/TrainingPageModal.jsx";
 
+
 export function TrainingForm() {
   const [selectedTraining, setSelectedTraining] = useState();
   const [trainings, setTrainings] = useState([]);
@@ -119,7 +120,7 @@ export function TrainingForm() {
                 onSubmit={handleSubmit}>
                 <div className="">
                   <div className="form-outline">
-                    <input
+                    <MDBInput
                       type="number"
                       className="form-control input-primary"
                       id="newWeight"
@@ -127,11 +128,9 @@ export function TrainingForm() {
                       value={newWeight}
                       onChange={(event) => setNewWeight(event.target.value)}
                       required
+                      label="Enter Weight"
                     />
              
-                    <label htmlFor="newWeight" className="form-label">
-                      Enter Weight
-                    </label>
                     <div className="invalid-feedback">
                       Weight must be greater than 1.
                     </div>
