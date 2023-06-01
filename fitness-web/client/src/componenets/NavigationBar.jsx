@@ -1,6 +1,5 @@
-import { React, useState } from "react";
+import { React, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { useCookies } from "react-cookie";
 
 import {
   MDBContainer,
@@ -18,13 +17,14 @@ import {
   MDBCollapse,
 } from "mdb-react-ui-kit";
 export function NavigationBar(props) {
-  const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
   const [showBasic, setShowBasic] = useState(false);
+  const [access_token,setAccessToken] = useState(    window.localStorage.getItem("access_token") );
+
 
   const navigate = useNavigate();
   const Logout = () => {
-    removeCookie("access_token");
     window.localStorage.removeItem("userId");
+    window.localStorage.removeItem("access_token");
     window.localStorage.removeItem("selectedTrainingInfo");
     navigate("/auth/login");
   };
@@ -49,7 +49,6 @@ export function NavigationBar(props) {
 
         <MDBNavbarToggler
           aria-controls="navbarSupportedContent"
-          aria-expanded="false"
           aria-label="Toggle navigation"
           onClick={() => setShowBasic(!showBasic)}>
           <MDBIcon icon="bars" fas />
@@ -57,7 +56,8 @@ export function NavigationBar(props) {
 
         <MDBCollapse navbar show={showBasic}>
           <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
-            {!cookies.access_token ? (
+            {!access_token ? (
+              
                 <MDBNavbarItem>
                   <MDBNavbarLink href="/auth/login">Login</MDBNavbarLink>
                 </MDBNavbarItem>
@@ -67,13 +67,12 @@ export function NavigationBar(props) {
            
                 <MDBNavbarItem>
                   <MDBNavbarLink href="/userpage">User</MDBNavbarLink>
-                </MDBNavbarItem>{" "}
+                </MDBNavbarItem>
                 {/* <LinkNav navigate_to="/auth/login" navigate_name="Logout" onClick={()=> Logout}  /> */}
-                <li className="nav-item">
-                  <Link className="nav-link" to="/auth/login" onClick={Logout}>
-                    Logout
-                  </Link>
-                </li>
+                
+                <MDBNavbarItem>
+                  <MDBNavbarLink href="/auth/login" onClick={Logout} >Log Out</MDBNavbarLink>
+                </MDBNavbarItem>
                 <MDBNavbarItem>
                   <MDBNavbarLink href="/training">Choose Training</MDBNavbarLink>
                 </MDBNavbarItem>
@@ -95,36 +94,6 @@ export function NavigationBar(props) {
               </>
             )}
    
-              {/* <Link
-                className="dropdown-item"
-                to="/TrainingProgramas"
-                onClick={() => handleLinkClick("Back")}>
-                Back
-              </Link>
-              <Link
-                className="dropdown-item"
-                to="/TrainingProgramas"
-                onClick={() => handleLinkClick("Chest")}>
-                Chest
-              </Link>
-              <Link
-                className="dropdown-item"
-                to="/TrainingProgramas"
-                onClick={() => handleLinkClick("Legs")}>
-                Legs
-              </Link>
-              <Link
-                className="dropdown-item"
-                to="/TrainingProgramas"
-                onClick={() => handleLinkClick("Hands")}>
-                Hands
-              </Link>
-              <Link
-                className="dropdown-item"
-                to="/TrainingProgramas"
-                onClick={() => handleLinkClick("Shoulders")}>
-                Shoulders
-              </Link> */}
           </MDBNavbarNav>
         </MDBCollapse>
       </MDBContainer>
