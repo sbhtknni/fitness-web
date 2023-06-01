@@ -15,7 +15,6 @@ const TrainingProgramas = () => {
 
     useEffect(() => {
         const fetchmuscleInformation = async () => {
-            
             try {
                 const response = await axios.get(`http://localhost:3002/muscle/${localStorage.getItem('selectedTrainingInfo')}`);
                 const data = response.data;

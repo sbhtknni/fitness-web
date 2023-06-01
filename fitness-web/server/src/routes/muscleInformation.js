@@ -11,7 +11,8 @@ router.get("/:muscleName", async (req, res) => {
         const musclesInformation = await MusclesInformation.findOne({ muscle:muscleName});
         if (!musclesInformation) {
             return res.status(400).json({ message: "MusclesInformation does not exist" });
-          }
+      }
+      console.log("MusclesInformation sent");
         return res.status(200).json({musclesInformation, message: "All musclesInformation sent" }); 
     } catch (error) {
         res.json(error,{ message: error.message });
