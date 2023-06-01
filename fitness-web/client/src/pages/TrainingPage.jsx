@@ -1,18 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import ReactPlayer from "react-player";
 import MainLayout from "../layout/MainLayout.jsx";
 import RadioButton from "../componenets/radioButton.jsx";
-import { Modal, Button } from "react-bootstrap";
 import ErrorPage from "./ErrorPage.jsx";
 import { useCookies } from "react-cookie";
 import VideoLink from "../componenets/TrainingPageComp/VideoLink.jsx";
 import LoadLinks from "../componenets/TrainingPageComp/LoadLinks.jsx";
-import { MDBBtn } from "mdb-react-ui-kit";
-import WeightInput from "../componenets/TrainingPageComp/WeightInput.jsx";
 import { MDBContainer, MDBInput } from "mdb-react-ui-kit";
 import InstructionsFormatter from "../componenets/TrainingPageComp/InstructionsFormatter.jsx";
-
+import TrainingModal from "../componenets/TrainingPageComp/TrainingPageModal.jsx";
 
 export function TrainingForm() {
   const [selectedTraining, setSelectedTraining] = useState();
@@ -21,29 +17,37 @@ export function TrainingForm() {
   const [showModal, setShowModal] = useState(false);
   const [modalOption, setModalOption] = useState("");
   const [error_response, setError] = useState(false);
-  const [access_token,setAccessToken] = useState(    window.localStorage.getItem("access_token") );
+
+  const [isLoading, setIsLoading] = useState(true); // State to track loading state
+
+  const [access_token, setAccessToken] = useState(
+    window.localStorage.getItem("access_token")
+  );
   //get from cookies access token
   // Inside your component
-  
+
+  const [dataFetched, setDataFetched] = useState(false);
 
   useEffect(() => {
-    const fetchTrainings = async () => {
-      try {
-        const response = await axios.get("http://localhost:3002/trainings", {   
-          headers: {
-            Authorization: `Bearer ${access_token}`,
-          },
-        });
-        const data = response.data.trainings;
-        setTrainings(data);
-      } catch (error) {
-        setError(true);
-        console.error("Error fetching trainings:", error);
-      }
-    };
+    if (!dataFetched) {
+      fetchData();
+    }
+  }, [!dataFetched]); // Empty dependency array to run the effect only once when the component mounts
 
-    fetchTrainings();
-  }, []);
+  async function fetchData() {
+    try {
+      const response = await axios.get("http://localhost:3002/trainings", {
+        headers: { Authorization: `Bearer ${access_token}` },
+      });
+      setTrainings(response.data.trainings);
+      setIsLoading(false);
+      setDataFetched(true);
+    } catch (error) {
+      console.error(error);
+      setIsLoading(false);
+      setError(true);
+    }
+  }
 
   const handleTrainingChange = (option) => {
     const selectedTraining = trainings.find(
@@ -78,15 +82,18 @@ export function TrainingForm() {
     addTrainingProgram();
   };
 
-  
   //Load error page if bad request
   if (error_response) {
     return <ErrorPage />;
   }
+  if (isLoading) {
+    return <div>Loading...</div>; // Render a loading indicator while data is being fetched
+  }
+
   return (
     <MainLayout>
       <div className="container">
-      <h3 className="fw-bolder  mt-4">Select a training:</h3>
+        <h3 className="fw-bolder  mt-4">Select a training:</h3>
         <br />
         <div style={{ marginBottom: "30px" }}>
           <RadioButton
@@ -103,7 +110,6 @@ export function TrainingForm() {
                   Add Training Program
                 </MDBBtn>
       </MDBContainer> */}
-
         {selectedTraining && (
           <div>
             <div className="d-flex justify-content-center">
@@ -122,18 +128,7 @@ export function TrainingForm() {
                       onChange={(event) => setNewWeight(event.target.value)}
                       required
                     />
-                    {/* <MDBInput
-                        value={email}
-                        name="email"
-                        //onChange={handleEmailChange}
-                        id="email"
-                        required
-                        label="Email address"
-                        type="email"
-                        size="lg"
-                        labelClass="text-white"
-                        style={{ color: "white" }}
-                      /> */}
+             
                     <label htmlFor="newWeight" className="form-label">
                       Enter Weight
                     </label>
@@ -147,38 +142,22 @@ export function TrainingForm() {
 
             <br />
 
-            <h5 className="fw-bolder  mt-4" > Instructions:</h5>
+            <h5 className="fw-bolder  mt-4"> Instructions:</h5>
             <InstructionsFormatter text={selectedTraining.instructions} />
             <LoadLinks video_urls={selectedTraining.videoUrls} />
-          {/* Remember to adjust the training intensity and exercises based on your fitness level and any specific goals or limitations you may have. Stay hydrated, listen to your body, and consult a healthcare professional if needed before starting any new exercise program. */}
+            {/* Remember to adjust the training intensity and exercises based on your fitness level and any specific goals or limitations you may have. Stay hydrated, listen to your body, and consult a healthcare professional if needed before starting any new exercise program. */}
             <div className="d-flex justify-content-center">
-            <h5 className="fw-bolder  mt-4" >Selected Training: {selectedTraining.name}</h5>
+              <h5 className="fw-bolder  mt-4">
+                Selected Training: {selectedTraining.name}
+              </h5>
             </div>
           </div>
         )}
-
-  <Modal show={showModal} onHide={() => setShowModal(false)}>
-          <Modal.Header closeButton>
-            <Modal.Title>Add Training Program</Modal.Title>
-          </Modal.Header>
-          <Modal.Body>
-            {/* Three Options to SHow */}
-            {modalOption === "emptyInput" && (
-              <p>Please enter a weight value.</p>
-            )}
-            {modalOption === "error" && (
-              <p>Error occurred while adding the training program.</p>
-            )}
-            {modalOption === "success" && (
-              <p>Training program added successfully.</p>
-            )}
-          </Modal.Body>
-          <Modal.Footer>
-            <Button variant="secondary" onClick={() => setShowModal(false)}>
-              Close
-            </Button>
-          </Modal.Footer>
-        </Modal>
+        <TrainingModal
+          showModal={showModal}
+          setShowModal={setShowModal}
+          modalOption={modalOption}
+        />
       </div>
     </MainLayout>
   );

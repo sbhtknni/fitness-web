@@ -10,6 +10,8 @@ const router = express.Router();
 //Get all trainings
 router.get("/",validateToken, async (req, res) => {
     try {
+      console.log("UserDetails",req.user.id);
+
         const trainings = await TrainingModel.find({});
         return res.status(200).json({trainings, message: "All trainings sent" });
     } catch (error) {
@@ -18,11 +20,11 @@ router.get("/",validateToken, async (req, res) => {
 });
 
 //Add training to user
-router.post("/", async (req, res) => {
-    const { userID, trainingName,new_weight } = req.body;
+router.post("/", validateToken ,async (req, res) => {
+    const {  trainingName,new_weight } = req.body;
     console.log("userID", userID,"weight",new_weight,"trainingName",trainingName);
     try {
-      const user = await UserModel.findById(userID);
+      const user = await UserModel.findById(req.user.id);
   
       if (!user) {
         console.log("User not found");
