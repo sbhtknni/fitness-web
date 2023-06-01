@@ -6,17 +6,18 @@ import jwt from "jsonwebtoken";
 //        const token =jwt.sign({ id: user._id }, "secret");
 
 export const validateToken = (req, res, next) => {
-    console.log("==",req.headers)
     const token =req.headers.authorization;
     console.log("Validate token",token);
 
     if (!token) {
-        // Unauthorized
         console.log("Access denied, no token provided");
         return res.status(401).json({ message: "Access denied, no token provided" });
     }
     try {
-        const verified = jwt.verify(token, "secret");
+        //remove the "Bearer " from the token
+        const tokenWithoutBearer = token.split(" ")[1];
+
+        const verified = jwt.verify(tokenWithoutBearer, "secret");
         console.log("verified",verified);
         req.user = verified;
         console.log("User is logged in");

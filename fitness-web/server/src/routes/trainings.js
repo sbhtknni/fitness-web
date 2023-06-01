@@ -8,7 +8,7 @@ import {validateToken} from './validate.js';
 const router = express.Router();
 
 //Get all trainings
-router.get("/", async (req, res) => {
+router.get("/",validateToken, async (req, res) => {
     try {
         const trainings = await TrainingModel.find({});
         return res.status(200).json({trainings, message: "All trainings sent" });

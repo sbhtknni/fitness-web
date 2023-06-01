@@ -49,11 +49,9 @@ export function Login(props) {
       setShowModal(true);
       const message = response.data.message;
       setModalMessage(message);
-      console.log("token" , response.data.token);
-      setCookies("access_token", response.data.token);
+      window.localStorage.setItem("access_token", response.data.token);
       window.localStorage.setItem("userId", response.data.userID);
 
-      console.log(response.status);
     } catch (err) {
       setModalOption("error");
       setShowModal(true);
@@ -224,7 +222,6 @@ export function Login(props) {
 }
 
 export default Login;
-
 
 export function Register() {
   const navigate = useNavigate();

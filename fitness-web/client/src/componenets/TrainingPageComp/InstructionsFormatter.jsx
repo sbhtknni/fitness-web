@@ -10,8 +10,8 @@ function InstructionsFormatter({ text }) {
 
         if (parts.length === 1) {
           return (
-            <p key={index}>
-              {parts[0].trim()}
+            <p  key={index}>
+               <strong> {parts[0].trim()}</strong> 
             </p>
           );
         } else {
@@ -20,14 +20,14 @@ function InstructionsFormatter({ text }) {
 
           return (
             <div key={index}>
-              {mainTask}
-              <ul>
+              <strong>{mainTask}</strong>
+              <ul  >
                 {subTasks.map((subTask, subIndex) => (
-                  <li key={subIndex}>
+                  <li style={{color:'#616161'}} key={subIndex}>
                     {subTask}
                   </li>
                 ))}
-              </ul>
+              </ul >
             </div>
           );
         }
