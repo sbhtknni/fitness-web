@@ -224,6 +224,8 @@ export function Login(props) {
 }
 
 export default Login;
+
+
 export function Register() {
   const navigate = useNavigate();
   const [email, setEmail] = useState("");

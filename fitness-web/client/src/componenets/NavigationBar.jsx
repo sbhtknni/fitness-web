@@ -67,13 +67,12 @@ export function NavigationBar(props) {
            
                 <MDBNavbarItem>
                   <MDBNavbarLink href="/userpage">User</MDBNavbarLink>
-                </MDBNavbarItem>{" "}
+                </MDBNavbarItem>
                 {/* <LinkNav navigate_to="/auth/login" navigate_name="Logout" onClick={()=> Logout}  /> */}
-                <li className="nav-item">
-                  <Link className="nav-link" to="/auth/login" onClick={Logout}>
-                    Logout
-                  </Link>
-                </li>
+                
+                <MDBNavbarItem>
+                  <MDBNavbarLink href="/auth/login" onClick={Logout} >Log Out</MDBNavbarLink>
+                </MDBNavbarItem>
                 <MDBNavbarItem>
                   <MDBNavbarLink href="/training">Choose Training</MDBNavbarLink>
                 </MDBNavbarItem>
