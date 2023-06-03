@@ -4,6 +4,7 @@ import { UserModel } from "../models/Users.js";
 import bcrypt from "bcryptjs";
 const router = express.Router();   //Create Router
 import {validateToken} from './validate.js';
+import config from '../config.json' assert { type: 'json' };
 
 //Register
 router.post('/register', async (req, res) => {
@@ -47,7 +48,7 @@ router.post('/login', async (req, res) => {
           return res.status(400).json({ message: "Incorrect password" });
         }
         // The token contains information about the user's identity.
-        const token =jwt.sign({ id: user._id }, "secret");
+        const token =jwt.sign({ id: user._id }, config.encrypt);
         res.status(200).json({token, message: "logged in successfully" });
       } catch (error) {
         res.status(500).json({ message: "Server Error" });

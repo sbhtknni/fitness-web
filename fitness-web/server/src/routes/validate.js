@@ -1,5 +1,6 @@
 
 import jwt from "jsonwebtoken";
+import config from '../config.json' assert { type: 'json' };
 
 //validate thata the user is logged in and has a valid token
 // i signe the token with the user id lije this:
@@ -15,7 +16,7 @@ export const validateToken = (req, res, next) => {
     try {
         //remove the "Bearer " from the token
         const tokenWithoutBearer = token.split(" ")[1];
-        const verified = jwt.verify(tokenWithoutBearer, "secret");
+        const verified = jwt.verify(tokenWithoutBearer, config.encrypt);
         req.user = verified;
         next();
     } catch (error) {
