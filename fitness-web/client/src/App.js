@@ -7,6 +7,7 @@ import { Login, Register } from './/pages/AuthPage.jsx';
 import {TrainingForm} from './/pages/TrainingPage.jsx';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
+import UserHomePage from './pages/UserHomePage.jsx';
 
 
 
@@ -20,12 +21,12 @@ import HomePage from './pages/HomePage';
 function App() {
   return (
 
-    
+
     
     <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
-          <Route path="userpage" element={<UserPage />} />
+          <Route path="userpage" element={<UserHomePage />} />
           <Route path="blog" element={<BlogPage />} />
           <Route path="training" element={<TrainingForm />} />
           <Route path="auth/login" element={<Login />} />

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MainLayout from "../layout/MainLayout.jsx";
-import RadioButton from "../componenets/radioButton.jsx";
+import RadioButton from "../componenets/RadioButton.jsx";
 import ErrorPage from "./ErrorPage.jsx";
 import LoadLinks from "../componenets/TrainingPageComp/LoadLinks.jsx";
 import InstructionsFormatter from "../componenets/TrainingPageComp/InstructionsFormatter.jsx";
@@ -30,10 +30,8 @@ export function TrainingForm() {
   };
 
   const addTrainingProgram = async (newWeight) => {
-    console.log("WEight ", newWeight);
 
     if (
-      parseInt(newWeight) > 250 ||
       newWeight === "" ||
       newWeight === undefined
     ) {
