@@ -96,4 +96,4 @@ export function TrainingForm() {
   );
 }
 
-export default TrainingForm;ד
+export default TrainingForm;
