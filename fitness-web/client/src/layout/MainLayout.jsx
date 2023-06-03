@@ -2,7 +2,6 @@ import React from "react";
 import NavigationBar from "..//componenets/NavigationBar.jsx";
 function MainLayout(props) {
   const { children } = props;
-  console.log(props);
   return (
     <div>
       <NavigationBar > </NavigationBar>

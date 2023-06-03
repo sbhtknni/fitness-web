@@ -47,8 +47,8 @@ export function Login(props) {
 
       setModalOption("success");
       setShowModal(true);
-      const message = response.data.message;
-      setModalMessage(message);
+      setModalMessage( response.data.message);
+      console.log("Login",response.data);
       window.localStorage.setItem("access_token", response.data.token);
       window.localStorage.setItem("userId", response.data.userID);
 
