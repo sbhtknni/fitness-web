@@ -50,3 +50,20 @@ export const addTrainingToUser = async (trainingName, new_weight) => {
     }
 };
 
+
+//----------------------User----------------------//
+//Get user
+export const getUser = async () => {
+    try {
+        const response = await createRequest("get",`/auth/${localStorage.getItem('userId')}`, "");
+        return response.data.user;
+    }
+    catch (error) {
+        console.log(error)
+        console.error(error);
+        return [];
+    }
+};
+
+
+

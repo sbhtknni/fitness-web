@@ -1,35 +1,55 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Spinner from "../componenets/Spinner";
 import MainLayout from "../layout/MainLayout.jsx";
-import { useCookies } from "react-cookie";
 
-export function ErrorPage() {
-  const [cookies, setCookie, removeCookie] = useCookies(["access_token"]);
-    removeCookie("access_token");
+export function ErrorPage(props) {
+  const { toRemove } = props;
+  if (toRemove) {
     window.localStorage.removeItem("userId");
+    window.localStorage.removeItem("access_token");
     window.localStorage.removeItem("selectedTrainingInfo");
     window.localStorage.removeItem("selectedTrainingName");
+  }
 
-  return (
-    <MainLayout>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          height: "100vh",
-          flexDirection: "column",
-        }}>
-        <h1>Page Not Found</h1>
+  if (toRemove === true) {
+    return (
+      <MainLayout>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+            flexDirection: "column",
+          }}>
+          <h1>Page Not Found</h1>
 
-        <p>Sorry, but the page you were trying to view does not exist.</p>
-        <div style={{ lexDirection: "row" }}>
-          <Spinner />
+          <p>Sorry, but the page you were trying to view does not exist.</p>
+          <div style={{ lexDirection: "row" }}>
+            <Spinner />
+          </div>
+          <p>Yu have to log in first</p>
         </div>
-        <p>Yu have to log in first</p>
-       
-      </div>
-    </MainLayout>
-  );
+      </MainLayout>
+    );
+  } else {
+    return (
+      <MainLayout>
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            height: "100vh",
+            flexDirection: "column",
+          }}>
+          <div style={{ lexDirection: "row" }}>
+            <Spinner />
+          </div>
+          <h1 style={{ color: "blue" }}>Loading...</h1>
+        </div>
+      </MainLayout>
+    );
+  }
 }
 export default ErrorPage;
