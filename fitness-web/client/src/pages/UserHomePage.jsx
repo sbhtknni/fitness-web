@@ -1,5 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import MainLayout from "../layout/MainLayout.jsx";
+import ErrorPage from "./ErrorPage.jsx";
+
 import {
   MDBCol,
   MDBContainer,
@@ -14,77 +17,130 @@ import {
   MDBListGroupItem,
 } from "mdb-react-ui-kit";
 import ProfilePicture from "../componenets/UserPageComp/ProfilePicture.jsx";
+import { getUser } from "../controller/requests.js";
+import {
+  calculateAverage,
+  calculateMax,
+  calculateMin,
+  calculateVariance,
+  calculateStandardDeviation,
+  calculateMedian,
+  calculatePopularName,
+  currentTrainingName,
+  calculateWeightLoss,
+} from "../controller/utils/util_home_page.js";
+import RowOfDetails from "../componenets/UserPageComp/RowOfDetails.jsx";
+import GraphComponent from "../componenets/graphComponent.jsx";
+import ChartTrainigGraph from "../componenets/ChartTrainingGraph.jsx";
 
 function UserHomePage() {
+  const navigate = useNavigate();
+  const [user, setUser] = useState({});
+  const [dates, setDates] = useState([]);
+  const [weights, setWeights] = useState([]);
+  const [trainingNames, setTrainingNames] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(false);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+      const response = await getUser();
+      if (response ===[]) {
+        setError(true);
+        return;
+      }
+      console.log("User response ", response);
+    
+      setUser(response);
+      setLoading(false); // Set loading to false once data is fetched
+
+      setAllData();
+    };
+
+    const setAllData = async () => {
+      if (!loading) {
+      console.log("User selectes ", user);
+      setDates(user.selectedTrainings.map((training) => training.startDate));
+      setWeights(user.selectedTrainings.map((training) => training.weight));
+      setTrainingNames(user.selectedTrainings.map((training) => training.name));
+      calculateStatistics()
+      }
+    };
+
+    const calculateStatistics = () => 
+    {
+      console.log("Weights ", weights);
+      const average = calculateAverage(weights);
+      const max = calculateMax(weights);
+      const min = calculateMin(weights);
+      const variance = calculateVariance(weights);
+      const standardDeviation = calculateStandardDeviation(weights);
+      const median = calculateMedian(weights);
+      const popularName = calculatePopularName(trainingNames);
+      const currentTraining = currentTrainingName(trainingNames);
+      const weightLoss = calculateWeightLoss(weights);
+
+    };
+
+    fetchUser();
+  
+  }, []); // Empty dependency array to run the effect only once when the component mounts
+
+  if (error) {
+    return <ErrorPage toRemove={true} />;
+  }
+  if (loading) {
+    return <ErrorPage toRemove={false} />;
+  }
+  else {
+
   return (
     <MainLayout>
       <section style={{ backgroundColor: "#eee" }}>
         <MDBContainer className="py-5">
           <MDBRow>
-            <MDBCol lg="4">
-              {/* Profile Picture Cube */}
-              <ProfilePicture />
+            {/* Profile Picture Cube */}
+            <ProfilePicture user={user} />
 
-            </MDBCol> 
             <MDBCol lg="8">
               <MDBCard className="mb-4">
                 <MDBCardBody>
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Full Name</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                      <MDBCardText className="text-muted">
-                        Johnatan Smith
-                      </MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Email</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                      <MDBCardText className="text-muted">
-                        example@example.com
-                      </MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Phone</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                      <MDBCardText className="text-muted">
-                        (097) 234-5678
-                      </MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Mobile</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                      <MDBCardText className="text-muted">
-                        (098) 765-4321
-                      </MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
-                  <hr />
-                  <MDBRow>
-                    <MDBCol sm="3">
-                      <MDBCardText>Address</MDBCardText>
-                    </MDBCol>
-                    <MDBCol sm="9">
-                      <MDBCardText className="text-muted">
-                        Bay Area, San Francisco, CA
-                      </MDBCardText>
-                    </MDBCol>
-                  </MDBRow>
+                  <RowOfDetails
+                    type="Full Name"
+                    value={user.firstName + " " + user.lastName}></RowOfDetails>
+                  <RowOfDetails
+                    type=" Email "
+                    value={user.email}></RowOfDetails>
+                  <RowOfDetails
+                    type=" Height "
+                    value={user.height}></RowOfDetails>
+                  <RowOfDetails
+                    type=" Weight "
+                    value={user.weight}></RowOfDetails>
                 </MDBCardBody>
               </MDBCard>
+             
+              <MDBRow>
+                
+                <MDBCol md="8">
+                  <MDBCard className="mb-4 mb-md-3">
+                    <MDBCardBody>
+                      <MDBCardBody>
+                        <ChartTrainigGraph
+                          selectedTrainings={user.selectedTrainings}
+                        />
+                                          <GraphComponent selectedTrainings={user.selectedTrainings} />
+
+                      </MDBCardBody>
+                    </MDBCardBody>
+                  </MDBCard>
+                  <MDBCard className="mb-4">
+                <MDBCardBody>
+                </MDBCardBody>
+              </MDBCard>
+  
+              </MDBCol>
+              </MDBRow>
 
               <MDBRow>
                 <MDBCol md="6">
@@ -248,5 +304,5 @@ function UserHomePage() {
     </MainLayout>
   );
 }
-
+}
 export default UserHomePage;

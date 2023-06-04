@@ -49,7 +49,7 @@ router.post('/login', async (req, res) => {
         }
         // The token contains information about the user's identity.
         const token =jwt.sign({ id: user._id }, config.encrypt);
-        res.status(200).json({token, message: "logged in successfully" });
+        res.status(200).json({token  ,userID: user._id ,message: "logged in successfully" });
       } catch (error) {
         res.status(500).json({ message: "Server Error" });
       }
@@ -63,6 +63,7 @@ router.get('/:id', async (req, res) => {
     if (!user) {
       return res.status(400).json({ message: "User does not exist" });
     }
+    user.password = "";
     res.status(200).json({user});
   } catch (error) {
     res.status(500).json({ message: "Server Error" });
