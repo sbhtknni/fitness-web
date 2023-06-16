@@ -10,13 +10,10 @@ const TrainingProgramas = () => {
     const [muscle, setMuscle] = useState();
     const [generalInformation, setGeneralInformation] = useState();
     const [topic, setTopicsVals] = useState([]);
-    const [data, setData] = useState([]);
     const [information, setInformation] = useState([]);
     const [link, setLink] = useState([]);
-    const [topics, setTopics] = useState([]);
     const [error, setError] = useState(false);
-    const [loading, setLoading] = useState(true);
-
+    let data = [];
 
     useEffect(() => {
         const fetchmuscleInformation = async () => {
@@ -27,23 +24,18 @@ const TrainingProgramas = () => {
                 return;
             }
             console.log("Response: ", response);
-            setData(response);
-            setLoading(false); // Set loading to false once data is fetched
+            data = response;
             setAllData();
         };
 
         const setAllData = async () => {
-            console.log("innnnn");
-            
-            if (!loading) {
-                console.log("innnnn X2");
-                setTopics(data.musclesInformation.topics);
-                setMuscle(data.musclesInformation.muscle);
-                setGeneralInformation(data.musclesInformation.generalInformation);
-                setTopicsVals(topics.map((info) => info.topic));
-                setInformation(topics.map((info) => info.information));
-                setLink(topics.map((info) => info.link));
-            }
+
+            setMuscle(data.musclesInformation.muscle);
+            setGeneralInformation(data.musclesInformation.generalInformation);
+            setTopicsVals(data.musclesInformation.topics.map((info) => info.topic));
+            setInformation(data.musclesInformation.topics.map((info) => info.information));
+            setLink(data.musclesInformation.topics.map((info) => info.link));
+
         };
 
         fetchmuscleInformation();
@@ -52,9 +44,6 @@ const TrainingProgramas = () => {
 
     if (error) {
         return <ErrorPage toRemove={true} />;
-    }
-    if (loading) {
-        return <ErrorPage toRemove={false} />;
     }
     else {
         return (
