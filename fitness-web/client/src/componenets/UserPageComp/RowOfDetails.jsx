@@ -7,10 +7,10 @@ export default function RowOfDetails(props) {
     <>
       <MDBRow>
         <MDBCol sm="3">
-          <MDBCardText>{type}</MDBCardText>
+          <MDBCardText className="fw-bolder">{type}</MDBCardText>
         </MDBCol>
         <MDBCol sm="9">
-          <MDBCardText className="text-muted">{value}</MDBCardText>
+          <MDBCardText className="text-muted text-center fst-italic">{value}</MDBCardText>
         </MDBCol>
         <hr />
       </MDBRow>

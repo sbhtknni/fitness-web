@@ -23,7 +23,7 @@ export default function ProfilePicture(props) {
         style={{ width: '200px' }}
         fluid />
         
-      <p className="text-muted mb-4">{user.firstName + "  "+user.lastName}</p>
+      <p className=" mb-4 fw-bolder " >{user.firstName + "  "+user.lastName}</p>
       <p className="text-muted mb-4">Current Training Program : {user.firstName+ "   "+user.lastName}</p>
       <div className="d-flex justify-content-center mb-2">
         <MDBBtn>Follow</MDBBtn>
