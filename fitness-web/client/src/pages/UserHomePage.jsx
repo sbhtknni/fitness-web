@@ -70,7 +70,6 @@ function UserHomePage() {
     const calculateStatistics = () => 
     {
       console.log("Weights ", weights);
-      const average = calculateAverage(weights);
       const max = calculateMax(weights);
       const min = calculateMin(weights);
       const variance = calculateVariance(weights);

@@ -21,7 +21,7 @@ const createRequest = (method, url, data) => {
 
 };
 
- 
+
 
 //----------------------Training----------------------//
 //Get all trainings
@@ -55,7 +55,7 @@ export const addTrainingToUser = async (trainingName, new_weight) => {
 //Get user
 export const getUser = async () => {
     try {
-        const response = await createRequest("get",`/auth/${localStorage.getItem('userId')}`, "");
+        const response = await createRequest("get", `/auth/${localStorage.getItem('userId')}`, "");
         return response.data.user;
     }
     catch (error) {
@@ -64,6 +64,19 @@ export const getUser = async () => {
         return [];
     }
 };
+
+//----------------------Training Programas----------------------//
+export const getTrainingProgramas = async () => {
+    try {
+        const response = await createRequest("get", `/muscle/${localStorage.getItem('selectedTrainingInfo')}`);
+        return response.data;
+    } catch (error) {
+        console.error('Error fetching muscleInformation:', error);
+        console.log(error)
+        console.error(error);
+        return [];
+    }
+}
 
 
 

@@ -30,8 +30,8 @@ export function NavigationBar(props) {
   };
 
   const handleLinkClick = (muscle) => {
-    navigate("/TrainingProgramas");
     window.localStorage.setItem("selectedTrainingInfo", muscle);
+    navigate("/TrainingProgramas");
     
     setTimeout(() => {
       window.location.reload(); // refresh page
