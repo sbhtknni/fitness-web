@@ -78,9 +78,11 @@ function UserHomePage() {
     dates = user.selectedTrainings.map((training) => training.startDate);
     weights = user.selectedTrainings.map((training) => training.weight);
     trainingNames = user.selectedTrainings.map((training) => training.name);
+    calculateStatistics(user);
+
   };
 
-  const calculateStatistics = () => {
+  const calculateStatistics = (user) => {
     // Update property1
     const updatedData = {
       ...data,
@@ -104,7 +106,6 @@ function UserHomePage() {
   useEffect(() => {
     async function fetchAllData() {
       await fetchUser();
-      calculateStatistics();
       setLoading(false);
     }
     fetchAllData();
@@ -225,7 +226,7 @@ function UserHomePage() {
       
               <BigCard
                 title="Weight"
-                text={`#Max Weight ${data.max} \n #Min Weight ${data.min} # ${data.weightLoss} \n`}
+                text={`#Max Weight $${data.max} kg$ \n #Min Weight $${data.min} kg$ # ${data.weightLoss} \n `}
                 img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
               />
               <BigCard
@@ -235,7 +236,7 @@ function UserHomePage() {
               />
               <BigCard
                 title=""
-                text={`#Popular Name ${data.popularName} \n #Current Training ${data.currentTraining} \n #Weight Loss ${data.weightLoss} \n #Weight Loss Per Program ${data.weightLossPerProgram} \n `}
+                text={`#Popular Training  $${data.popularName}$  #Current Training $${data.currentTraining}$  #Weight Loss Per Program ${data.weightLossPerProgram} \n `}
                 img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
               />
           
