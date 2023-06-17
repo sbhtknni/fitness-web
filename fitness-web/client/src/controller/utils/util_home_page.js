@@ -83,55 +83,27 @@ export function currentTrainingName(trainingNames) {
 }
 
 // export function calculateWeightLoss = calculateWeightLoss(dates, weights, trainingNames)
-// calc the weight loss per program and return the max weight loss program;
 
+
+//calculate total weight loss from the first training to the last training
 export function calculateWeightLoss(selectedTrainings) {
- 
-    
-    let optimalProgram = null;
-    let maxWeightLoss = 0;
-    let weightForPercentage = 0;
-  
-    for (let i = 0; i < selectedTrainings.length - 1; i++) {
-      const currentTraining = selectedTrainings[i];
-      const nextTraining = selectedTrainings[i + 1];
-  
-      const weightLoss = nextTraining.weight - currentTraining.weight;
-      const weightLossPercentage = (weightLoss / nextTraining.weight) * 100;
-  
-      if (weightLoss > maxWeightLoss) {
-        optimalProgram = currentTraining.name;
-        maxWeightLoss = weightLoss;
-        weightForPercentage = nextTraining.weight;
-      }
+    const firstTraining = selectedTrainings[0];
+    const lastTraining = selectedTrainings[selectedTrainings.length - 1];
+    if (firstTraining == null || lastTraining == null) {
+        return 0;
     }
+    if ( lastTraining.weight - firstTraining.weight > 0)
+    {
+        return ` You gained ${lastTraining.weight - firstTraining.weight} kg from the first training to the last training.`
+    }
+    return  ` Well done! You lost ${firstTraining.weight - lastTraining.weight} kg from the first training to the last training.`
+ 
+ 
+}
   
-    const WeightLossPercentage = (maxWeightLoss / weightForPercentage) * 100;
-  
-    console.log(maxWeightLoss);
-    console.log(optimalProgram);
-    console.log(WeightLossPercentage);
-  
-    return {
-      optimalProgram,
-      maxWeightLoss,
-      WeightLossPercentage: WeightLossPercentage.toFixed(2) ,
-    };
-  }
 
   //---------------------------------------------------------------------------------
 
-  //calculate total weight loss
-    export function calculateTotalWeightLoss(selectedTrainings) {
-        let totalWeightLoss = 0;
-        for (let i = 0; i < selectedTrainings.length - 1; i++) {
-            const currentTraining = selectedTrainings[i];
-            const nextTraining = selectedTrainings[i + 1];
-            const weightLoss = nextTraining.weight - currentTraining.weight;
-            totalWeightLoss += weightLoss;
-        }
-        return totalWeightLoss;
-    }
 
 //Calaculate for each program the weight loss
 export function calculateWeightLossPerProgram(selectedTrainings) {
@@ -146,22 +118,29 @@ export function calculateWeightLossPerProgram(selectedTrainings) {
             weightLossPerProgram[currentTraining.name] = weightLoss;
         }
     }
-    return weightLossPerProgram;
-}
+    let Result = "";
 
-//Calculate the worst program using the weight loss per program
-export function calculateWorstProgram(selectedTrainings) {
-    const weightLossPerProgram = calculateWeightLossPerProgram(selectedTrainings);
-    let worstProgram = "";
+    // Create String Result
+    //Save Max Weight Loss
     let maxWeightLoss = 0;
+
     for (const program in weightLossPerProgram) {
         if (weightLossPerProgram[program] > maxWeightLoss) {
             maxWeightLoss = weightLossPerProgram[program];
-            worstProgram = program;
+        }
+    
+        if (weightLossPerProgram[program] > 0) {
+            Result  += `$You gained ${weightLossPerProgram[program]} kg in ${program}.$`;
+        } else {
+            Result += `You lost ${Math.abs(weightLossPerProgram[program])} kg in ${program}.`;
         }
     }
-    return worstProgram;
+    Result += `Your biggest weight loss was ${maxWeightLoss} kg in ${calculatePopularName(selectedTrainings.map(training => training.name))}.`;
+    return Result;
+
 }
+
+
 
 
 
