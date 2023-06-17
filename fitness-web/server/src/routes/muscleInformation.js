@@ -5,7 +5,7 @@ import {validateToken} from './validate.js';
 const router = express.Router();
 
 // Get muscleInformation by muscle name
-router.get("/:muscleName", async (req, res) => {
+router.get("/:muscleName",validateToken, async (req, res) => {
     const muscleName = req.params.muscleName;
     try {
         const musclesInformation = await MusclesInformation.findOne({ muscle:muscleName});
@@ -42,4 +42,19 @@ router.post("/muscleInformation",validateToken, async (req, res) => {
     }
   });
   
+// Get only name from all Training Programas that in the scema
+router.get("/",validateToken, async (req, res) => {
+  try {
+    const musclesInformation = await MusclesInformation.find({}, { muscle: 1 });
+    if (!musclesInformation) {
+      return res.status(400).json({ message: "MusclesInformation does not exist" });
+    }
+    console.log("MusclesInformation sent");
+    return res.status(200).json(musclesInformation);
+  } catch (error) {
+    res.json(error, { message: error.message });
+  }
+});
+
+
   export { router as muscleRouter };

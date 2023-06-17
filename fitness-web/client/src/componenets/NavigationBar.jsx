@@ -43,6 +43,7 @@ export function NavigationBar(props) {
   return (
     <MDBNavbar dark expand="lg" light bgColor="dark">
       <MDBContainer fluid>
+
         <MDBNavbarBrand href={!access_token ? '/' : '/userpage'}>
 
           <img width="30" height="30" src="https://queenstreetmedical.co.nz/wp-content/uploads/2023/02/qstfsvglogo.png" alt="Logo" />
@@ -76,6 +77,9 @@ export function NavigationBar(props) {
                 </MDBNavbarItem>
                 <MDBNavbarItem>
                   <MDBNavbarLink href="/training">Choose Training</MDBNavbarLink>
+                </MDBNavbarItem>
+                <MDBNavbarItem>
+                  <MDBNavbarLink href="/TrainingProgramas">Training Programas</MDBNavbarLink>
                 </MDBNavbarItem>
                 <MDBNavbarItem>
                   <MDBDropdown>

@@ -66,9 +66,9 @@ export const getUser = async () => {
 };
 
 //----------------------Training Programas----------------------//
-export const getTrainingProgramas = async () => {
+export const getTrainingProgramas = async (muscle) => {
     try {
-        const response = await createRequest("get", `/muscle/${localStorage.getItem('selectedTrainingInfo')}`);
+        const response = await createRequest("get", `/muscle/${muscle}`, "");
         return response.data;
     } catch (error) {
         console.error('Error fetching muscleInformation:', error);
@@ -77,6 +77,22 @@ export const getTrainingProgramas = async () => {
         return [];
     }
 }
+// Get only name from all Training Programas that in the scema
+export const getTrainingProgramasName = async () => {
+    try {
+        const response = await createRequest("get", `/muscle`, "");
+        //return only the name of the training program
+        return response.data.map((training) => training.muscle);
+    } catch (error) {
+        console.error('Error fetching muscleInformation:', error);
+        console.log(error)
+        console.error(error);
+        
+        return [];
+    }
+}
+
+
 
 
 
