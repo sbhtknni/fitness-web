@@ -230,8 +230,9 @@ export function Register() {
   return (
     <>
       
-      <MainLayout>
+      <MainLayout >
         <MDBContainer onSubmit={handleSubmit}  >
+          
           <MDBRow className='g-0 align-items-center ' >
            
             <MDBCol col='5'>
