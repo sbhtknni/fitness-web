@@ -30,7 +30,7 @@ function App() {
           <Route path="blog" element={<BlogPage />} />
           <Route path="training" element={<TrainingForm />} />
           <Route path="auth/login" element={<Login />} />
-          <Route path="auth/signup" element={<Register />} />
+          <Route path="auth/register" element={<Register />} />
           <Route path="TrainingProgramas" element={<TrainingProgramas />} />
         </Routes>
        

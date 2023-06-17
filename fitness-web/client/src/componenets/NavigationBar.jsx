@@ -18,7 +18,7 @@ import {
 } from "mdb-react-ui-kit";
 export function NavigationBar(props) {
   const [showBasic, setShowBasic] = useState(false);
-  const [access_token,setAccessToken] = useState(    window.localStorage.getItem("access_token") );
+  const [access_token, setAccessToken] = useState(window.localStorage.getItem("access_token"));
 
 
   const navigate = useNavigate();
@@ -31,22 +31,23 @@ export function NavigationBar(props) {
 
   const handleLinkClick = (muscle) => {
     window.localStorage.setItem("selectedTrainingInfo", muscle);
+    navigate("/TrainingProgramas");
+
     setTimeout(() => {
-      // Code to refresh the page or trigger navigation after 1 second
-      // Replace with your specific logic here
-      window.location.reload(); // Example: Refresh the page after 1 second
-    }, 20);
+      window.location.reload(); // refresh page
+    }, 100);
   };
 
+
+
   return (
-    <MDBNavbar dark  expand="lg" light bgColor="dark">
+    <MDBNavbar dark expand="lg" light bgColor="dark">
       <MDBContainer fluid>
-      <MDBNavbarBrand href={!access_token ? '/' : '/userpage'}>
-          
+        <MDBNavbarBrand href={!access_token ? '/' : '/userpage'}>
+
           <img width="30" height="30" src="https://queenstreetmedical.co.nz/wp-content/uploads/2023/02/qstfsvglogo.png" alt="Logo" />
           Fitness
         </MDBNavbarBrand>
-
         <MDBNavbarToggler
           aria-controls="navbarSupportedContent"
           aria-label="Toggle navigation"
@@ -57,19 +58,19 @@ export function NavigationBar(props) {
         <MDBCollapse navbar show={showBasic}>
           <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
             {!access_token ? (
-              
-                <MDBNavbarItem>
-                  <MDBNavbarLink href="/auth/login">Login</MDBNavbarLink>
-                </MDBNavbarItem>
-                
+
+              <MDBNavbarItem>
+                <MDBNavbarLink href="/auth/login">Login</MDBNavbarLink>
+              </MDBNavbarItem>
+
             ) : (
               <>
-           
+
                 <MDBNavbarItem>
                   <MDBNavbarLink href="/userpage">User</MDBNavbarLink>
                 </MDBNavbarItem>
                 {/* <LinkNav navigate_to="/auth/login" navigate_name="Logout" onClick={()=> Logout}  /> */}
-                
+
                 <MDBNavbarItem>
                   <MDBNavbarLink href="/auth/login" onClick={Logout} >Log Out</MDBNavbarLink>
                 </MDBNavbarItem>
@@ -77,20 +78,23 @@ export function NavigationBar(props) {
                   <MDBNavbarLink href="/training">Choose Training</MDBNavbarLink>
                 </MDBNavbarItem>
                 <MDBNavbarItem>
-              <MDBDropdown>
-                <MDBDropdownToggle tag="a" className="nav-link" role="button">
-                  Dropdown
-                </MDBDropdownToggle>
-                <MDBDropdownMenu>
-                  <MDBDropdownItem link>Action</MDBDropdownItem>
-                  <MDBDropdownItem link>Another action</MDBDropdownItem>
-                  <MDBDropdownItem link>Something else here</MDBDropdownItem>
-                </MDBDropdownMenu>
-              </MDBDropdown>
-            </MDBNavbarItem>
+                  <MDBDropdown>
+                    <MDBDropdownToggle tag="a" className="nav-link" role="button">
+                      Training Programas
+                    </MDBDropdownToggle>
+                    <MDBDropdownMenu>
+                      <MDBDropdownItem link onClick={() => handleLinkClick("Back")} >Back</MDBDropdownItem>
+                      <MDBDropdownItem link onClick={() => handleLinkClick("Chest")}>Chest</MDBDropdownItem>
+                      <MDBDropdownItem link onClick={() => handleLinkClick("Legs")}>Legs</MDBDropdownItem>
+                      <MDBDropdownItem link onClick={() => handleLinkClick("Hands")}>Hands</MDBDropdownItem>
+                      <MDBDropdownItem link onClick={() => handleLinkClick("Shoulders")}>Shoulders</MDBDropdownItem>
+
+                    </MDBDropdownMenu>
+                  </MDBDropdown>
+                </MDBNavbarItem>
               </>
             )}
-   
+
           </MDBNavbarNav>
         </MDBCollapse>
       </MDBContainer>
