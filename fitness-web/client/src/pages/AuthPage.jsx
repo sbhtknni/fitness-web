@@ -16,9 +16,9 @@ import {
   MDBCard,
   MDBCardBody,
   MDBInput,
-  MDBIcon,
   MDBValidation,
   MDBValidationItem,
+  
 } from "mdb-react-ui-kit";
 
 export function Login(props) {
@@ -47,8 +47,8 @@ export function Login(props) {
 
       setModalOption("success");
       setShowModal(true);
-      setModalMessage( response.data.message);
-      console.log("Login",response.data);
+      setModalMessage(response.data.message);
+      console.log("Login", response.data);
       window.localStorage.setItem("access_token", response.data.token);
       window.localStorage.setItem("userId", response.data.userID);
 
@@ -79,10 +79,11 @@ export function Login(props) {
   return (
     <>
       <MainLayout>
-      <MDBContainer fluid  onSubmit={handleSubmit}  >
+        <MDBContainer fluid onSubmit={handleSubmit}  >
+          <div className="p-5 bg-image" style={{ backgroundImage: 'url(https://mdbootstrap.com/img/new/textures/full/171.jpg)', height: '300px' }}></div>
           <MDBRow className='d-flex justify-content-center align-items-center h-100'>
             <MDBCol col='12'>
-              <MDBCard className='bg-dark text-white my-5 mx-auto' style={{ borderRadius: '1rem', maxWidth: '400px' }} >
+              <MDBCard className='bg-dark text-white mx-auto' style={{ borderRadius: '1rem', maxWidth: '400px',marginTop: '-100px', background: 'hsla(0, 0%, 100%, 0.8)', backdropFilter: 'blur(30px)' }} >
                 <MDBCardBody className='p-5 d-flex flex-column align-items-center mx-auto w-100'>
                   <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
                   <p className="text-white-50 mb-5">Please enter your login and password!</p>
@@ -116,7 +117,7 @@ export function Login(props) {
                         style={{ color: 'white' }}
                       />
                     </MDBValidationItem>
-                   <div className="d-flex justify-content-center">
+                    <div className="d-flex justify-content-center">
                       <MDBBtn
                         outline
                         className='mx-2 px-5'
@@ -131,17 +132,7 @@ export function Login(props) {
                       </MDBBtn>
                     </div>
                   </MDBValidation>
-                  <div className='d-flex flex-row mt-3 mb-5'>
-                    <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
-                      <MDBIcon fab icon='facebook-f' size="lg" />
-                    </MDBBtn>
-                    <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
-                      <MDBIcon fab icon='twitter' size="lg" />
-                    </MDBBtn>
-                    <MDBBtn tag='a' color='none' className='m-3' style={{ color: 'white' }}>
-                      <MDBIcon fab icon='google' size="lg" />
-                    </MDBBtn>
-                  </div>
+
                   <div>
                     <p className="mb-0">Don't have an account? <a href="register" class="text-white-50 fw-bold">Sign Up</a></p>
                   </div>
@@ -202,7 +193,7 @@ export function Register() {
 
   const forms = document.querySelectorAll(".needs-validation");
 
-  
+
 
   // Logic for handling form submission goes here
 
@@ -224,7 +215,6 @@ export function Register() {
       // alert(response.status.);
       console.log(response.status);
     } catch (err) {
-      //TODO: enter model for error
       setModalOption("error");
       setShowModal(true);
       console.error(err);
@@ -239,18 +229,16 @@ export function Register() {
 
   return (
     <>
+      
       <MainLayout>
-
-        <MDBContainer onSubmit={handleSubmit} className="vh-100 gradient-custom" fluid>
-
+        <MDBContainer onSubmit={handleSubmit}  >
           <MDBRow className='g-0 align-items-center ' >
+           
             <MDBCol col='5'>
-              <MDBCard className='my-5 cascading-right' style={{ background: 'hsla(0, 0%, 100%, 0.55)', backdropFilter: 'blur(30px)' }}  >
+              <MDBCard className='bg-dark text-white my-5 cascading-right ' style={{margin: '-15px', background: 'hsla(0, 0%, 100%, 0.55)', backdropFilter: 'blur(30px)' }}  >
                 <MDBCardBody className='p-5 shadow-5 text-center'>
                   <h2 className="fw-bold mb-5 text-uppercase">Sign up  now</h2>
-
                   <MDBValidation className='row g-3 align-items-center' >
-
                     <MDBRow col='3'>
                       <MDBCol col='3'>
                         <MDBValidationItem feedback='Please choose First name.' invalid  >
@@ -265,6 +253,7 @@ export function Register() {
                             type="text"
                             size="lg"
                             wrapperClass='mb-4'
+                            labelClass='text-white'
                           />
                         </MDBValidationItem>
                       </MDBCol>
@@ -282,6 +271,7 @@ export function Register() {
                             type="text"
                             size="lg"
                             wrapperClass='mb-4'
+                            labelClass='text-white'
                           />
                         </MDBValidationItem>
                       </MDBCol>
@@ -300,6 +290,7 @@ export function Register() {
                           type='email'
                           size="lg"
                           wrapperClass='mb-4'
+                          labelClass='text-white'
                         />
                       </MDBValidationItem>
                     </MDBRow>
@@ -316,6 +307,7 @@ export function Register() {
                           type='password'
                           size="lg"
                           wrapperClass='mb-4'
+                          labelClass='text-white'
                         />
                       </MDBValidationItem>
                     </MDBRow>
@@ -336,7 +328,7 @@ export function Register() {
                             max={210}
                             size="lg"
                             wrapperClass='mb-4'
-
+                            labelClass='text-white'
                           />
 
                         </MDBValidationItem>
@@ -357,7 +349,7 @@ export function Register() {
                             type='number'
                             size="lg"
                             wrapperClass='mb-4'
-
+                            labelClass='text-white'
                           />
                         </MDBValidationItem>
                       </MDBCol>
@@ -367,7 +359,7 @@ export function Register() {
                       <MDBBtn
                         outline
                         className='mx-2 px-5'
-                        color='grey'
+                        color='white'
                         size='lg'
                         type='submit'
                         data-mdb-toggle="modal"
@@ -379,23 +371,28 @@ export function Register() {
                   </MDBValidation>
 
                   <div >
-                    <p className="mb-0"> Have an account? <a href="login" class="fw-bold mb-5"> Log in</a></p>
+                    <p className="mb-0"> Have an account? <a href="login" class="text-white-50 fw-bold"> Log in</a></p>
 
                   </div>
                 </MDBCardBody>
               </MDBCard>
             </MDBCol>
 
-            <MDBCol col="6">
+            <MDBCol col="5">
               <img
                 src="https://nowosci.beactivetv.pl/wp-content/themes/beactive/img/fitlovers/fitlovers-photo.png"
+                class="w-100 rounded-4 shadow-10"
                 alt=""
                 fluid
-              />
+               
+               />
             </MDBCol>
+            
           </MDBRow>
         </MDBContainer>
 
+        
+        
 
         <Modal show={showModal} onHide={handleModalClose}>
           <Modal.Header closeButton>

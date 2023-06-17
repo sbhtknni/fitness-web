@@ -41,7 +41,6 @@ const TrainingProgramas = () => {
         fetchmuscleInformation();
     }, []);
 
-
     if (error) {
         return <ErrorPage toRemove={true} />;
     }
