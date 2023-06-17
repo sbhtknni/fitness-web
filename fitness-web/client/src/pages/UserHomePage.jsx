@@ -334,7 +334,8 @@ function UserHomePage() {
               </MDBCol>
             </MDBRow>
             <MDBRow>
-              <MDBCol sm="6" className="h-25 mb-4 mb-md-2">
+              
+              <MDBCol  sm="6" className="h-25 mb-4 mb-md-2">
                 <MDBCard className="h-100">
                   <MDBCardHeader className="fw-bolder text-center">
                     Program Distribution
@@ -346,6 +347,7 @@ function UserHomePage() {
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>
+
               <MDBCol sm="6" className="h-25 mb-4 mb-md-2">
                 <MDBCard className="h-100">
                   <MDBCardHeader className="fw-bolder text-center">
@@ -358,6 +360,7 @@ function UserHomePage() {
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>
+
             </MDBRow>
             <MDBRow className='row-cols-1 row-cols-md-3 g-4'>
       <MDBCol>
