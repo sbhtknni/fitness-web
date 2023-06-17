@@ -13,8 +13,8 @@ import {
 export default function ProfilePicture(props) {
     const {user} = props;
   return (
-    <MDBCol lg="4">
-    <MDBCard className="mb-4">
+    <MDBCol sm="4">
+    <MDBCard className="mb-4" >
     <MDBCardBody className="text-center">
       <MDBCardImage
         src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp"

@@ -43,6 +43,7 @@ router.post("/", validateToken ,async (req, res) => {
         trainingId: training._id,
         name: training.name,
         weight: parseInt(new_weight,10),
+        bmi: BMICalculation(parseInt(new_weight,10),user.height),
         startDate: new Date(),
       };
   

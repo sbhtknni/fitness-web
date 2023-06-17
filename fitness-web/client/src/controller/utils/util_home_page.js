@@ -1,5 +1,3 @@
-import { Alert } from "react-bootstrap";
-
 export function calculateAverage(weights) {
     let sum = 0;
     for (let i = 0; i < weights.length; i++) {
@@ -120,7 +118,52 @@ export function calculateWeightLoss(selectedTrainings) {
       WeightLossPercentage: WeightLossPercentage.toFixed(2) ,
     };
   }
-  
+
+  //---------------------------------------------------------------------------------
+
+  //calculate total weight loss
+    export function calculateTotalWeightLoss(selectedTrainings) {
+        let totalWeightLoss = 0;
+        for (let i = 0; i < selectedTrainings.length - 1; i++) {
+            const currentTraining = selectedTrainings[i];
+            const nextTraining = selectedTrainings[i + 1];
+            const weightLoss = nextTraining.weight - currentTraining.weight;
+            totalWeightLoss += weightLoss;
+        }
+        return totalWeightLoss;
+    }
+
+//Calaculate for each program the weight loss
+export function calculateWeightLossPerProgram(selectedTrainings) {
+    const weightLossPerProgram = {};
+    for (let i = 0; i < selectedTrainings.length - 1; i++) {
+        const currentTraining = selectedTrainings[i];
+        const nextTraining = selectedTrainings[i + 1];
+        const weightLoss = nextTraining.weight - currentTraining.weight;
+        if (weightLossPerProgram[currentTraining.name]) {
+            weightLossPerProgram[currentTraining.name] += weightLoss;
+        } else {
+            weightLossPerProgram[currentTraining.name] = weightLoss;
+        }
+    }
+    return weightLossPerProgram;
+}
+
+//Calculate the worst program using the weight loss per program
+export function calculateWorstProgram(selectedTrainings) {
+    const weightLossPerProgram = calculateWeightLossPerProgram(selectedTrainings);
+    let worstProgram = "";
+    let maxWeightLoss = 0;
+    for (const program in weightLossPerProgram) {
+        if (weightLossPerProgram[program] > maxWeightLoss) {
+            maxWeightLoss = weightLossPerProgram[program];
+            worstProgram = program;
+        }
+    }
+    return worstProgram;
+}
+
+
 
 
 
