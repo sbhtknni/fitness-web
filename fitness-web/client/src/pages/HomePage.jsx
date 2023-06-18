@@ -20,7 +20,7 @@ function HomePage  () {
                         <h1 className="display-3">Hello Trainer!</h1>
                         <p>Achieve your fitness goals with our cutting-edge programs. Join our community of fitness enthusiasts and embark on a transformative journey towards a stronger, healthier you. Get started today and unlock your full potential. Welcome to a world of fitness excellence!</p>
                         <p>
-                        <Link className="btn btn-primary btn-lg" to="/auth/signup" role="button">Sign Up  »</Link>
+                        <Link className="btn btn-primary btn-lg" to="auth/register" role="button">Sign Up  »</Link>
                         </p>
                     </div>
                     <div className="col-md-4 ">

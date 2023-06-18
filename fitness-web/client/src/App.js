@@ -1,9 +1,9 @@
 
-import  UserPage from './pages/UserPage.jsx';
 import React from 'react';
 import BlogPage from './/pages/BlogPage.jsx';
 import TrainingProgramas from './pages/TrainingPrograms.jsx';
-import { Login, Register } from './/pages/AuthPage.jsx';
+import  Login  from './componenets//AuthPageComp//LoginComponent.jsx';
+import  Register  from './componenets//AuthPageComp//RegisterComponent.jsx';
 import {TrainingForm} from './/pages/TrainingPage.jsx';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
