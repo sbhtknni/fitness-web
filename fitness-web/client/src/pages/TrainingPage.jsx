@@ -7,6 +7,7 @@ import InstructionsFormatter from "../componenets/TrainingPageComp/InstructionsF
 import TrainingModal from "../componenets/TrainingPageComp/TrainingPageModal.jsx";
 import { getTrainings, addTrainingToUser } from "../controller/requests.js";
 import WeightInput from "../componenets/TrainingPageComp/WeightInput.jsx";
+import Footer from '..//componenets//Footer.jsx';
 
 export function TrainingForm() {
   const [selectedTraining, setSelectedTraining] = useState();
@@ -91,7 +92,9 @@ export function TrainingForm() {
           setShowModal={setShowModal}
           modalOption={modalOption}
         />
+        <hr />
       </div>
+      <Footer />
     </MainLayout>
   );
 }

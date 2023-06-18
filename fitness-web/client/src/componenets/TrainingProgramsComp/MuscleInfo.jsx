@@ -39,7 +39,6 @@ function MuscleInfo({ muscle, dataVals }) {
               </div>
             ))}
           </div>
-          <hr />
         </div>
       </div>
     );

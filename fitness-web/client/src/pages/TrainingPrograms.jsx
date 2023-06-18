@@ -3,6 +3,7 @@ import MainLayout from '../layout/MainLayout.jsx';
 import { getTrainingProgramas, getTrainingProgramasName } from "../controller/requests.js";
 import ErrorPage from "./ErrorPage.jsx";
 import TPMainComponent from "../componenets/TrainingProgramsComp/TPMainComponent.jsx";
+import Footer from '..//componenets//Footer.jsx';
 
 
 const TrainingProgramas = () => {
@@ -93,6 +94,7 @@ const TrainingProgramas = () => {
         return (
             <MainLayout>
                 <TPMainComponent musclesNames={musclesNames} muscle={muscle} handleMuscleChange={handleMuscleChange} dataVals={dataVals} />
+                <Footer />
             </MainLayout>
         );
     };

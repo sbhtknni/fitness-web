@@ -3,8 +3,8 @@ import { useNavigate } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import LoginModal from "./LoginModal";
 import MainLayout from '../../layout/MainLayout';
-import axios from "axios";
-
+import axios from "axios"; 
+import Footer from '..//Footer.jsx';
 
 
 
@@ -81,6 +81,8 @@ function LoginComponent() {
                     </MDBCol>
                 </MDBRow>
                 <LoginModal showModal={showModal} modalOption={modalOption} modalMessage={modalMessage} handleModalClose={handleModalClose} setShowModal={setShowModal} />
+                <hr />
+                <Footer />
             </MDBContainer>
         </MainLayout>
     );

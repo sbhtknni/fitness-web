@@ -3,8 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import RegistrationModal from "./RegistrationModal";
 import RegistrationForm from "./RegistrationForm";
 import MainLayout from '../../layout/MainLayout';
+import Footer from '..//Footer.jsx';
 
- function RegisterComponent() {
+function RegisterComponent() {
     const navigate = useNavigate();
     const [showModal, setShowModal] = useState(false);
     const [modalOption, setModalOption] = useState('');
@@ -24,8 +25,10 @@ import MainLayout from '../../layout/MainLayout';
     return (
         <>
             <MainLayout>
-            <RegistrationForm handleRegistration={handleRegistration} />
-            <RegistrationModal showModal={showModal} modalOption={modalOption} handleModalClose={handleModalClose} />
+                <RegistrationForm handleRegistration={handleRegistration} />
+                <RegistrationModal showModal={showModal} modalOption={modalOption} handleModalClose={handleModalClose} />
+                <hr />
+                <Footer />
             </MainLayout>
         </>
     );

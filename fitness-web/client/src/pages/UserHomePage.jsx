@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import MainLayout from "../layout/MainLayout.jsx";
 import ErrorPage from "./ErrorPage.jsx";
+import Footer from "../componenets/Footer.jsx";
 
 import {
   MDBCol,
@@ -194,8 +195,8 @@ function UserHomePage() {
               </MDBCol>
             </MDBRow>
             <MDBRow>
-              
-              <MDBCol  sm="6" className="h-25 mb-4 mb-md-2">
+
+              <MDBCol sm="6" className="h-25 mb-4 mb-md-2">
                 <MDBCard className="h-100">
                   <MDBCardHeader className="fw-bolder text-center">
                     Program Distribution
@@ -226,7 +227,7 @@ function UserHomePage() {
               {/* <StatisticsCard img_src="https://mdbootstrap.com/img/new/standard/city/044.webp" title="Best Vs Worst" text=  {`${min}${max}` }/> */}
               {/* <StatisticsCard img_src="https://mdbootstrap.com/img/new/standard/city/044.webp" title="lorea" text="lorea" />  */}
 
-      
+
               <BigCard
                 title="Weight"
                 text={`#Max Weight $${data.max} kg$ \n #Min Weight $${data.min} kg$ # ${data.weightLoss} \n `}
@@ -242,11 +243,15 @@ function UserHomePage() {
                 text={`#Popular Training  $${data.popularName}$  #Current Training $${data.currentTraining}$  #Weight Loss Per Program ${data.weightLossPerProgram} \n `}
                 img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
               />
-          
-              
+
+
             </MDBRow>
+            <hr />
+            <Footer />
           </MDBContainer>
+
         </section>
+
       </MainLayout>
     );
   }

@@ -10,6 +10,7 @@ function TPMainComponent({ musclesNames, muscle, handleMuscleChange, dataVals })
         <MuscleSelect musclesNames={musclesNames} muscle={muscle} handleMuscleChange={handleMuscleChange} />
         <br />
         {muscle && <MuscleInfo muscle={muscle} dataVals={dataVals} />}
+        <hr />
       </div>
     );
   }
