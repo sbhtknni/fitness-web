@@ -1,7 +1,12 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import LoginModal from "./LoginModal";
 import MainLayout from '../../layout/MainLayout';
+import axios from "axios";
+
+
+
 
 // bootstrap imports
 import {
@@ -14,31 +19,47 @@ import {
 
 // Login Function  login to the app
 function LoginComponent() {
+    const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showModal, setShowModal] = useState(false);
     const [modalOption, setModalOption] = useState('');
     const [modalMessage, setModalMessage] = useState('');
 
-    const handleEmailChange = (e) => {
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        try {
+            const response = await axios.post("http://localhost:3002/auth/login", {
+                email: email,
+                password: password,
+            });
+
+            // Show modal based on login result
+            setShowModal(true);
+            setModalOption('success'); // or 'error'
+            setModalMessage('Invalid credentials'); // Set the appropriate message
+            window.localStorage.setItem("access_token", response.data.token);
+            window.localStorage.setItem("userId", response.data.userID);
+
+        } catch (err) {
+            setModalOption("error");
+            setShowModal(true);
+            console.error(err);
+        }
+    };
+
+    const handleEmailChange = async (e) => {
         setEmail(e.target.value);
     };
 
     const handlePasswordChange = (e) => {
         setPassword(e.target.value);
     };
-
-    const handleSubmit = (e) => {
-        e.preventDefault();
-        // Add your login logic here
-        // Show modal based on login result
-        setShowModal(true);
-        setModalOption('success'); // or 'error'
-        setModalMessage('Invalid credentials'); // Set the appropriate message
-    };
-
     const handleModalClose = () => {
         setShowModal(false);
+        if (modalOption === "success") {
+            navigate("/userpage");
+        }
     };
 
     return (
