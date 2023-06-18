@@ -71,16 +71,6 @@
   }
 }
 body {
-  /* fallback for old browsers */
-  background: #6a11cb;
-
-  /* Chrome 10-25, Safari 5.1-6 */
-  background: -webkit-linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1));
-
-  /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-  background: linear-gradient(to right, rgba(106, 17, 203, 1), rgba(37, 117, 252, 1))
-}
-.gradient-custom {
 /* fallback for old browsers */
 background: #6a11cb;
 
@@ -88,7 +78,7 @@ background: #6a11cb;
 background: -webkit-linear-gradient(to right, rgb(105, 90, 121), rgb(227, 230, 234));
 
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-background: linear-gradient(to right, rgb(131, 143, 195), rgb(198, 212, 233))
+background: linear-gradient(to right, rgb(84, 99, 170), rgb(198, 212, 233))
 }
 
 .cascading-right {
@@ -101,55 +91,10 @@ background: linear-gradient(to right, rgb(131, 143, 195), rgb(198, 212, 233))
   }
 }
 
-/* login page*/
-#classicformpage .view {
-  background-image: url("http://mdbootstrap.com/img/Photos/Others/images/91.webp");
-  background-repeat: no-repeat;
-  background-size: cover;
-  background-position: center center;
-  height: 100vh;
-}
-
-#classicformpage .gradient {
-  background: -webkit-linear-gradient(
-    45deg,
-    rgba(0, 0, 0, 0.7),
-    rgba(72, 15, 144, 0.4) 100%
-  );
-  background: -webkit-gradient(
-    linear,
-    45deg,
-    from(rgba(0, 0, 0, 0.7), rgba(72, 15, 144, 0.4) 100%)
-  );
-  background: linear-gradient(
-    45deg,
-    rgba(0, 0, 0, 0.7),
-    rgba(72, 15, 144, 0.4) 100%
-  );
-}
-
-#classicformpage .card {
-  background-color: rgba(126, 123, 215, 0.2);
-}
-
-#classicformpage h6 {
-  line-height: 1.7;
-}
-
-#classicformpage .navbar {
-  transition: background 0.5s ease-in-out, padding 0.5s ease-in-out;
-}
-
-#classicformpage .top-nav-collapse {
-  background: #424f95 !important;
-}
-
-@media (max-width: 768px) {
-  #classicformpage .navbar:not(.top-nav-collapse) {
-    background: #424f95 !important;
-  }
-}
-
-#classicformpage label {
-  color: #fff !important;
+.background-image {
+  --primary: #CFC3FF;
+  --primary-dark: #676286;
+  --secondary: #484554;
+  --secondary-dark: #0D0D0D;
+  --white: #fff;
 }
