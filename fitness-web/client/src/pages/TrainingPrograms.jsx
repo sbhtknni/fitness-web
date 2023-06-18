@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import MainLayout from '../layout/MainLayout.jsx';
 import { getTrainingProgramas, getTrainingProgramasName } from "../controller/requests.js";
 import ErrorPage from "./ErrorPage.jsx";
-import MainComponent from "../componenets/TrainingProgramsComp/MainComponent.jsx";
+import TPMainComponent from "../componenets/TrainingProgramsComp/TPMainComponent.jsx";
 
 
 const TrainingProgramas = () => {
@@ -92,7 +92,7 @@ const TrainingProgramas = () => {
     } else {
         return (
             <MainLayout>
-                <MainComponent musclesNames={musclesNames} muscle={muscle} handleMuscleChange={handleMuscleChange} dataVals={dataVals} />
+                <TPMainComponent musclesNames={musclesNames} muscle={muscle} handleMuscleChange={handleMuscleChange} dataVals={dataVals} />
             </MainLayout>
         );
     };
