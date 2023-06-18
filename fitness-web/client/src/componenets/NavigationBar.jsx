@@ -29,14 +29,6 @@ export function NavigationBar(props) {
     navigate("/auth/login");
   };
 
-  const handleLinkClick = (muscle) => {
-    window.localStorage.setItem("selectedTrainingInfo", muscle);
-    navigate("/TrainingProgramas");
-
-    setTimeout(() => {
-      window.location.reload(); // refresh page
-    }, 100);
-  };
 
 
 
@@ -83,17 +75,7 @@ export function NavigationBar(props) {
                 </MDBNavbarItem>
                 <MDBNavbarItem>
                   <MDBDropdown>
-                    <MDBDropdownToggle tag="a" className="nav-link" role="button">
-                      Training Programas
-                    </MDBDropdownToggle>
-                    <MDBDropdownMenu>
-                      <MDBDropdownItem link onClick={() => handleLinkClick("Back")} >Back</MDBDropdownItem>
-                      <MDBDropdownItem link onClick={() => handleLinkClick("Chest")}>Chest</MDBDropdownItem>
-                      <MDBDropdownItem link onClick={() => handleLinkClick("Legs")}>Legs</MDBDropdownItem>
-                      <MDBDropdownItem link onClick={() => handleLinkClick("Hands")}>Hands</MDBDropdownItem>
-                      <MDBDropdownItem link onClick={() => handleLinkClick("Shoulders")}>Shoulders</MDBDropdownItem>
-
-                    </MDBDropdownMenu>
+                   
                   </MDBDropdown>
                 </MDBNavbarItem>
               </>
