@@ -10,8 +10,9 @@ import {
 } from "mdb-react-ui-kit";
 
 function LoginForm({ email, password, handleEmailChange, handlePasswordChange, handleSubmit }) {
-    return (
-      <MDBValidation className='row g-3'>
+  return (
+      
+      <MDBValidation className='row g-3' >
         <MDBValidationItem feedback='Please choose an Email.' invalid className='col-md-12'>
           <MDBInput
             value={email}
