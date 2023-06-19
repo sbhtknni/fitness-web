@@ -7,18 +7,27 @@ import InstructionsFormatter from "../componenets/TrainingPageComp/InstructionsF
 import TrainingModal from "../componenets/TrainingPageComp/TrainingPageModal.jsx";
 import { getTrainings, addTrainingToUser } from "../controller/requests.js";
 import WeightInput from "../componenets/TrainingPageComp/WeightInput.jsx";
-import Footer from '..//componenets//Footer.jsx';
+import Footer from "..//componenets//Footer.jsx";
 
 export function TrainingForm() {
   const [selectedTraining, setSelectedTraining] = useState();
   const [trainings, setTrainings] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [modalOption, setModalOption] = useState("");
+  const [error, setError] = useState(true);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchTrainings = async () => {
       const response = await getTrainings();
-      setTrainings(response);
+      if (response === false) {
+        setError(true);
+        setLoading(false);
+      } else {
+        setTrainings(response);
+        setLoading(false);
+        setError(false);
+      }
     };
     fetchTrainings();
   }, []); // Empty dependency array to run the effect only once when the component mounts
@@ -31,11 +40,7 @@ export function TrainingForm() {
   };
 
   const addTrainingProgram = async (newWeight) => {
-
-    if (
-      newWeight === "" ||
-      newWeight === undefined
-    ) {
+    if (newWeight === "" || newWeight === undefined) {
       setModalOption("emptyInput");
       setShowModal(true);
       return;
@@ -52,51 +57,57 @@ export function TrainingForm() {
     }
   };
 
-  //Load error page if bad request
-  if (trainings === [] || !trainings[0]) {
-    return <ErrorPage />;
+  // if error return error page
+  if (error && !loading) {
+    return <ErrorPage toRemove={true} />;
   }
+  // if loading the data return loading page
+  if (loading && !error) {
+    return <ErrorPage toRemove={false} />;
+  }
+  if (!loading && !error) {
+    return (
+      <MainLayout>
+        <div className="container">
+          <h3 className="fw-bolder  mt-4">Select a training:</h3>
+          <br />
 
-  return (
-    <MainLayout>
-      <div className="container">
-        <h3 className="fw-bolder  mt-4">Select a training:</h3>
-        <br />
+          <RadioButton
+            style={{ marginBottom: "30px" }}
+            options={trainings.map((training) => training.name)}
+            selectedOption={selectedTraining ? selectedTraining.name : ""}
+            onOptionChange={handleTrainingChange}
+          />
 
-        <RadioButton
-          style={{ marginBottom: "30px" }}
-          options={trainings.map((training) => training.name)}
-          selectedOption={selectedTraining ? selectedTraining.name : ""}
-          onOptionChange={handleTrainingChange}
-        />
+          <br />
+          <br />
+          {selectedTraining && (
+            <div>
+              <WeightInput
+                addTrainingProgram={addTrainingProgram}></WeightInput>
 
-        <br />
-        <br />
-        {selectedTraining && (
-          <div>
-            <WeightInput addTrainingProgram={addTrainingProgram}></WeightInput>
+              <br />
 
-            <br />
+              <h5 className="fw-bolder  mt-4"> Instructions:</h5>
+              <InstructionsFormatter text={selectedTraining.instructions} />
+              <LoadLinks video_urls={selectedTraining.videoUrls} />
+              <h5 className=" d-flex justify-content-center fw-bolder  mt-4">
+                Selected Training: {selectedTraining.name}
+              </h5>
+            </div>
+          )}
 
-            <h5 className="fw-bolder  mt-4"> Instructions:</h5>
-            <InstructionsFormatter text={selectedTraining.instructions} />
-            <LoadLinks video_urls={selectedTraining.videoUrls} />
-            <h5 className=" d-flex justify-content-center fw-bolder  mt-4">
-              Selected Training: {selectedTraining.name}
-            </h5>
-          </div>
-        )}
-
-        <TrainingModal
-          showModal={showModal}
-          setShowModal={setShowModal}
-          modalOption={modalOption}
-        />
-        <hr />
-      </div>
-      <Footer />
-    </MainLayout>
-  );
+          <TrainingModal
+            showModal={showModal}
+            setShowModal={setShowModal}
+            modalOption={modalOption}
+          />
+          <hr />
+        </div>
+        <Footer />
+      </MainLayout>
+    );
+  }
 }
 
 export default TrainingForm;
