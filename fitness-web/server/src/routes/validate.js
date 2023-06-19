@@ -1,10 +1,12 @@
 
 import jwt from "jsonwebtoken";
-import config from '../config.json' assert { type: 'json' };
+import { config } from 'dotenv';
+
 
 //validate thata the user is logged in and has a valid token
 // i signe the token with the user id lije this:
 //        const token =jwt.sign({ id: user._id }, "secret");
+config();
 
 export const validateToken = (req, res, next) => {
     const token =req.headers.authorization;
@@ -16,7 +18,8 @@ export const validateToken = (req, res, next) => {
     try {
         //remove the "Bearer " from the token
         const tokenWithoutBearer = token.split(" ")[1];
-        const verified = jwt.verify(tokenWithoutBearer, config.encrypt);
+        const enc = process.env.SECRET_KEY;
+        const verified = jwt.verify(tokenWithoutBearer, enc);
         req.user = verified;
         next();
     } catch (error) {
