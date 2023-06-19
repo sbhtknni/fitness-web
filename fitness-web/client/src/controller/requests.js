@@ -55,10 +55,7 @@ export const addTrainingToUser = async (trainingName, new_weight) => {
 //Login
 export const login = async (email, password) => {
     try {
-        const response = await createRequest("post", "/auth/login", {
-            email: email,
-            password: password,
-        });
+        const response = await axios.post(`${format.baseUrl}/auth/login`, {'email': email, 'password': password});
         return response.data;
     } catch (error) {
         console.error(error);
