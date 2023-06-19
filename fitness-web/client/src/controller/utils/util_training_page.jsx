@@ -13,7 +13,7 @@ export function AllTrainings() {
   useEffect(() => {
     const fetchTrainings = async () => {
       try {
-        const response = await axios.get('http://localhost:3002/trainings');
+        const response = await axios.get('https://fitness-api-7tqf.onrender.com/trainings');
         const data = response.data.trainings;
         setTrainings(data);
       } catch (error) {
@@ -31,7 +31,7 @@ export function AllTrainings() {
 
   const addTrainingProgram = async () => {
     try {
-      await axios.post('http://localhost:3002/trainings', {
+      await axios.post('https://fitness-api-7tqf.onrender.com/trainings', {
         userID: localStorage.getItem('userId'),
         trainingName: selectedTraining.name,
         new_weight: newWeight,

@@ -30,7 +30,7 @@ function LoginComponent() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:3002/auth/login", {
+            const response = await axios.post("https://fitness-api-7tqf.onrender.com/auth/login", {
                 email: email,
                 password: password,
             });
