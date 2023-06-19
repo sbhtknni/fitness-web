@@ -3,6 +3,7 @@ import jwt from "jsonwebtoken";
 import { UserModel } from "../models/Users.js";
 import bcrypt from "bcryptjs";
 import { config } from 'dotenv';
+import { validateLoggedIn } from "./validate.js";
 const router = express.Router();   //Create Router
 config();
 //Register
@@ -28,8 +29,9 @@ router.post('/register', async (req, res) => {
     }
 
 });   
+
 //Login
-router.post('/login', async (req, res) => {
+router.post('/login',validateLoggedIn, async (req, res) => {
     
     const { email, password } = req.body;
     try {
@@ -48,13 +50,9 @@ router.post('/login', async (req, res) => {
       }
       const enc = process.env.SECRET_KEY;
         // The token contains information about the user's identity.
-        //Check that the user is not already logged in
-        const check =req.headers.authorization;
-        if (check) {
-          return res.status(400).json({ message: "User is already logged in" });
-        }
-      
+        //Create token
         const token =jwt.sign({ id: user._id }, enc);
+        
         res.status(200).json({token  ,userID: user._id ,message: "logged in successfully" });
       } catch (error) {
         res.status(500).json({ message: "Server Error" });
