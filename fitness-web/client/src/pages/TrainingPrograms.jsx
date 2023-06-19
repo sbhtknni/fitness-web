@@ -8,6 +8,8 @@ import ErrorPage from "./ErrorPage.jsx";
 import TPMainComponent from "../componenets/TrainingProgramsComp/TPMainComponent.jsx";
 import Footer from "..//componenets//Footer.jsx";
 import HelpAndTitle from "../componenets/HelpAndTtile.jsx";
+import { MDBRadio, MDBBtnGroup } from 'mdb-react-ui-kit';
+
 
 const TrainingProgramas = () => {
   const [muscle, setMuscle] = useState("");
@@ -108,7 +110,8 @@ useEffect(() => {
             #You can click on the link to see the video about the muscle
             
             "
-          />
+        />
+       
         <TPMainComponent
           musclesNames={musclesNames}
           muscle={muscle}

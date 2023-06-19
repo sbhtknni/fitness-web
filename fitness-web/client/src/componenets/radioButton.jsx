@@ -13,7 +13,7 @@ function RadioButton(props) {
 
   return (
 
-    <MDBBtnGroup shadow='2'  >
+    <MDBBtnGroup shadow='5'  >
         {options.map((option) => (
           <MDBRadio
             className='mx-1'
