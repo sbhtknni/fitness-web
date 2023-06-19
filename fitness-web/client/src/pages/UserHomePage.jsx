@@ -29,6 +29,7 @@ import GraphComponent from "../componenets/graphComponent.jsx";
 import ChartTrainigGraph from "../componenets/ChartTrainingGraph.jsx";
 import DetailsCard from "../componenets/UserPageComp/DetailsCard.jsx";
 import BigCard from "../componenets/UserPageComp/BigCard.jsx";
+import getURL from "../assets/assetsUrls.js";
 
 function UserHomePage() {
   const [user, setUser] = useState({});
@@ -138,17 +139,17 @@ function UserHomePage() {
                 <BigCard
                   title="Weight"
                   text={`#Max Weight $${data.max} kg$ \n #Min Weight $${data.min} kg$ # ${data.weightLoss} \n `}
-                  img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
+                  img_src={getURL("weight")}
                 />
                 <BigCard
                   title="Statistics"
                   text={`#Varience $${data.variance}$ \n #Standard Deviation $${data.standardDeviation}$ \n #Median $${data.median}$ \n`}
-                  img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
+                  img_src={getURL("statistics")}
                 />
                 <BigCard
                   title=""
                   text={`#Popular Training  $${data.popularName}$  #Current Training $${data.currentTraining}$  #Weight Loss Per Program ${data.weightLossPerProgram} \n `}
-                  img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
+                  img_src={getURL("workout")}
                 />
               </MDBRow>
 
@@ -169,7 +170,7 @@ function UserHomePage() {
                 <BigCard
                   title="General information"
                   text={`#Varience $${data.variance}$ \n #Standard Deviation $${data.standardDeviation}$`}
-                  img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
+                  img_src={getURL("general-info")}
                 />
               </MDBRow>
 
