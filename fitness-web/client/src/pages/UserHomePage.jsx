@@ -106,12 +106,12 @@ function UserHomePage() {
     fetchAllData();
   }, []); // Empty dependency array to run the effect only once when the component mounts
 
-  if (error && !loading) {
-    return <ErrorPage toRemove={true} />;
-  }
-  if (loading && !error) {
-    return <ErrorPage toRemove={false} />
-  }
+  // if (error && !loading) {
+  //   return <ErrorPage toRemove={true} />;
+  // }
+  // if (loading && !error) {
+  //   return <ErrorPage toRemove={false} />
+  // }
 
     if (!loading && !error) {
       return (

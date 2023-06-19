@@ -13,7 +13,7 @@ function RegistrationForm({ handleRegistration }) {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.post('http://localhost:3002/auth/register', {
+            const response = await axios.post('https://fitness-api-43yp.onrender.com/auth/register', {
                 email: email,
                 password: password,
                 firstName: firstName,

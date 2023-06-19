@@ -30,11 +30,10 @@ function LoginComponent() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("http://localhost:3002/auth/login", {
+            const response = await axios.post("https://fitness-api-43yp.onrender.com/auth/login", {
                 email: email,
                 password: password,
             });
-
             // Show modal based on login result
             setShowModal(true);
             setModalOption('success'); // or 'error'
@@ -66,9 +65,9 @@ function LoginComponent() {
     return (
         <MainLayout>
             <MDBContainer fluid onSubmit={handleSubmit}>
-                <div className="p-5 bg-image" style={{ backgroundImage: 'url(https://mdbootstrap.com/img/new/textures/full/171.jpg)', borderRadius: '10px', margin: '2vh', height: '300px' }}></div>
                 <div style={{  backgroundImage: `url(${background})`, borderRadius: '10px' }} >
-
+            <br />
+            <br />
                 <MDBRow className='d-flex justify-content-center align-items-center h-100'>
                     <MDBCol col='12'>
                         <MDBCard className='bg-dark text-white mx-auto' style={{ borderRadius: '1rem' ,maxWidth: '400px', background: 'hsla(0, 0%, 100%, 0.8)', backdropFilter: 'blur(30px)' }} >

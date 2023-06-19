@@ -4,7 +4,7 @@ import axios from "axios";
 const access_token = localStorage.getItem("access_token");
 
 const format = {
-    baseUrl: "http://localhost:3002",
+    baseUrl: "https://fitness-api-43yp.onrender.com",
     headers: {
         Authorization: `Bearer ${access_token}`,
     },

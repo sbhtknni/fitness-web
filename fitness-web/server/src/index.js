@@ -18,7 +18,7 @@ app.use('/auth', usersRouter);
 app.use('/trainings', trainingsRouter);
 app.use('/muscle', muscleRouter);
 
-const uri ="mongodb+srv://romharel:JOu6QaJuEstS0Bka@fitness-web.u0isjzc.mongodb.net/fitness-web?retryWrites=true&w=majority"
+const uri =process.env.URL_DB;
 mongoose.connect( uri ,{ useNewUrlParser: true, useUnifiedTopology: true })
   .then(() => {
     console.log('Connected to MongoDB');

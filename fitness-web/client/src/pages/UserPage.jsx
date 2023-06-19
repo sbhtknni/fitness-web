@@ -44,7 +44,7 @@ export default function UserPage(props) {
   useEffect(() => {
     const fetchTrainings = async () => {
       try {
-        const response = await axios.get(`http://localhost:3002/auth/${localStorage.getItem('userId')}`);
+        const response = await axios.get(`https://fitness-api-43yp.onrender.com/auth/${localStorage.getItem('userId')}`);
         const data = response.data;
         console.log("data", data.user)
 
@@ -123,7 +123,7 @@ export default function UserPage(props) {
     const fetchTrainings = async () => {
       try {
         const response = await axios.put(
-          `http://localhost:3002/auth/updateHeight/${localStorage.getItem('userId')}`,
+          `https://fitness-api-43yp.onrender.com/auth/updateHeight/${localStorage.getItem('userId')}`,
           { height: editFieldValue }
         );
         // Update the state or perform any other necessary actions
