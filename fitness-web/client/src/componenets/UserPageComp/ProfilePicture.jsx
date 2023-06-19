@@ -24,10 +24,9 @@ export default function ProfilePicture(props) {
         fluid />
         
       <p className=" mb-4 fw-bolder " >{user.firstName + "  "+user.lastName}</p>
-      <p className="text-muted mb-4">Current Training Program : {user.firstName+ "   "+user.lastName}</p>
+      <p className="text-muted mb-4">Click To Change Training Program</p>
       <div className="d-flex justify-content-center mb-2">
-        <MDBBtn>Follow</MDBBtn>
-        <MDBBtn outline className="ms-1">Message</MDBBtn>
+        <MDBBtn color='dark' href='/training'>Change Now  </MDBBtn>
       </div>
     </MDBCardBody>
   </MDBCard>

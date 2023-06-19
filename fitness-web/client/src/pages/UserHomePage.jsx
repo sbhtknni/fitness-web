@@ -124,10 +124,10 @@ function UserHomePage() {
               <MDBRow>
                 {/* Profile Picture Cube */}
                 <ProfilePicture user={user} />
-                <MDBCol lg="8">
+                <MDBCol sm="8">
                   {/* User Details Card  */}
 
-                  <DetailsCard user={user} />
+                  <DetailsCard user={user} training={data.currentTraining} />
                   <MDBRow className="row-cols-1 row-cols-md-3 g-4">
                     {/* Include Max and Min Weight */}
                   </MDBRow>
