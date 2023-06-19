@@ -31,9 +31,10 @@ function LoginComponent() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-
-            const response = login(email, password);
-
+            const response = await axios.post("https://fitness-api-7tqf.onrender.com/auth/login", {
+                email: email,
+                password: password,
+            });
             // Show modal based on login result
             setShowModal(true);
             setModalOption('success'); // or 'error'

@@ -30,35 +30,30 @@ router.post('/register', async (req, res) => {
 
 });   
 
-//Login
 router.post('/login', async (req, res) => {
     
-    const { email, password } = req.body;
-    try {
-        console.log("Hello");
-        const user = await UserModel.findOne({ email });
+  const { email, password } = req.body;
+  try {
     
-        if (!user) {
-          return res.status(400).json({ message: "User does not exist" });
-        }
-    
-    
-        const isMatch = await bcrypt.compare(password, user.password);
-    
-        if (!isMatch) {
-          return res.status(400).json({ message: "Incorrect password" });
+      const user = await UserModel.findOne({ email });
+  
+      if (!user) {
+        return res.status(400).json({ message: "User does not exist" });
       }
-      const enc = process.env.SECRET_KEY;
-        // The token contains information about the user's identity.
-        //Create token
-        const token =jwt.sign({ id: user._id }, enc);
-        
-        res.status(200).json({token  ,userID: user._id ,message: "logged in successfully" });
-      } catch (error) {
-        res.status(500).json({ message: "Server Error" });
+  
+  
+      const isMatch = await bcrypt.compare(password, user.password);
+  
+      if (!isMatch) {
+        return res.status(400).json({ message: "Incorrect password" });
       }
+      // The token contains information about the user's identity.
+      const token =jwt.sign({ id: user._id }, config.encrypt);
+      res.status(200).json({token  ,userID: user._id ,message: "logged in successfully" });
+    } catch (error) {
+      res.status(500).json({ message: "Server Error" });
+    }
 });
-
 //get user by id
 router.get('/:id', async (req, res) => {
   const id = req.params.id;
