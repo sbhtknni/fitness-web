@@ -171,7 +171,7 @@ function UserHomePage() {
                 </MDBCol>
 
                 <BigCard
-                  title="Statistics"
+                  title="General information"
                   text={`#Varience $${data.variance}$ \n #Standard Deviation $${data.standardDeviation}$`}
                   img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
                 />
