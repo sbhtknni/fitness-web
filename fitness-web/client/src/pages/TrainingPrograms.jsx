@@ -14,7 +14,6 @@ import { MDBRadio, MDBBtnGroup } from 'mdb-react-ui-kit';
 const TrainingProgramas = () => {
   const [muscle, setMuscle] = useState("");
   const [error, setError] = useState(true);
-  const [data, setData] = useState([]);
   const [musclesNames, setMusclesNames] = useState([]);
   const [loading, setLoading] = useState(true);
   const [flag, setFlag] = useState(false);
@@ -35,19 +34,20 @@ const TrainingProgramas = () => {
     getDataMusclesNamesFromDB();
   }, []);
 
-  // get all muscles information from DB
-  useEffect(() => {
-    const getData = async () => {
-      await fetchmuscleInformation();
-    };
-    getData();
-  }, [muscle]);
+// get all muscles information from DB
+useEffect(() => {
+  const getData = async () => {
+    await fetchmuscleInformation();
+  };
+  getData();
+// eslint-disable-next-line 
+}, [muscle]);
 
   // get all muscles names from DB and set it to musclesNames
   const getMusclesNames = async () => {
     const response = await getTrainingProgramasName();
-    if (response == false) {
-      console.log("response", response);
+    if (response === false) {
+        console.log("response", response);
       setLoading(false);
       return;
     } else {
@@ -63,9 +63,7 @@ const TrainingProgramas = () => {
     if (response === []) {
       return;
     } else {
-      console.log("---", response);
       setAllData(response);
-      setData(response);
     }
   };
 
@@ -104,7 +102,7 @@ const TrainingProgramas = () => {
     return (
       <MainLayout>
               <HelpAndTitle
-          title="Muscel Information"
+          title="Muscle Information"
             button_name="Need Help ?"
             headline="Muscle Information "
             body="#Please make sure you choose the muscle that you want to learn about $click on radio button option$

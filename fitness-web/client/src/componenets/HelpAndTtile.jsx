@@ -1,8 +1,5 @@
-import React, { useState } from "react";
+import React from "react";
 import { MDBContainer, MDBRow,MDBCol } from "mdb-react-ui-kit";
-
-
-import InstructionsFormatter from "./TrainingPageComp/InstructionsFormatter";
 import InformativeModal from "./InformativeModal";
 
 export default function HelpAndTitle(props) {

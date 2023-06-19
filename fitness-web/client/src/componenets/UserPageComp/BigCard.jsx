@@ -9,8 +9,8 @@ export default function BigCard(props) {
     <>
       <MDBCol >
                 <MDBCard className="h-100">
-                  <MDBCardImage
-                    src="https://mdbootstrap.com/img/new/standard/city/043.webp"
+                  <MDBCardImage style={{height:"200px" , width:"100%"}}
+                    src={img_src}
                     alt="..."
                     position="top"
                   />

@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import MainLayout from "../layout/MainLayout.jsx";
 import ErrorPage from "./ErrorPage.jsx";
 import Footer from "../componenets/Footer.jsx";
@@ -25,16 +24,14 @@ import {
   currentTrainingName,
   calculateWeightLoss,
   calculateWeightLossPerProgram,
-  calculateWorstProgram,
 } from "../controller/utils/util_home_page.js";
 import GraphComponent from "../componenets/graphComponent.jsx";
 import ChartTrainigGraph from "../componenets/ChartTrainingGraph.jsx";
 import DetailsCard from "../componenets/UserPageComp/DetailsCard.jsx";
-import StatisticsCard from "../componenets/UserPageComp/StatisticsCard.jsx";
 import BigCard from "../componenets/UserPageComp/BigCard.jsx";
+import getURL from "../assets/assetsUrls.js";
 
 function UserHomePage() {
-  const navigate = useNavigate();
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
@@ -142,17 +139,17 @@ function UserHomePage() {
                 <BigCard
                   title="Weight"
                   text={`#Max Weight $${data.max} kg$ \n #Min Weight $${data.min} kg$ # ${data.weightLoss} \n `}
-                  img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
+                  img_src={getURL("weight")}
                 />
                 <BigCard
                   title="Statistics"
                   text={`#Varience $${data.variance}$ \n #Standard Deviation $${data.standardDeviation}$ \n #Median $${data.median}$ \n`}
-                  img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
+                  img_src={getURL("statistics")}
                 />
                 <BigCard
                   title=""
                   text={`#Popular Training  $${data.popularName}$  #Current Training $${data.currentTraining}$  #Weight Loss Per Program ${data.weightLossPerProgram} \n `}
-                  img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
+                  img_src={getURL("workout")}
                 />
               </MDBRow>
 
@@ -173,7 +170,7 @@ function UserHomePage() {
                 <BigCard
                   title="General information"
                   text={`#Varience $${data.variance}$ \n #Standard Deviation $${data.standardDeviation}$`}
-                  img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
+                  img_src={getURL("general-info")}
                 />
               </MDBRow>
 
