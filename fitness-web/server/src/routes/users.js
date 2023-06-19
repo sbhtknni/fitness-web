@@ -3,8 +3,6 @@ import jwt from "jsonwebtoken";
 import { UserModel } from "../models/Users.js";
 import bcrypt from "bcryptjs";
 const router = express.Router();   //Create Router
-import {validateToken} from './validate.js';
-import config from '../config.json' assert { type: 'json' };
 
 //Register
 router.post('/register', async (req, res) => {
