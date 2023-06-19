@@ -33,7 +33,7 @@ router.post('/login', async (req, res) => {
     
     const { email, password } = req.body;
     try {
-      
+        console.log("Hello");
         const user = await UserModel.findOne({ email });
     
         if (!user) {
@@ -52,7 +52,7 @@ router.post('/login', async (req, res) => {
         if (jwt.verify(token, enc)) {
           return res.status(400).json({ message: "User is already logged in" });
         }
-        
+
         const token =jwt.sign({ id: user._id }, enc);
         res.status(200).json({token  ,userID: user._id ,message: "logged in successfully" });
       } catch (error) {

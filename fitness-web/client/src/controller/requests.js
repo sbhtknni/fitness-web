@@ -52,6 +52,21 @@ export const addTrainingToUser = async (trainingName, new_weight) => {
 
 
 //----------------------User----------------------//
+//Login
+export const login = async (email, password) => {
+    try {
+        const response = await createRequest("post", "/auth/login", {
+            email: email,
+            password: password,
+        });
+        return response.data;
+    } catch (error) {
+        console.error(error);
+    
+        return false;
+    }
+};
+
 //Get user
 export const getUser = async () => {
     try {

@@ -17,6 +17,7 @@ import {
     MDBCard,
     MDBCardBody,
 } from "mdb-react-ui-kit";
+import { login } from "../../controller/requests";
 
 // Login Function  login to the app
 function LoginComponent() {
@@ -30,10 +31,8 @@ function LoginComponent() {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const response = await axios.post("https://fitness-api-7tqf.onrender.com/auth/login", {
-                email: email,
-                password: password,
-            });
+
+            const response = login(email, password);
 
             // Show modal based on login result
             setShowModal(true);
