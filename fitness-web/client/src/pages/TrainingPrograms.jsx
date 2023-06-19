@@ -7,9 +7,8 @@ import {
 import ErrorPage from "./ErrorPage.jsx";
 import TPMainComponent from "../componenets/TrainingProgramsComp/TPMainComponent.jsx";
 import Footer from "..//componenets//Footer.jsx";
-import {
-  MDBContainer,
-} from "mdb-react-ui-kit";
+import HelpAndTitle from "../componenets/HelpAndTtile.jsx";
+
 const TrainingProgramas = () => {
   const [muscle, setMuscle] = useState("");
   const [error, setError] = useState(true);
@@ -102,15 +101,23 @@ const TrainingProgramas = () => {
   if (!loading && !error) {
     return (
       <MainLayout>
-        <MDBContainer>
-          <TPMainComponent
-            musclesNames={musclesNames}
-            muscle={muscle}
-            handleMuscleChange={handleMuscleChange}
-            dataVals={dataVals}
+              <HelpAndTitle
+          title="Muscel Information"
+            button_name="Need Help ?"
+            headline="Muscle Information "
+            body="#Please make sure you choose the muscle that you want to learn about $click on radio button option$
+            #After you choose the muscle you will see the information about the muscle 
+            #You can click on the link to see the video about the muscle
+            
+            "
           />
-          <Footer />
-        </MDBContainer>
+        <TPMainComponent
+          musclesNames={musclesNames}
+          muscle={muscle}
+          handleMuscleChange={handleMuscleChange}
+          dataVals={dataVals}
+        />
+        <Footer />
       </MainLayout>
     );
   }
