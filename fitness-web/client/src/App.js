@@ -1,6 +1,5 @@
 
 import React from 'react';
-import BlogPage from './/pages/BlogPage.jsx';
 import TrainingProgramas from './pages/TrainingPrograms.jsx';
 import  Login  from './componenets//AuthPageComp//LoginComponent.jsx';
 import  Register  from './componenets//AuthPageComp//RegisterComponent.jsx';
@@ -27,7 +26,6 @@ function App() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="userpage" element={<UserHomePage />} />
-          <Route path="blog" element={<BlogPage />} />
           <Route path="training" element={<TrainingForm />} />
           <Route path="auth/login" element={<Login />} />
           <Route path="auth/register" element={<Register />} />

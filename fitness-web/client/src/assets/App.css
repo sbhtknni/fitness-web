@@ -75,7 +75,7 @@ background: #6a11cb;
 background: -webkit-linear-gradient(to right, rgb(105, 90, 121), rgb(227, 230, 234));
 
 /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
-background: linear-gradient(to right, rgb(205, 207, 219), rgb(226, 230, 236))
+background: linear-gradient(to right, rgb(238, 238, 238), rgb(226, 230, 236))
 }
 
 .cascading-right {
@@ -86,12 +86,4 @@ background: linear-gradient(to right, rgb(205, 207, 219), rgb(226, 230, 236))
   .cascading-right {
     margin-right: 0;
   }
-}
-
-.background-image {
-  --primary: #CFC3FF;
-  --primary-dark: #676286;
-  --secondary: #484554;
-  --secondary-dark: #0D0D0D;
-  --white: #fff;
 }
