@@ -30,9 +30,7 @@ export const validateToken = (req, res, next) => {
 export const validateLoggedIn = (req, res, next) => {
     const token =req.headers.authorization;
 
-    if (!token) {
-        next();
-    }
+  
     try {
         //remove the "Bearer " from the token
         const tokenWithoutBearer = token.split(" ")[1];
@@ -41,7 +39,7 @@ export const validateLoggedIn = (req, res, next) => {
         req.user = verified;
         res.status(400).json({ message: "You are already logged in" });
     } catch (error) {
-    res.status(400).json({ message: "Invalid token" });
+        next();
     }
     }
 
