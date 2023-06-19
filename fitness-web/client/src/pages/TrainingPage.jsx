@@ -8,6 +8,8 @@ import TrainingModal from "../componenets/TrainingPageComp/TrainingPageModal.jsx
 import { getTrainings, addTrainingToUser } from "../controller/requests.js";
 import WeightInput from "../componenets/TrainingPageComp/WeightInput.jsx";
 import Footer from "..//componenets//Footer.jsx";
+import InformativeModal from "../componenets/InformativeModal.jsx";
+import HelpAndTitle from "../componenets/HelpAndTtile.jsx";
 
 export function TrainingForm() {
   const [selectedTraining, setSelectedTraining] = useState();
@@ -69,11 +71,16 @@ export function TrainingForm() {
     return (
       <MainLayout>
         <div className="container">
-          <h3 className="fw-bolder  mt-4">Select a training:</h3>
+          <HelpAndTitle
+          title="Choose Training Program"
+            button_name="Need Help ?"
+            headline="Add New Training "
+            body="#Please make sure you choose the training program that is right for you $click on radio button option$
+                 #Make sure you enter a weight within a normal range $enter a vaild number , will become green when ok $
+                #Click Submit"
+          />
           <br />
-
           <RadioButton
-            style={{ marginBottom: "30px" }}
             options={trainings.map((training) => training.name)}
             selectedOption={selectedTraining ? selectedTraining.name : ""}
             onOptionChange={handleTrainingChange}

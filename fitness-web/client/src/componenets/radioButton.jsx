@@ -6,45 +6,30 @@ function RadioButton(props) {
   const handleOptionChange = (option) => {
     if (option !== selectedOption) {
       onOptionChange(option);
+       
+
     }
   };
 
   return (
-    // <><div className="btn-group btn-group-toggle" data-toggle="buttons">
-    //   {options.map((option) => (
-    //     <label
-    //       key={option}
-    //       className={`btn btn-secondary ${option === selectedOption ? 'active' : ''}`}
-    //       onClick={() => handleOptionChange(option)}
-    //     >
-    //       <input
-    //         type="radio"
-    //         name="options"
-    //         autoComplete="off"
-    //         checked={option === selectedOption}
-    //         onChange={() => { } } />{' '}
-    //       {option}
-    //     </label>
-    //   ))}
-      
-    // </div>
-    <MDBBtnGroup>
+
+    <MDBBtnGroup shadow='2'  >
         {options.map((option) => (
           <MDBRadio
+            className='mx-1'
             key={option}
             btn
             btnColor='dark'
             id={`btn-radio${option}`}
             name='options'
-            wrapperClass='mx-2'
-            wrapperTag='span'
+            wrapperClass='mx-1'
             label={option}
             checked={option === selectedOption}
-            onChange={() => handleOptionChange(option)}
+            onChange={() => handleOptionChange(option) }
           />
         ))}
       </MDBBtnGroup>
-
+  
   );
 }
 

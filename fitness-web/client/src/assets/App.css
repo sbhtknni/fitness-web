@@ -1,39 +1,7 @@
 .App {
-  text-align: center;
   
 }
-.navigation-bar{
-  text-align: center;
 
-  background-color: #282c34;
-  display: flex;
-  flex-direction: row;
-  color: white; 
-  padding: 10px 16px; 
-  margin-bottom: 16px;
-}
-.navigation-bar-logo{
-  color: white; 
-  font-size: 24px;
-  width: 50px;
-  height: 50px;
-  margin-right: 16px;
-}
-.navigation-bar-menu{
-  text-align: center;
-
-  display: flex;
-  list-style-type: none;
-  gap :30px;
-  align-items: center;
-
-}
-.navigation-bar-link {
-  color: white;
-  text-decoration: none;
-  font-size: 16px;
-  font-weight: 600;
-}
 
 .App-logo {
   height: 40vmin;

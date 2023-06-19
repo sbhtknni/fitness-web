@@ -50,12 +50,7 @@ export default function WeightInput(props) {
                 Submit
               </MDBBtn>
 
-              <InformativeModal
-                button_name="How to use?"
-                headline="Add New Training Form "
-                body="Please make sure you choose the training program that is right for you,
-                 Then make sure you enter a weight within a normal range
-                Click Submit"></InformativeModal>
+
             </MDBBtnGroup>
           </div>
         </MDBValidation>
