@@ -6,7 +6,7 @@ import MainLayout from '../../layout/MainLayout';
 import axios from "axios"; 
 import Footer from '..//Footer.jsx';
 import '..//..//assets/App.css';
-import background from "..//..//assets/loginBG.jpg";
+import background from "..//..//assets/loginBG.png";
 
 
 // bootstrap imports
