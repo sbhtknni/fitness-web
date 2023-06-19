@@ -3,7 +3,6 @@ import jwt from "jsonwebtoken";
 import { UserModel } from "../models/Users.js";
 import bcrypt from "bcryptjs";
 import { config } from 'dotenv';
-import { validateLoggedIn } from "./validate.js";
 const router = express.Router();   //Create Router
 config();
 //Register
@@ -46,9 +45,11 @@ router.post('/login', async (req, res) => {
   
       if (!isMatch) {
         return res.status(400).json({ message: "Incorrect password" });
-      }
+    }
+    const enc = process.env.URL_DB;
+
       // The token contains information about the user's identity.
-      const token =jwt.sign({ id: user._id }, config.encrypt);
+      const token =jwt.sign({ id: user._id }, enc);
       res.status(200).json({token  ,userID: user._id ,message: "logged in successfully" });
     } catch (error) {
       res.status(500).json({ message: "Server Error" });
