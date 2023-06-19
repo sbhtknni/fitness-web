@@ -27,6 +27,7 @@ const UserSchema = new mongoose.Schema({
             trainingId: { type: mongoose.Schema.Types.ObjectId, ref: "trainings" },
             name: { type: String, required: true },
             weight: { type: Number, required: true, min: Number.MIN_SAFE_INTEGER, max: Number.MAX_SAFE_INTEGER },
+            bmi: { type: Number, min: Number.MIN_SAFE_INTEGER, max: Number.MAX_SAFE_INTEGER },
             startDate: { type: Date, required: true },
         }
     ]

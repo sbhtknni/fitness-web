@@ -104,7 +104,7 @@ const YoutubeTrainingsPrograms = () => {
                 title: 'legs Video 1',
               },
               {
-                src: 'https://www.youtube.com/embed/kiI57DPH3fM',
+                src: 'https://www.youtube.com/embed/IvmaekQfKiw',
                 title: 'legs Video 2',
               },
             ],

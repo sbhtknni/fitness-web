@@ -1,56 +1,90 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
-import { useCookies } from 'react-cookie';
+import { React, useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
+import {
+  MDBContainer,
+  MDBNavbar,
+  MDBNavbarBrand,
+  MDBNavbarToggler,
+  MDBIcon,
+  MDBNavbarNav,
+  MDBNavbarItem,
+  MDBNavbarLink,
+  MDBDropdown,
+  MDBDropdownToggle,
+  MDBDropdownMenu,
+  MDBDropdownItem,
+  MDBCollapse,
+} from "mdb-react-ui-kit";
 export function NavigationBar(props) {
-  const [cookies, setCookie, removeCookie] = useCookies(['access_token']);
+  const [showBasic, setShowBasic] = useState(false);
+  const [access_token, setAccessToken] = useState(window.localStorage.getItem("access_token"));
 
+
+  const navigate = useNavigate();
   const Logout = () => {
-    removeCookie("access_token");
     window.localStorage.removeItem("userId");
-    
-  }
-  
-    return (
-      <nav class="navbar navbar-dark bg-dark navbar navbar-expand-lg navbar sticky-top">
- <a class="navbar-brand" href="/">
-    <img src="https://gymgearmentors.com/wp-content/uploads/2022/08/cropped-Orange-Black-White-Minimalist-Fitness-Gym-Logo-3-1.png" width="30" height="30" class="d-inline-block align-top" alt=""></img>
-    Fitness
-  </a>      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav">
-          <li class="nav-item active">
-            <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-          </li>
-        
-          {!cookies.access_token ? ( <li class="nav-item">
-            <a class="nav-link" href="/auth">Login</a>
-          </li>) : (<li class="nav-item">
-            <a class="nav-link" href="/auth"     onClick={Logout} >Logout</a>
-           
-          </li>)}
+    window.localStorage.removeItem("access_token");
+    window.localStorage.removeItem("selectedTrainingInfo");
+    navigate("/auth/login");
+  };
 
-         
 
-          <li class="nav-item">
-            <a class="nav-link" href="/training">Trainings</a>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Dropdown link
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <a class="dropdown-item" href="/2">Action</a>
-              <a class="dropdown-item" href="/2">Another action</a>
-              <a class="dropdown-item" href="/2">Something else here</a>
-            </div>
-          </li>
-        </ul>
-      </div>
-    </nav>
 
-          )
+
+  return (
+    <MDBNavbar dark expand="lg" light bgColor="dark">
+      <MDBContainer fluid>
+
+        <MDBNavbarBrand href={!access_token ? '/' : '/userpage'}>
+
+          <img width="30" height="30" src="https://queenstreetmedical.co.nz/wp-content/uploads/2023/02/qstfsvglogo.png" alt="Logo" />
+          Fitness
+        </MDBNavbarBrand>
+        <MDBNavbarToggler
+          aria-controls="navbarSupportedContent"
+          aria-label="Toggle navigation"
+          onClick={() => setShowBasic(!showBasic)}>
+          <MDBIcon icon="bars" fas />
+        </MDBNavbarToggler>
+
+        <MDBCollapse navbar show={showBasic}>
+          <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
+            {!access_token ? (
+
+              <MDBNavbarItem>
+                <MDBNavbarLink href="/auth/login">Login</MDBNavbarLink>
+              </MDBNavbarItem>
+
+            ) : (
+              <>
+
+                <MDBNavbarItem>
+                  <MDBNavbarLink href="/userpage">User</MDBNavbarLink>
+                </MDBNavbarItem>
+                {/* <LinkNav navigate_to="/auth/login" navigate_name="Logout" onClick={()=> Logout}  /> */}
+
+                <MDBNavbarItem>
+                  <MDBNavbarLink href="/auth/login" onClick={Logout} >Log Out</MDBNavbarLink>
+                </MDBNavbarItem>
+                <MDBNavbarItem>
+                  <MDBNavbarLink href="/training">Choose Training</MDBNavbarLink>
+                </MDBNavbarItem>
+                <MDBNavbarItem>
+                  <MDBNavbarLink href="/TrainingProgramas">Training Programas</MDBNavbarLink>
+                </MDBNavbarItem>
+                <MDBNavbarItem>
+                  <MDBDropdown>
+                   
+                  </MDBDropdown>
+                </MDBNavbarItem>
+              </>
+            )}
+
+          </MDBNavbarNav>
+        </MDBCollapse>
+      </MDBContainer>
+    </MDBNavbar>
+  );
 }
 export default NavigationBar;

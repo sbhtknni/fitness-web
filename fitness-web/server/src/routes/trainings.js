@@ -3,12 +3,15 @@ import mongoose from "mongoose";
 import { TrainingModel } from "../models/Training.js";
 import { UserModel } from "../models/Users.js";
 import { BMICalculation } from "..//routes/users.js";
+import {validateToken} from './validate.js';
 
 const router = express.Router();
 
 //Get all trainings
-router.get("/", async (req, res) => {
+router.get("/",validateToken, async (req, res) => {
     try {
+      console.log("UserDetails",req.user.id);
+
         const trainings = await TrainingModel.find({});
         return res.status(200).json({trainings, message: "All trainings sent" });
     } catch (error) {
@@ -17,11 +20,11 @@ router.get("/", async (req, res) => {
 });
 
 //Add training to user
-router.post("/", async (req, res) => {
-    const { userID, trainingName,new_weight } = req.body;
-    console.log("userID", userID,"weight",new_weight,"trainingName",trainingName);
+router.post("/", validateToken ,async (req, res) => {
+    const {  trainingName,new_weight } = req.body;
+    console.log("userID", req.user.id,"weight",new_weight,"trainingName",trainingName);
     try {
-      const user = await UserModel.findById(userID);
+      const user = await UserModel.findById(req.user.id);
   
       if (!user) {
         console.log("User not found");
@@ -40,6 +43,7 @@ router.post("/", async (req, res) => {
         trainingId: training._id,
         name: training.name,
         weight: parseInt(new_weight,10),
+        bmi: BMICalculation(parseInt(new_weight,10),user.height),
         startDate: new Date(),
       };
   
