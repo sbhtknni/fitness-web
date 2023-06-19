@@ -130,71 +130,24 @@ function UserHomePage() {
                 <DetailsCard user={user} />
                 <MDBRow className="row-cols-1 row-cols-md-3 g-4">
                   {/* Include Max and Min Weight */}
-                  <StatisticsCard
-                    title="Max Min Weight"
-                    text={`Max Weight: ${data.max} \n Min Weight: ${data.min}`}
-                    img_src="https://mdbootstrap.com/img/new/standard/city/041.jpg"
-                  />
-                  <StatisticsCard
-                    title="Max Min Weight"
-                    text={`Max Weight: ${data.max} \n Min Weight: ${data.min} `}
-                    img_src="https://mdbootstrap.com/img/new/standard/city/041.jpg"
-                  />
-                  <StatisticsCard
-                    title="Average Weight"
-                    text={`Average Weight: ${data.average} Variance: ${data.variance} `}
-                    img_src="https://mdbootstrap.com/img/new/standard/city/041.jpg"
-                  />{" "}
-                  "
-                  <MDBCol>
-                    <MDBCard className="h-100">
-                      <MDBCardImage
-                        src="https://mdbootstrap.com/img/new/standard/city/043.webp"
-                        alt="..."
-                        position="top"
-                      />
-                      <MDBCardBody>
-                        <MDBCardTitle>Card title</MDBCardTitle>
-                        <MDBCardText>
-                          This card has supporting text below as a natural
-                          lead-in to additional content.
-                        </MDBCardText>
-                      </MDBCardBody>
-                      <MDBCardFooter>
-                        <small className="text-muted">
-                          Last updated 3 mins ago
-                        </small>
-                      </MDBCardFooter>
-                    </MDBCard>
-                  </MDBCol>
-                  <MDBCol>
-                    <MDBCard className="h-100">
-                      <MDBCardImage
-                        src="https://mdbootstrap.com/img/new/standard/city/042.webp"
-                        alt="..."
-                        position="top"
-                      />
-                      <MDBCardBody>
-                        <MDBCardTitle>Card title</MDBCardTitle>
-                        <MDBCardText>
-                          This is a wider card with supporting text below as a
-                          natural lead-in to additional content. This card has
-                          even longer content than the first to show that equal
-                          height action.
-                        </MDBCardText>
-                      </MDBCardBody>
-                      <MDBCardFooter>
-                        <small className="text-muted">
-                          Last updated 3 mins ago
-                        </small>
-                      </MDBCardFooter>
-                    </MDBCard>
-                  </MDBCol>
+  
                 </MDBRow>
               </MDBCol>
             </MDBRow>
             <MDBRow>
-              <MDBCol sm="6" className="h-25 mb-4 mb-md-2">
+                <MDBCard className="h-100">
+                  <MDBCardHeader className="fw-bolder text-center">
+                    Weight Linear Graph
+                  </MDBCardHeader>
+                  <MDBCardBody>
+                    <GraphComponent
+                      selectedTrainings={user.selectedTrainings}
+                    />
+                  </MDBCardBody>
+                </MDBCard>
+            </MDBRow>
+            <MDBRow>
+              <MDBCol sm="6" className="h-100">
                 <MDBCard className="h-100">
                   <MDBCardHeader className="fw-bolder text-center">
                     Program Distribution
@@ -206,18 +159,12 @@ function UserHomePage() {
                   </MDBCardBody>
                 </MDBCard>
               </MDBCol>
-              <MDBCol sm="6" className="h-25 mb-4 mb-md-2">
-                <MDBCard className="h-100">
-                  <MDBCardHeader className="fw-bolder text-center">
-                    Weight Linear Graph
-                  </MDBCardHeader>
-                  <MDBCardBody>
-                    <GraphComponent
-                      selectedTrainings={user.selectedTrainings}
-                    />
-                  </MDBCardBody>
-                </MDBCard>
-              </MDBCol>
+              
+              <BigCard
+                title="Statistics"
+                text={`#Varience $${data.variance}$ \n #Standard Deviation $${data.standardDeviation}$`}
+                img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
+              />
             </MDBRow>
             <MDBRow className="row-cols-1 row-cols-md-3 g-4">
               {/* <StatisticsCard img_src="https://mdbootstrap.com/img/new/standard/city/044.webp" title="Best Vs Worst" text=  {`${min}${max}` }/> */}

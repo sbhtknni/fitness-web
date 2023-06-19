@@ -19,6 +19,10 @@ export default function DetailsCard(props) {
         <RowOfDetails type=" Email " value={user.email}></RowOfDetails>
         <RowOfDetails type=" Height " value={user.height}></RowOfDetails>
         <RowOfDetails type=" Weight " value={user.weight}></RowOfDetails>
+        <RowOfDetails type=" Weight " value={user.weight}></RowOfDetails>
+        <RowOfDetails type=" Weight " value={user.weight}></RowOfDetails>
+        <RowOfDetails type=" Weight " value={user.weight}></RowOfDetails>
+        <RowOfDetails type=" Weight " value={user.weight}></RowOfDetails>
       </MDBCardBody>
     </MDBCard>
   );
