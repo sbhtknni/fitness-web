@@ -7,7 +7,7 @@ export default function BigCard(props) {
   
   return (
     <>
-            <MDBCol>
+      <MDBCol >
                 <MDBCard className="h-100">
                   <MDBCardImage
                     src="https://mdbootstrap.com/img/new/standard/city/043.webp"

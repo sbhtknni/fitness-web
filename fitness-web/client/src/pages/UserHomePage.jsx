@@ -133,38 +133,8 @@ function UserHomePage() {
                   </MDBRow>
                 </MDBCol>
               </MDBRow>
-              <MDBRow>
-                <MDBCard className="h-100">
-                  <MDBCardHeader className="fw-bolder text-center">
-                    Weight Linear Graph
-                  </MDBCardHeader>
-                  <MDBCardBody>
-                    <GraphComponent
-                      selectedTrainings={user.selectedTrainings}
-                    />
-                  </MDBCardBody>
-                </MDBCard>
-              </MDBRow>
-              <MDBRow>
-                <MDBCol sm="6" className="h-100">
-                  <MDBCard className="h-100">
-                    <MDBCardHeader className="fw-bolder text-center">
-                      Program Distribution
-                    </MDBCardHeader>
-                    <MDBCardBody>
-                      <ChartTrainigGraph
-                        selectedTrainings={user.selectedTrainings}
-                      />
-                    </MDBCardBody>
-                  </MDBCard>
-                </MDBCol>
-
-                <BigCard
-                  title="Statistics"
-                  text={`#Varience $${data.variance}$ \n #Standard Deviation $${data.standardDeviation}$`}
-                  img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
-                />
-              </MDBRow>
+             
+             
               <MDBRow className="row-cols-1 row-cols-md-3 g-4">
                 {/* <StatisticsCard img_src="https://mdbootstrap.com/img/new/standard/city/044.webp" title="Best Vs Worst" text=  {`${min}${max}` }/> */}
                 {/* <StatisticsCard img_src="https://mdbootstrap.com/img/new/standard/city/044.webp" title="lorea" text="lorea" />  */}
@@ -184,6 +154,40 @@ function UserHomePage() {
                   text={`#Popular Training  $${data.popularName}$  #Current Training $${data.currentTraining}$  #Weight Loss Per Program ${data.weightLossPerProgram} \n `}
                   img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
                 />
+              </MDBRow>
+
+              <MDBRow className="py-4">
+                <MDBCol sm="7" className="h-100">
+                  <MDBCard className="h-100">
+                    <MDBCardHeader className="fw-bolder text-center">
+                      Program Distribution
+                    </MDBCardHeader>
+                    <MDBCardBody>
+                      <ChartTrainigGraph
+                        selectedTrainings={user.selectedTrainings}
+                      />
+                    </MDBCardBody>
+                  </MDBCard>
+                </MDBCol>
+
+                <BigCard
+                  title="Statistics"
+                  text={`#Varience $${data.variance}$ \n #Standard Deviation $${data.standardDeviation}$`}
+                  img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
+                />
+              </MDBRow>
+
+              <MDBRow className="py-2">
+                <MDBCard  className="h-100">
+                  <MDBCardHeader className="fw-bolder text-center">
+                    Weight Linear Graph
+                  </MDBCardHeader>
+                  <MDBCardBody>
+                    <GraphComponent
+                      selectedTrainings={user.selectedTrainings}
+                    />
+                  </MDBCardBody>
+                </MDBCard>
               </MDBRow>
               <hr />
               <Footer />
