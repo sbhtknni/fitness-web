@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import MainLayout from "../layout/MainLayout.jsx";
 import ErrorPage from "./ErrorPage.jsx";
 import Footer from "../componenets/Footer.jsx";
@@ -25,16 +24,13 @@ import {
   currentTrainingName,
   calculateWeightLoss,
   calculateWeightLossPerProgram,
-  calculateWorstProgram,
 } from "../controller/utils/util_home_page.js";
 import GraphComponent from "../componenets/graphComponent.jsx";
 import ChartTrainigGraph from "../componenets/ChartTrainingGraph.jsx";
 import DetailsCard from "../componenets/UserPageComp/DetailsCard.jsx";
-import StatisticsCard from "../componenets/UserPageComp/StatisticsCard.jsx";
 import BigCard from "../componenets/UserPageComp/BigCard.jsx";
 
 function UserHomePage() {
-  const navigate = useNavigate();
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
