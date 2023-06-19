@@ -8,7 +8,6 @@ import TrainingModal from "../componenets/TrainingPageComp/TrainingPageModal.jsx
 import { getTrainings, addTrainingToUser } from "../controller/requests.js";
 import WeightInput from "../componenets/TrainingPageComp/WeightInput.jsx";
 import Footer from "..//componenets//Footer.jsx";
-import InformativeModal from "../componenets/InformativeModal.jsx";
 import HelpAndTitle from "../componenets/HelpAndTtile.jsx";
 
 export function TrainingForm() {

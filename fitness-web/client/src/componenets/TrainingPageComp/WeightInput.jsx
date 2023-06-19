@@ -6,14 +6,11 @@ import {
   MDBValidationItem,
   MDBBtnGroup,
 } from "mdb-react-ui-kit";
-import InformativeModal from "../InformativeModal";
 
 export default function WeightInput(props) {
   const [newWeight, setNewWeight] = useState();
   const { addTrainingProgram } = props;
-  const [optSmModal, setOptSmModal] = useState(false);
 
-  const toggleShow = () => setOptSmModal(!optSmModal);
 
   const handleSubmit = (event) => {
     event.preventDefault();
