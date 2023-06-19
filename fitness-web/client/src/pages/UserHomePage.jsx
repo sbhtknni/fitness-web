@@ -133,8 +133,7 @@ function UserHomePage() {
              
              
               <MDBRow className="row-cols-1 row-cols-md-3 g-4">
-                {/* <StatisticsCard img_src="https://mdbootstrap.com/img/new/standard/city/044.webp" title="Best Vs Worst" text=  {`${min}${max}` }/> */}
-                {/* <StatisticsCard img_src="https://mdbootstrap.com/img/new/standard/city/044.webp" title="lorea" text="lorea" />  */}
+
 
                 <BigCard
                   title="Weight"

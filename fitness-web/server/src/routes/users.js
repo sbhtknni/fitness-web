@@ -48,6 +48,11 @@ router.post('/login', async (req, res) => {
       }
       const enc = process.env.SECRET_KEY;
         // The token contains information about the user's identity.
+        //Check that the user is not already logged in
+        if (jwt.verify(token, enc)) {
+          return res.status(400).json({ message: "User is already logged in" });
+        }
+        
         const token =jwt.sign({ id: user._id }, enc);
         res.status(200).json({token  ,userID: user._id ,message: "logged in successfully" });
       } catch (error) {
