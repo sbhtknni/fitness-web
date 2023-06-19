@@ -9,12 +9,8 @@ import {
   MDBContainer,
   MDBRow,
   MDBCard,
-  MDBCardText,
   MDBCardBody,
   MDBCardHeader,
-  MDBCardTitle,
-  MDBCardFooter,
-  MDBCardImage,
 } from "mdb-react-ui-kit";
 import ProfilePicture from "../componenets/UserPageComp/ProfilePicture.jsx";
 import { getUser } from "../controller/requests.js";
@@ -29,7 +25,7 @@ import {
   currentTrainingName,
   calculateWeightLoss,
   calculateWeightLossPerProgram,
-  calculateWorstProgram
+  calculateWorstProgram,
 } from "../controller/utils/util_home_page.js";
 import GraphComponent from "../componenets/graphComponent.jsx";
 import ChartTrainigGraph from "../componenets/ChartTrainingGraph.jsx";
@@ -41,7 +37,7 @@ function UserHomePage() {
   const navigate = useNavigate();
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState(true);
   const [data, setData] = useState({
     max: 0,
     min: 0,
@@ -53,9 +49,8 @@ function UserHomePage() {
     currentTraining: "",
     weightLoss: 0,
     weightLossPerProgram: "",
-    worstProgram: ""
+    worstProgram: "",
   });
-
 
   let weights = [];
   let dates = [];
@@ -63,14 +58,17 @@ function UserHomePage() {
 
   const fetchUser = async () => {
     const response = await getUser();
-    if (response === []) {
-      setError(true);
+    if (response === false) {
+      setLoading(false);
       return;
+    } else {
+      console.log("Repsonse is ", response);
+      const val = response;
+      setUser(val);
+      setAllData(val);
+      setError(false);
     }
-    console.log("Repsonse is ", response);
-    const val = response;
-    setUser(val);
-    setAllData(val);
+
     // Set loading to false once data is fetched
   };
 
@@ -80,7 +78,6 @@ function UserHomePage() {
     weights = user.selectedTrainings.map((training) => training.weight);
     trainingNames = user.selectedTrainings.map((training) => training.name);
     calculateStatistics(user);
-
   };
 
   const calculateStatistics = (user) => {
@@ -96,46 +93,47 @@ function UserHomePage() {
       popularName: calculatePopularName(trainingNames),
       currentTraining: currentTrainingName(trainingNames),
       weightLoss: calculateWeightLoss(user.selectedTrainings),
-      weightLossPerProgram: calculateWeightLossPerProgram(user.selectedTrainings),
-
+      weightLossPerProgram: calculateWeightLossPerProgram(
+        user.selectedTrainings
+      ),
     };
     console.log("Weights are ", calculateWeightLoss(user.selectedTrainings));
-
+    setLoading(false);
     setData(updatedData);
   };
 
   useEffect(() => {
     async function fetchAllData() {
       await fetchUser();
-      setLoading(false);
     }
     fetchAllData();
   }, []); // Empty dependency array to run the effect only once when the component mounts
 
-  if (error) {
+  if (error && !loading) {
     return <ErrorPage toRemove={true} />;
   }
-  if (loading) {
-    return <ErrorPage toRemove={false} />;
-  } else {
-    return (
-      <MainLayout>
-        <section style={{ backgroundColor: "#eee" }}>
-          <MDBContainer className="py-5">
-            <MDBRow>
-              {/* Profile Picture Cube */}
-              <ProfilePicture user={user} />
-              <MDBCol lg="8">
-                {/* User Details Card  */}
+  if (loading && !error) {
+    return <ErrorPage toRemove={false} />
+  }
 
-                <DetailsCard user={user} />
-                <MDBRow className="row-cols-1 row-cols-md-3 g-4">
-                  {/* Include Max and Min Weight */}
-  
-                </MDBRow>
-              </MDBCol>
-            </MDBRow>
-            <MDBRow>
+    if (!loading && !error) {
+      return (
+        <MainLayout>
+          <section style={{ backgroundColor: "#eee" }}>
+            <MDBContainer className="py-5">
+              <MDBRow>
+                {/* Profile Picture Cube */}
+                <ProfilePicture user={user} />
+                <MDBCol lg="8">
+                  {/* User Details Card  */}
+
+                  <DetailsCard user={user} />
+                  <MDBRow className="row-cols-1 row-cols-md-3 g-4">
+                    {/* Include Max and Min Weight */}
+                  </MDBRow>
+                </MDBCol>
+              </MDBRow>
+              <MDBRow>
                 <MDBCard className="h-100">
                   <MDBCardHeader className="fw-bolder text-center">
                     Weight Linear Graph
@@ -146,58 +144,54 @@ function UserHomePage() {
                     />
                   </MDBCardBody>
                 </MDBCard>
-            </MDBRow>
-            <MDBRow>
-              <MDBCol sm="6" className="h-100">
-                <MDBCard className="h-100">
-                  <MDBCardHeader className="fw-bolder text-center">
-                    Program Distribution
-                  </MDBCardHeader>
-                  <MDBCardBody>
-                    <ChartTrainigGraph
-                      selectedTrainings={user.selectedTrainings}
-                    />
-                  </MDBCardBody>
-                </MDBCard>
-              </MDBCol>
-              
-              <BigCard
-                title="Statistics"
-                text={`#Varience $${data.variance}$ \n #Standard Deviation $${data.standardDeviation}$`}
-                img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
-              />
-            </MDBRow>
-            <MDBRow className="row-cols-1 row-cols-md-3 g-4">
-              {/* <StatisticsCard img_src="https://mdbootstrap.com/img/new/standard/city/044.webp" title="Best Vs Worst" text=  {`${min}${max}` }/> */}
-              {/* <StatisticsCard img_src="https://mdbootstrap.com/img/new/standard/city/044.webp" title="lorea" text="lorea" />  */}
+              </MDBRow>
+              <MDBRow>
+                <MDBCol sm="6" className="h-100">
+                  <MDBCard className="h-100">
+                    <MDBCardHeader className="fw-bolder text-center">
+                      Program Distribution
+                    </MDBCardHeader>
+                    <MDBCardBody>
+                      <ChartTrainigGraph
+                        selectedTrainings={user.selectedTrainings}
+                      />
+                    </MDBCardBody>
+                  </MDBCard>
+                </MDBCol>
 
+                <BigCard
+                  title="Statistics"
+                  text={`#Varience $${data.variance}$ \n #Standard Deviation $${data.standardDeviation}$`}
+                  img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
+                />
+              </MDBRow>
+              <MDBRow className="row-cols-1 row-cols-md-3 g-4">
+                {/* <StatisticsCard img_src="https://mdbootstrap.com/img/new/standard/city/044.webp" title="Best Vs Worst" text=  {`${min}${max}` }/> */}
+                {/* <StatisticsCard img_src="https://mdbootstrap.com/img/new/standard/city/044.webp" title="lorea" text="lorea" />  */}
 
-              <BigCard
-                title="Weight"
-                text={`#Max Weight $${data.max} kg$ \n #Min Weight $${data.min} kg$ # ${data.weightLoss} \n `}
-                img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
-              />
-              <BigCard
-                title="Statistics"
-                text={`#Varience $${data.variance}$ \n #Standard Deviation $${data.standardDeviation}$ \n #Median $${data.median}$ \n`}
-                img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
-              />
-              <BigCard
-                title=""
-                text={`#Popular Training  $${data.popularName}$  #Current Training $${data.currentTraining}$  #Weight Loss Per Program ${data.weightLossPerProgram} \n `}
-                img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
-              />
-
-
-            </MDBRow>
-            <hr />
-            <Footer />
-          </MDBContainer>
-
-        </section>
-
-      </MainLayout>
-    );
-  }
+                <BigCard
+                  title="Weight"
+                  text={`#Max Weight $${data.max} kg$ \n #Min Weight $${data.min} kg$ # ${data.weightLoss} \n `}
+                  img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
+                />
+                <BigCard
+                  title="Statistics"
+                  text={`#Varience $${data.variance}$ \n #Standard Deviation $${data.standardDeviation}$ \n #Median $${data.median}$ \n`}
+                  img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
+                />
+                <BigCard
+                  title=""
+                  text={`#Popular Training  $${data.popularName}$  #Current Training $${data.currentTraining}$  #Weight Loss Per Program ${data.weightLossPerProgram} \n `}
+                  img_src="https://mdbootstrap.com/img/new/standard/city/044.webp"
+                />
+              </MDBRow>
+              <hr />
+              <Footer />
+            </MDBContainer>
+          </section>
+        </MainLayout>
+      );
+    }
+  
 }
 export default UserHomePage;

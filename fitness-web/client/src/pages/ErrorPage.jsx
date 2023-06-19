@@ -28,7 +28,7 @@ export function ErrorPage(props) {
           <div style={{ lexDirection: "row" }}>
             <Spinner />
           </div>
-          <p>Yu have to log in first</p>
+          <p>You have to log in first</p>
         </div>
       </MainLayout>
     );

@@ -32,7 +32,7 @@ export const getTrainings = async () => {
         return response.data.trainings;
     } catch (error) {
         console.error(error);
-        return [];
+        return false;
     }
 };
 
@@ -61,7 +61,7 @@ export const getUser = async () => {
     catch (error) {
         console.log(error)
         console.error(error);
-        return [];
+        return false;
     }
 };
 
@@ -88,7 +88,7 @@ export const getTrainingProgramasName = async () => {
         console.log(error)
         console.error(error);
         
-        return [];
+        return false;
     }
 }
 
