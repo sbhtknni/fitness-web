@@ -5,15 +5,20 @@ export default function RowOfDetails(props) {
   const { type, value } = props;
   return (
     <>
+        <div style={{height: 59}}>
+
       <MDBRow>
-        <MDBCol sm="3">
+
+        <MDBCol sm="3" className="">
           <MDBCardText className="fw-bolder">{type}</MDBCardText>
         </MDBCol>
         <MDBCol sm="9">
           <MDBCardText className="text-muted text-center fst-italic">{value}</MDBCardText>
         </MDBCol>
-        <hr />
       </MDBRow>
+      <hr className="w-40 " />
+
+      </div>
     </>
   );
 }
