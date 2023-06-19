@@ -67,7 +67,7 @@ function LoginComponent() {
         <MainLayout>
             <MDBContainer fluid onSubmit={handleSubmit}>
                 <div className="p-5 bg-image" style={{ backgroundImage: 'url(https://mdbootstrap.com/img/new/textures/full/171.jpg)', borderRadius: '10px', margin: '2vh', height: '300px' }}></div>
-                <div style={{  backgroundImage: `url(${background})`, borderRadius: '10px', padding: '2vh', margin: '9vh' }} >
+                <div style={{  backgroundImage: `url(${background})`, borderRadius: '10px' }} >
 
                 <MDBRow className='d-flex justify-content-center align-items-center h-100'>
                     <MDBCol col='12'>

@@ -18,7 +18,7 @@ export default function DetailsCard(props) {
         <RowOfDetails type="Weight " value = {`${user.weight} kg  `}></RowOfDetails>
         <RowOfDetails type="Height " value = {`${user.height} cm  `}></RowOfDetails>
         <RowOfDetails type="BMI " value={user.bmi}></RowOfDetails>
-        <RowOfDetails type="Current Training Program " value={training}></RowOfDetails>
+        <RowOfDetails type="Current Program " value={training}></RowOfDetails>
       
       </MDBCardBody>
     </MDBCard>
