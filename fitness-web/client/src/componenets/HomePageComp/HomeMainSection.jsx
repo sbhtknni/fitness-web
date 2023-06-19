@@ -1,12 +1,14 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import getURL from "../../assets/assetsUrls";
+
 
 function HomeMainSection() {
     return (
       <div className="container">
         <div className="row">
           <div className="col-md-4 bg-image hover-zoom overflow-visible">
-            <img className="col-md-10" src="https://deprmqvywv28x.cloudfront.net/fitlovers/homepage-banner-left.png" alt="Banner Left" />
+            <img className="col-md-10" src={getURL("home-page-left")} alt="Banner Left" />
           </div>
           <div className="col-md-4">
             <h2>Already Have an Account?</h2>
@@ -18,7 +20,7 @@ function HomeMainSection() {
             </p>
           </div>
           <div className="col-md-4 bg-image hover-zoom overflow-visible">
-            <img className="col-md-10" src="https://deprmqvywv28x.cloudfront.net/fitlovers/homepage-banner-right.png" alt="Banner Right" />
+            <img className="col-md-10" src={getURL("home-page-right")} alt="Banner Right" />
           </div>
         </div>
         <hr />
