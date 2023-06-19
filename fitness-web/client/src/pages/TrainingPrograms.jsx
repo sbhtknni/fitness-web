@@ -7,7 +7,9 @@ import {
 import ErrorPage from "./ErrorPage.jsx";
 import TPMainComponent from "../componenets/TrainingProgramsComp/TPMainComponent.jsx";
 import Footer from "..//componenets//Footer.jsx";
-
+import {
+  MDBContainer,
+} from "mdb-react-ui-kit";
 const TrainingProgramas = () => {
   const [muscle, setMuscle] = useState("");
   const [error, setError] = useState(true);
@@ -44,7 +46,7 @@ const TrainingProgramas = () => {
   const getMusclesNames = async () => {
     const response = await getTrainingProgramasName();
     if (response == false) {
-        console.log("response", response);
+      console.log("response", response);
       setLoading(false);
       return;
     } else {
@@ -100,13 +102,15 @@ const TrainingProgramas = () => {
   if (!loading && !error) {
     return (
       <MainLayout>
-        <TPMainComponent
-          musclesNames={musclesNames}
-          muscle={muscle}
-          handleMuscleChange={handleMuscleChange}
-          dataVals={dataVals}
-        />
-        <Footer />
+        <MDBContainer>
+          <TPMainComponent
+            musclesNames={musclesNames}
+            muscle={muscle}
+            handleMuscleChange={handleMuscleChange}
+            dataVals={dataVals}
+          />
+          <Footer />
+        </MDBContainer>
       </MainLayout>
     );
   }
