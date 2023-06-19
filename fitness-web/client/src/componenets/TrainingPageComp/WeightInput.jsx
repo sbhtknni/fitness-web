@@ -28,17 +28,19 @@ export default function WeightInput(props) {
         <MDBValidation className="row g-3" isValidated>
           <MDBValidationItem
             feedback="Enter Weight to Choose Training   ( Max 250 kg )"
+            invalid
             className="col-md-4"
-            invalid>
+            >       
             <MDBInput
               type="number"
               className="form-control input-primary"
+              required
               id="newWeight"
               min="0"
               max="250"
               value={newWeight}
               onChange={(event) => setNewWeight(event.target.value)}
-              required
+              
             />
           </MDBValidationItem>
 

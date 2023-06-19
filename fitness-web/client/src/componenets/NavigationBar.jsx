@@ -29,20 +29,13 @@ export function NavigationBar(props) {
     navigate("/auth/login");
   };
 
-  const handleLinkClick = (muscle) => {
-    window.localStorage.setItem("selectedTrainingInfo", muscle);
-    navigate("/TrainingProgramas");
-
-    setTimeout(() => {
-      window.location.reload(); // refresh page
-    }, 100);
-  };
 
 
 
   return (
     <MDBNavbar dark expand="lg" light bgColor="dark">
       <MDBContainer fluid>
+
         <MDBNavbarBrand href={!access_token ? '/' : '/userpage'}>
 
           <img width="30" height="30" src="https://queenstreetmedical.co.nz/wp-content/uploads/2023/02/qstfsvglogo.png" alt="Logo" />
@@ -78,18 +71,11 @@ export function NavigationBar(props) {
                   <MDBNavbarLink href="/training">Choose Training</MDBNavbarLink>
                 </MDBNavbarItem>
                 <MDBNavbarItem>
+                  <MDBNavbarLink href="/TrainingProgramas">Training Programas</MDBNavbarLink>
+                </MDBNavbarItem>
+                <MDBNavbarItem>
                   <MDBDropdown>
-                    <MDBDropdownToggle tag="a" className="nav-link" role="button">
-                      Training Programas
-                    </MDBDropdownToggle>
-                    <MDBDropdownMenu>
-                      <MDBDropdownItem link onClick={() => handleLinkClick("Back")} >Back</MDBDropdownItem>
-                      <MDBDropdownItem link onClick={() => handleLinkClick("Chest")}>Chest</MDBDropdownItem>
-                      <MDBDropdownItem link onClick={() => handleLinkClick("Legs")}>Legs</MDBDropdownItem>
-                      <MDBDropdownItem link onClick={() => handleLinkClick("Hands")}>Hands</MDBDropdownItem>
-                      <MDBDropdownItem link onClick={() => handleLinkClick("Shoulders")}>Shoulders</MDBDropdownItem>
-
-                    </MDBDropdownMenu>
+                   
                   </MDBDropdown>
                 </MDBNavbarItem>
               </>

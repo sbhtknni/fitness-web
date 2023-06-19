@@ -1,98 +1,100 @@
 import React, { useState, useEffect } from 'react';
 import MainLayout from '../layout/MainLayout.jsx';
-import { getTrainingProgramas } from "../controller/requests.js";
-import { Link } from 'react-router-dom';
+import { getTrainingProgramas, getTrainingProgramasName } from "../controller/requests.js";
 import ErrorPage from "./ErrorPage.jsx";
-
+import TPMainComponent from "../componenets/TrainingProgramsComp/TPMainComponent.jsx";
+import Footer from '..//componenets//Footer.jsx';
 
 
 const TrainingProgramas = () => {
-    const [muscle, setMuscle] = useState();
-    const [generalInformation, setGeneralInformation] = useState();
-    const [topic, setTopicsVals] = useState([]);
-    const [information, setInformation] = useState([]);
-    const [link, setLink] = useState([]);
+    const [muscle, setMuscle] = useState("");
     const [error, setError] = useState(false);
-    let data = [];
+    const [data, setData] = useState([]);
+    const [musclesNames, setMusclesNames] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [flag, setFlag] = useState(false);
+    const [dataVals, setDataVals] = useState({
+        link: [],
+        topic: [],
+        information: [],
+        generalInformation: "",
+    });
 
+    // get all muscles names from DB on first render
     useEffect(() => {
-        const fetchmuscleInformation = async () => {
-            console.log("New fetch");
-            const response = await getTrainingProgramas();
-            if (response === []) {
-                setError(true);
-                return;
-            }
-            console.log("Response: ", response);
-            data = response;
-            setAllData();
-        };
+        const getDataMusclesNamesFromDB = async () => {
+            await getMusclesNames();
+        }
+        getDataMusclesNamesFromDB();
 
-        const setAllData = async () => {
-
-            setMuscle(data.musclesInformation.muscle);
-            setGeneralInformation(data.musclesInformation.generalInformation);
-            setTopicsVals(data.musclesInformation.topics.map((info) => info.topic));
-            setInformation(data.musclesInformation.topics.map((info) => info.information));
-            setLink(data.musclesInformation.topics.map((info) => info.link));
-
-        };
-
-        fetchmuscleInformation();
     }, []);
 
+    // get all muscles information from DB
+    useEffect(() => {
+        const getData = async () => {
+            await fetchmuscleInformation();
+            setLoading(false); // Set loading to false once data is fetched
+        }
+        getData();
+    }, [muscle]);
+
+    // get all muscles names from DB and set it to musclesNames
+    const getMusclesNames = async () => {
+        const response = await getTrainingProgramasName();
+        if (response === []) {
+            setError(true);
+            return;
+        }
+        setMusclesNames(response);
+    }
+
+    // get all muscles information from DB and set it to data
+    const fetchmuscleInformation = async () => {
+        const response = await getTrainingProgramas(muscle);
+        if (response === []) {
+            setError(true);
+            return;
+        }
+        setData(response);
+        setAllData(response);
+    };
+
+    // set all data to dataVals
+    const setAllData = async (data) => {
+        if (flag === true) {
+            const updatedData = {
+                ...dataVals,
+                link: data.musclesInformation.topics.map((info) => info.link),
+                topic: data.musclesInformation.topics.map((info) => info.topic),
+                information: data.musclesInformation.topics.map((info) => info.information),
+                generalInformation: data.musclesInformation.generalInformation,
+            };
+            setDataVals(updatedData);
+        }
+    };
+    // handle muscle change ant flag to true to update dataVals with new data
+    const handleMuscleChange = (option) => {
+        const selectedMuscle = musclesNames.find(
+            (muscle) => muscle === option
+        );
+        setMuscle(selectedMuscle);
+        setFlag(true);
+
+    };
+
+    // if error return error page
     if (error) {
         return <ErrorPage toRemove={true} />;
     }
-    else {
+    // if loading the data return loading page
+    if (loading) {
+        console.log("Loading");
+        return <ErrorPage toRemove={false} />;
+    } else {
         return (
             <MainLayout>
-                <body className="vsc-initialized">
-                    <main role="main">
-                        <div className="jumbotron">
-                            <div className="container">
-                                <h1 className="display-3">Muscle {muscle}</h1>
-                                <p>{generalInformation} </p>
-                                <p>
-                                    <Link className="btn btn-primary btn-lg" to="/training" role="button">
-                                        Choose workout »
-                                    </Link>
-                                </p>
-                            </div>
-                        </div>
-                        <div className="container">
-                            <div className="row">
-                                {topic.map((topicItem, index) => (
-                                    <div className="col-md-4" key={index}>
-                                        <h2>{topicItem}</h2>
-                                        <p>{information[index]}</p>
-                                        {index === 0 ? (
-                                            <p>
-                                                <a className="btn btn-secondary" href={link[index]} role="button">
-                                                    Go to the website »
-                                                </a>
-                                            </p>
-                                        ) : index === 1 ? (
-                                            <p>
-                                                <img src={link[index]} alt="Picture" />
-                                            </p>
-                                        ) : index === 2 ? (
-                                            <p>
-                                                <iframe width="350" height="220" src={link[index]} title="Video" frameborder="0" allowfullscreen></iframe>
-                                            </p>
-                                        ) : null}
-                                    </div>
-                                ))}
-                            </div>
-                            <hr />
-                        </div>
-                    </main>
-
-                    <footer className="container">
-                        <p>© RD company since 2023</p>
-                    </footer>
-                </body>
-
+                <TPMainComponent musclesNames={musclesNames} muscle={muscle} handleMuscleChange={handleMuscleChange} dataVals={dataVals} />
+                <Footer />
             </MainLayout>
         );
     };
