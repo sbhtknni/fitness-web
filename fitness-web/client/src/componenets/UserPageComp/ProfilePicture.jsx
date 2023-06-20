@@ -6,6 +6,7 @@ import {
     MDBCardImage,
     MDBBtn,
     MDBCol,
+    MDBIcon,
   } from 'mdb-react-ui-kit';
 
 
@@ -25,6 +26,8 @@ export default function ProfilePicture(props) {
         
       <p className=" mb-4 fw-bolder " >{user.firstName + "  "+user.lastName}</p>
       <p className="text-muted mb-4">Click To Change Training Program</p>
+      <MDBIcon fas icon="caret-down" />
+
       <div className="d-flex justify-content-center mb-2">
         <MDBBtn color='dark' href='/training'>Change Now  </MDBBtn>
       </div>

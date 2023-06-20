@@ -1,5 +1,6 @@
 import React from 'react';
-import RadioButton from "../RadioButton.jsx";
+import RadioButton from '../General/RadioButton';
+
 // MuscleSelect Component
 function MuscleSelect({ musclesNames, muscle, handleMuscleChange }) {
   return (
