@@ -10,6 +10,7 @@ import DetailsCard from "../componenets/UserPageComp/DetailsCard.jsx";
 import BigCard from "../componenets/UserPageComp/BigCard.jsx";
 import getURL from "../assets/assetsUrls.js";
 
+
 import {
   MDBCol,
   MDBContainer,

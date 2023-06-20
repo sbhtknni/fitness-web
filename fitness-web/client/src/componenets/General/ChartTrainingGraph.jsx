@@ -1,6 +1,8 @@
 import React from 'react';
 import { Chart } from 'chart.js';
 import 'chartjs-plugin-datalabels';
+import Chartt from 'chart.js/auto'
+
 
 const ChartTrainigGraph = ({ selectedTrainings }) => {
   const chartRef = React.useRef(null);
