@@ -35,7 +35,6 @@ function UserHomePage() {
   const [user, setUser] = useState({});
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
-  const[weights, setWeights] = useState([]);
   const [data, setData] = useState({
     max: 0,
     min: 0,
@@ -50,7 +49,7 @@ function UserHomePage() {
     worstProgram: "",
   });
 
-  
+  let weights = [];
   let dates = [];
   let trainingNames = [];
 
@@ -71,13 +70,13 @@ function UserHomePage() {
 
   const setAllData = async (user) => {
     dates = user.selectedTrainings.map((training) => training.startDate);
-    setWeights( user.selectedTrainings.map((training) => training.weight));
+    weights = user.selectedTrainings.map((training) => training.weight);
     trainingNames = user.selectedTrainings.map((training) => training.name);
-
     calculateStatistics(user);
+    
   };
 
-  const calculateStatistics = (user) => {
+  const calculateStatistics = async (user) => {
     // Update property1
     const updatedData = {
       ...data,
@@ -93,13 +92,14 @@ function UserHomePage() {
       weightLossPerProgram: calculateWeightLossPerProgram(user.selectedTrainings),
     };
     console.log("Weights are ", weights.length);
-    setLoading(false);
+    
     setData(updatedData);
   };
 
   useEffect(() => {
-    async function fetchAllData() {
+    const  fetchAllData =async () => {
       await fetchUser();
+      setLoading(false);
     }
     fetchAllData();
   }, []); // Empty dependency array to run the effect only once when the component mounts
@@ -112,6 +112,7 @@ function UserHomePage() {
   }
 
   if (!loading && !error) {
+    weights = user.selectedTrainings.map((training) => training.weight);
     return (
       <MainLayout>
         <section style={{ backgroundColor: "#eee" }}>
