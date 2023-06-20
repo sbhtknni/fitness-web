@@ -16,11 +16,12 @@ router.get("/:muscleName", validateToken, async (req, res) => {
         .status(400)
         .json({ message: "MusclesInformation does not exist" });
     }
-    console.log("MusclesInformation sent");
+    console.log("MusclesInformation Sent");
     return res
       .status(200)
       .json({ musclesInformation, message: "All musclesInformation sent" });
   } catch (error) {
+    console.log("MusclesInformation Failed to send");
     res.json(error, { message: error.message });
   }
 });
@@ -41,7 +42,7 @@ router.post("/muscleInformation", validateToken, async (req, res) => {
     const savedMuscleInformation = await muscleInformation.save();
 
     res.status(201).json(savedMuscleInformation);
-    console.log("MuscleInformation saved");
+    console.log("Muscle Information Saved");
   } catch (error) {
     console.error("Failed to save MuscleInformation", error);
     res.status(500).json({ error: "Failed to save MuscleInformation" });
@@ -55,9 +56,9 @@ router.get("/", validateToken, async (req, res) => {
     if (!musclesInformation) {
       return res
         .status(400)
-        .json({ message: "MusclesInformation does not exist" });
+        .json({ message: "MusclesInformation Names does not exist" });
     }
-    console.log("MusclesInformation sent");
+    console.log("Muscles Information Names Sent");
     return res.status(200).json(musclesInformation);
   } catch (error) {
     res.json(error, { message: error.message });

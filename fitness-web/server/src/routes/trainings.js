@@ -10,9 +10,10 @@ const router = express.Router();
 //Get all trainings
 router.get("/", validateToken, async (req, res) => {
   try {
-    console.log("UserDetails", req.user.id);
+
 
     const trainings = await TrainingModel.find({});
+    console.log("Get all trainings to User ID :", req.user.id);
     return res.status(200).json({ trainings, message: "All trainings sent" });
   } catch (error) {
     res.json(error, { message: error.message });
@@ -34,11 +35,11 @@ router.post("/", validateToken, async (req, res) => {
     const user = await UserModel.findById(req.user.id);
 
     if (!user) {
-      console.log("User not found");
+      console.log("User ", req.user.id ," not found");
       return res.status(404).json({ message: "User not found" });
     }
 
-    console.log("User found");
+    console.log("User " ,user.id ," found");
     const training = await TrainingModel.findOne({ name: trainingName });
 
     if (!training) {
@@ -58,14 +59,14 @@ router.post("/", validateToken, async (req, res) => {
     user.selectedTrainings.push(selectedTraining);
     user.weight = parseInt(new_weight, 10);
     user.bmi = BMICalculation(user.weight, user.height);
-    console.log("User updated:", user);
 
     await user.save();
-    console.log("User saved");
+  
+    console.log("Add training to User ID : ", req.user.id);
 
     return res.status(200).json({ message: "Training added to user" });
   } catch (error) {
-    console.log("Error:", error);
+    console.log("Cannot add training to user :" ,  useer.id);
     res.status(500).json({ message: "Cannot add training to user" });
   }
 });
