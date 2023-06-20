@@ -53,8 +53,8 @@ function RegistrationForm({ handleRegistration }) {
               <MDBCardBody className="p-5 shadow-5 text-center">
                 <h2 className="fw-bold mb-5 text-uppercase">Sign up now</h2>
                 <MDBValidation className="row g-3 align-items-center">
-                  <MDBRow col="3">
-                    <MDBCol col="3">
+                  <MDBRow >
+                    <MDBCol >
                       <MDBValidationItem
                         feedback="Please choose First name."
                         invalid>
@@ -73,7 +73,7 @@ function RegistrationForm({ handleRegistration }) {
                         />
                       </MDBValidationItem>
                     </MDBCol>
-                    <MDBCol col="4">
+                    <MDBCol >
                       <MDBValidationItem
                         feedback="Please choose a Last name."
                         invalid>
@@ -93,7 +93,7 @@ function RegistrationForm({ handleRegistration }) {
                       </MDBValidationItem>
                     </MDBCol>
                   </MDBRow>
-                  <MDBRow col="5">
+                  <MDBRow >
                     <MDBValidationItem feedback="Please choose a Email." invalid>
                       <MDBInput
                         value={email}
@@ -110,7 +110,7 @@ function RegistrationForm({ handleRegistration }) {
                       />
                     </MDBValidationItem>
                   </MDBRow>
-                  <MDBRow col="5">
+                  <MDBRow >
                     <MDBValidationItem
                       feedback="Please choose a Password."
                       invalid>
@@ -151,7 +151,7 @@ function RegistrationForm({ handleRegistration }) {
                         />
                       </MDBValidationItem>
                     </MDBCol>
-                    <MDBCol col="5">
+                    <MDBCol >
                       <MDBValidationItem
                         feedback="Choose Weight between 0-250"
                         invalid>
