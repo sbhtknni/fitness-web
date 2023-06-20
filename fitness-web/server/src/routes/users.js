@@ -4,6 +4,7 @@ import { UserModel } from "../models/Users.js";
 import bcrypt from "bcryptjs";
 import { config } from "dotenv";
 const router = express.Router(); //Create Router
+
 config();
 //Register
 router.post("/register", async (req, res) => {

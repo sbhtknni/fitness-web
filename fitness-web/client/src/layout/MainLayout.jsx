@@ -1,5 +1,5 @@
 import React from "react";
-import NavigationBar from "..//componenets/NavigationBar.jsx";
+import NavigationBar from "../componenets/General/NavigationBar.jsx";
 function MainLayout(props) {
   const { children } = props;
   return (

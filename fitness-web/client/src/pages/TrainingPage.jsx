@@ -1,16 +1,14 @@
 import React, { useState, useEffect } from "react";
 import MainLayout from "../layout/MainLayout.jsx";
-import RadioButton from "../componenets/RadioButton.jsx";
 import ErrorPage from "./ErrorPage.jsx";
 import LoadLinks from "../componenets/TrainingPageComp/LoadLinks.jsx";
 import InstructionsFormatter from "../componenets/TrainingPageComp/InstructionsFormatter.jsx";
 import TrainingModal from "../componenets/TrainingPageComp/TrainingPageModal.jsx";
 import { getTrainings, addTrainingToUser } from "../controller/requests.js";
 import WeightInput from "../componenets/TrainingPageComp/WeightInput.jsx";
-import Footer from "..//componenets//Footer.jsx";
-import HelpAndTitle from "../componenets/HelpAndTtile.jsx";
-import { Modal } from "react-bootstrap";
-
+import Footer from "../componenets/General/Footer.jsx";
+import HelpAndTitle from "../componenets/General/HelpAndTtile.jsx";
+import RadioButton from "../componenets/General/RadioButton.jsx";
 
 export function TrainingForm() {
   const [selectedTraining, setSelectedTraining] = useState();
@@ -73,7 +71,7 @@ export function TrainingForm() {
       <MainLayout>
         <div className="container">
           <HelpAndTitle
-          title="Choose Training Program"
+            title="Choose Training Program"
             button_name="Need Help ?"
             headline="Add New Training "
             body="#Please make sure you choose the training program that is right for you $click on radio button option$

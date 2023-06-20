@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import RegistrationModal from "./RegistrationModal";
 import RegistrationForm from "./RegistrationForm";
 import MainLayout from '../../layout/MainLayout';
-import Footer from '..//Footer.jsx';
+import Footer from '..//General/Footer.jsx';
 
 function RegisterComponent() {
     const navigate = useNavigate();

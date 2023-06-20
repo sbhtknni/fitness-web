@@ -8,7 +8,7 @@ import {
   MDBModalTitle,
   MDBModalBody,
 } from "mdb-react-ui-kit";
-import InstructionsFormatter from "./TrainingPageComp/InstructionsFormatter";
+import InstructionsFormatter from "../TrainingPageComp/InstructionsFormatter";
 
 export default function InformativeModal(props) {
   const { button_name, headline, body } = props;
