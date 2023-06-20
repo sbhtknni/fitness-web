@@ -28,4 +28,3 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   });
 
 app.listen(3002, () => console.log('Server Running on Port 3002')); //Start Server
-console.log('local storage: ', localStorage.getItem('logedIn') );
