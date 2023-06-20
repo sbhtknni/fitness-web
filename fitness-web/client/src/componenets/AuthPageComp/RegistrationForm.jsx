@@ -51,6 +51,7 @@ function RegistrationForm({ handleRegistration }) {
                                                 size='lg'
                                                 wrapperClass='mb-4'
                                                 labelClass='text-white'
+                                                style={{ color: 'white' }}
                                             />
                                         </MDBValidationItem>
                                     </MDBCol>
@@ -67,6 +68,7 @@ function RegistrationForm({ handleRegistration }) {
                                                 size='lg'
                                                 wrapperClass='mb-4'
                                                 labelClass='text-white'
+                                                style={{ color: 'white' }}
                                             />
                                         </MDBValidationItem>
                                     </MDBCol>
@@ -84,6 +86,7 @@ function RegistrationForm({ handleRegistration }) {
                                             size='lg'
                                             wrapperClass='mb-4'
                                             labelClass='text-white'
+                                            style={{ color: 'white' }}
                                         />
                                     </MDBValidationItem>
                                 </MDBRow>
@@ -100,6 +103,7 @@ function RegistrationForm({ handleRegistration }) {
                                             size='lg'
                                             wrapperClass='mb-4'
                                             labelClass='text-white'
+                                            style={{ color: 'white' }}
                                         />
                                     </MDBValidationItem>
                                 </MDBRow>
@@ -119,6 +123,7 @@ function RegistrationForm({ handleRegistration }) {
                                                 size='lg'
                                                 wrapperClass='mb-4'
                                                 labelClass='text-white'
+                                                style={{ color: 'white' }}
                                             />
                                         </MDBValidationItem>
                                     </MDBCol>
@@ -137,6 +142,7 @@ function RegistrationForm({ handleRegistration }) {
                                                 size='lg'
                                                 wrapperClass='mb-4'
                                                 labelClass='text-white'
+                                                style={{ color: 'white' }}
                                             />
                                         </MDBValidationItem>
                                     </MDBCol>
