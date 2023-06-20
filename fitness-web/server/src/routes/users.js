@@ -46,7 +46,7 @@ router.post('/login', async (req, res) => {
       if (!isMatch) {
         return res.status(400).json({ message: "Incorrect password" });
     }
-    const enc = process.env.URL_DB;
+    const enc = process.env.SECRET_KEY;
 
       // The token contains information about the user's identity.
       const token =jwt.sign({ id: user._id }, enc);
