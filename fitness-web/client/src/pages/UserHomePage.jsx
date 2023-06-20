@@ -2,6 +2,13 @@ import React, { useState, useEffect } from "react";
 import MainLayout from "../layout/MainLayout.jsx";
 import ErrorPage from "./ErrorPage.jsx";
 import Footer from "../componenets/General/Footer.jsx";
+import ProfilePicture from "../componenets/UserPageComp/ProfilePicture.jsx";
+import { getUser } from "../controller/requests.js";
+import GraphComponent from "../componenets/General/GraphComponent.jsx";
+import ChartTrainigGraph from "../componenets/General/ChartTrainingGraph.jsx";
+import DetailsCard from "../componenets/UserPageComp/DetailsCard.jsx";
+import BigCard from "../componenets/UserPageComp/BigCard.jsx";
+import getURL from "../assets/assetsUrls.js";
 
 import {
   MDBCol,
@@ -11,8 +18,7 @@ import {
   MDBCardBody,
   MDBCardHeader,
 } from "mdb-react-ui-kit";
-import ProfilePicture from "../componenets/UserPageComp/ProfilePicture.jsx";
-import { getUser } from "../controller/requests.js";
+
 import {
   calculateAverage,
   calculateMax,
@@ -25,11 +31,7 @@ import {
   calculateWeightLoss,
   calculateWeightLossPerProgram,
 } from "../controller/utils/util_home_page.js";
-import GraphComponent from "../componenets/General/GraphComponent.jsx";
-import ChartTrainigGraph from "../componenets/General/ChartTrainingGraph.jsx";
-import DetailsCard from "../componenets/UserPageComp/DetailsCard.jsx";
-import BigCard from "../componenets/UserPageComp/BigCard.jsx";
-import getURL from "../assets/assetsUrls.js";
+
 
 function UserHomePage() {
   const [user, setUser] = useState({});
