@@ -9,6 +9,8 @@ import { getTrainings, addTrainingToUser } from "../controller/requests.js";
 import WeightInput from "../componenets/TrainingPageComp/WeightInput.jsx";
 import Footer from "..//componenets//Footer.jsx";
 import HelpAndTitle from "../componenets/HelpAndTtile.jsx";
+import { Modal } from "react-bootstrap";
+
 
 export function TrainingForm() {
   const [selectedTraining, setSelectedTraining] = useState();
@@ -41,13 +43,13 @@ export function TrainingForm() {
   };
 
   const addTrainingProgram = async (newWeight) => {
-    if (newWeight === "" || newWeight === undefined) {
+    const response = addTrainingToUser(selectedTraining.name, newWeight);
+    if (newWeight == "" || newWeight === undefined) {
+      console.log("empty");
       setModalOption("emptyInput");
       setShowModal(true);
       return;
     } else {
-      const response = addTrainingToUser(selectedTraining.name, newWeight);
-
       if (response) {
         setModalOption("success");
         setShowModal(true);

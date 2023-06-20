@@ -17,7 +17,6 @@ import {
     MDBCard,
     MDBCardBody,
 } from "mdb-react-ui-kit";
-import { login } from "../../controller/requests";
 
 // Login Function  login to the app
 function LoginComponent() {

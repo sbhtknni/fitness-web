@@ -14,20 +14,17 @@ export default function WeightInput(props) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    if (newWeight > 0 && newWeight < 250) {
       addTrainingProgram(newWeight);
-    }
+    // clear the input
+    setNewWeight("");
   };
+
 
   return (
     <>
       <div>
-        <MDBValidation className="row g-3" isValidated>
-          <MDBValidationItem
-            feedback="Enter Weight to Choose Training   ( Max 250 kg )"
-            invalid
-            className="col-md-4"
-            >       
+        <MDBValidation className="row g-3" >
+          <MDBValidationItem feedback='Enter Weight to Choose Training ( Max 250 kg )' invalid className="col-md-4">
             <MDBInput
               type="number"
               className="form-control input-primary"
@@ -37,7 +34,6 @@ export default function WeightInput(props) {
               max="250"
               value={newWeight}
               onChange={(event) => setNewWeight(event.target.value)}
-              
             />
           </MDBValidationItem>
 
@@ -46,7 +42,6 @@ export default function WeightInput(props) {
               <MDBBtn type="submit" color="success" onClick={handleSubmit}>
                 Submit
               </MDBBtn>
-
 
             </MDBBtnGroup>
           </div>
