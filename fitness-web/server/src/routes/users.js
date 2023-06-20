@@ -52,11 +52,13 @@ router.post("/login", async (req, res) => {
     }
     const enc = process.env.SECRET_KEY;
     // The token contains information about the user's identity.
-    const token = jwt.sign({ id: user._id }, enc, { expiresIn: "60s" });
+    const token = jwt.sign({ id: user._id }, enc, { expiresIn: "600s" });
+    console.log("User logged in successfully");
     res
       .status(200)
       .json({ token, userID: user._id, message: "logged in successfully" });
   } catch (error) {
+    console.error("Error logging in user:", error);
     res.status(500).json({ message: "Server Error" });
   }
 });
@@ -66,11 +68,14 @@ router.get("/:id", async (req, res) => {
   try {
     const user = await UserModel.findById(id);
     if (!user) {
+      console.log("User ", id, " does not exist");
       return res.status(400).json({ message: "User does not exist" });
     }
     user.password = "";
+    console.log("User ", id, " sent successfully");
     res.status(200).json({ user });
   } catch (error) {
+    console.error("Error getting user : ", error);
     res.status(500).json({ message: "Server Error" });
   }
 });
@@ -81,6 +86,7 @@ router.put("/update/:id", async (req, res) => {
   try {
     const user = await UserModel.findById(userID);
     if (!user) {
+      console.log("User ", userID, " does not exist");
       return res.status(400).json({ message: "User does not exist" });
     }
     const saltRounds = 10; // Number of salt rounds
@@ -98,9 +104,10 @@ router.put("/update/:id", async (req, res) => {
       bmi,
     });
     await newUser.save();
-    console.log("User saved successfully");
+    console.log("User ", userID, " saved successfully");
     res.status(200).json({ messege: "User updated successfully" });
   } catch (error) {
+    console.log("Cant update user ", userID, " Error", error);
     res.status(500).json({ message: "Server Error" });
   }
 });
@@ -116,10 +123,13 @@ router.put("/updateHeight/:id", async (req, res) => {
       { bmi: BMICalculation(user.weight, height) }
     );
     if (!user) {
+      console.log("User ", userID, " does not exist");
       return res.status(400).json({ message: "User does not exist" });
     }
+    console.log("User ", userID, " height updated successfully");
     res.status(200).json({ messege: "User height updated successfully" });
   } catch (error) {
+    console.log("Cant update height For user ", userID, " Error", error);
     res.status(500).json({ message: "Server Error" });
   }
 });

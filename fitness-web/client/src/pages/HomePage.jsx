@@ -9,10 +9,10 @@ import Footer from '..//componenets//General//Footer.jsx';
 function HomePage() {
 
     return (
-
+        //Load animation and then load the page
         <MainLayout>
             <body className="vsc-initialized ">
-                <main role="main">
+                <main role="main" className='pageLoadAnimation'>
                     <HomePageJumbotron />
                     <HomeMainSection />
                 </main>

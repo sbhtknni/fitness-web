@@ -23,6 +23,7 @@ export const validateToken = (req, res, next) => {
     req.user = verified;
     next();
   } catch (error) {
+    console.log("Invalid token provided by user id : ", req.user.id);
     res.status(400).json({ message: "Invalid token" });
   }
 };

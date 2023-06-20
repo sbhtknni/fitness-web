@@ -20,7 +20,7 @@ function HomeMainSection() {
             </p>
           </div>
           <div className="col-md-4 bg-image hover-zoom overflow-visible">
-            <img className="col-md-10" src={getURL("home-page-right")} alt="Banner Right" />
+            <img  className="col-md-10" src={getURL("home-page-right")} alt="Banner Right" />
           </div>
         </div>
         <hr />

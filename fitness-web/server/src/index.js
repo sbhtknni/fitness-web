@@ -27,5 +27,5 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
     console.error('Error connecting to MongoDB:', error);
   });
 
-app.listen(3002, () => console.log('Server Running on Port 3002')); //Start Server
+app.listen(5000, () => console.log('Server Running on Port 5000')); //Start Server
 

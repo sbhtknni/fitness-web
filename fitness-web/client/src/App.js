@@ -10,12 +10,6 @@ import UserHomePage from './pages/UserHomePage.jsx';
 
 
 
-// import 'react-native-gesture-handler';
-
-// import { createNativeStackNavigator } from '@react-navigation/native-stack';
-// import { createStackNavigator } from '@react-navigation/stack';
-// const Stack = createStackNavigator();
-
 //Functional component
 function App() {
   return (
