@@ -20,9 +20,6 @@ import UserHomePage from './pages/UserHomePage.jsx';
 //Functional component
 function App() {
   return (
-
-
-    
     <BrowserRouter>
         <Routes>
           <Route path="/" element={<HomePage />} />
@@ -33,7 +30,6 @@ function App() {
           <Route path="auth/register" element={<Register />} />
           <Route path="TrainingProgramas" element={<TrainingProgramas />} />
         </Routes>
-       
     </BrowserRouter>
   );
 }

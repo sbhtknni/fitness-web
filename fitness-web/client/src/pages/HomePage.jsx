@@ -11,12 +11,12 @@ function HomePage() {
     return (
 
         <MainLayout>
-            <body className="vsc-initialized">
+            <body className="vsc-initialized ">
                 <main role="main">
                     <HomePageJumbotron />
                     <HomeMainSection />
                 </main>
-                <Footer />
+                <Footer  />
             </body>
 
         </MainLayout>

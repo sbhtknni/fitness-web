@@ -18,8 +18,9 @@ import {
 } from "mdb-react-ui-kit";
 export function NavigationBar(props) {
   const [showBasic, setShowBasic] = useState(false);
-  const [access_token, setAccessToken] = useState(window.localStorage.getItem("access_token"));
-
+  const [access_token, setAccessToken] = useState(
+    window.localStorage.getItem("access_token")
+  );
 
   const navigate = useNavigate();
   const Logout = () => {
@@ -29,16 +30,16 @@ export function NavigationBar(props) {
     navigate("/auth/login");
   };
 
-
-
-
   return (
-    <MDBNavbar dark expand="lg" light bgColor="dark">
+    <MDBNavbar sticky fixed dark expand="lg" bgColor="dark">
       <MDBContainer fluid>
-
-        <MDBNavbarBrand href={!access_token ? '/' : '/userpage'}>
-
-          <img width="30" height="30" src="https://queenstreetmedical.co.nz/wp-content/uploads/2023/02/qstfsvglogo.png" alt="Logo" />
+        <MDBNavbarBrand href={!access_token ? "/" : "/userpage"}>
+          <img
+            width="30"
+            height="30"
+            src="https://queenstreetmedical.co.nz/wp-content/uploads/2023/02/qstfsvglogo.png"
+            alt="Logo"
+          />
           Fitness
         </MDBNavbarBrand>
         <MDBNavbarToggler
@@ -51,36 +52,36 @@ export function NavigationBar(props) {
         <MDBCollapse navbar show={showBasic}>
           <MDBNavbarNav className="mr-auto mb-2 mb-lg-0">
             {!access_token ? (
-
               <MDBNavbarItem>
                 <MDBNavbarLink href="/auth/login">Login</MDBNavbarLink>
               </MDBNavbarItem>
-
             ) : (
               <>
-
                 <MDBNavbarItem>
                   <MDBNavbarLink href="/userpage">User</MDBNavbarLink>
                 </MDBNavbarItem>
                 {/* <LinkNav navigate_to="/auth/login" navigate_name="Logout" onClick={()=> Logout}  /> */}
 
                 <MDBNavbarItem>
-                  <MDBNavbarLink href="/auth/login" onClick={Logout} >Log Out</MDBNavbarLink>
+                  <MDBNavbarLink href="/auth/login" onClick={Logout}>
+                    Log Out
+                  </MDBNavbarLink>
                 </MDBNavbarItem>
                 <MDBNavbarItem>
-                  <MDBNavbarLink href="/training">Choose Training</MDBNavbarLink>
+                  <MDBNavbarLink href="/training">
+                    Choose Training
+                  </MDBNavbarLink>
                 </MDBNavbarItem>
                 <MDBNavbarItem>
-                  <MDBNavbarLink href="/TrainingProgramas">Training Programas</MDBNavbarLink>
+                  <MDBNavbarLink href="/TrainingProgramas">
+                    Training Programas
+                  </MDBNavbarLink>
                 </MDBNavbarItem>
                 <MDBNavbarItem>
-                  <MDBDropdown>
-                   
-                  </MDBDropdown>
+                  <MDBDropdown></MDBDropdown>
                 </MDBNavbarItem>
               </>
             )}
-
           </MDBNavbarNav>
         </MDBCollapse>
       </MDBContainer>
