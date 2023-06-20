@@ -67,16 +67,13 @@ export function NavigationBar(props) {
                 <MDBNavbarItem>
                   <MDBNavbarLink href="/auth/login" onClick={Logout} >Log Out</MDBNavbarLink>
                 </MDBNavbarItem>
+
                 <MDBNavbarItem>
                   <MDBNavbarLink href="/training">Choose Training</MDBNavbarLink>
                 </MDBNavbarItem>
+
                 <MDBNavbarItem>
-                  <MDBNavbarLink href="/TrainingProgramas">Training Programas</MDBNavbarLink>
-                </MDBNavbarItem>
-                <MDBNavbarItem>
-                  <MDBDropdown>
-                   
-                  </MDBDropdown>
+                  <MDBNavbarLink href="/TrainingProgramas">Muscle Information</MDBNavbarLink>
                 </MDBNavbarItem>
               </>
             )}

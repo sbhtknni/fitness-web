@@ -9,7 +9,7 @@ const TrainingModal = ({ showModal, setShowModal, modalOption }) => {
       </Modal.Header>
       <Modal.Body>
         {/* Three Options to Show */}
-        {modalOption === "emptyInput" && <p>Please enter a weight value.</p>}
+        {modalOption === "emptyInput" && <p>Please enter valid weight value.</p>}
         {modalOption === "error" && (
           <p>Error occurred while adding the training program.</p>
         )}
