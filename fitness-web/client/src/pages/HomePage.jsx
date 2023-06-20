@@ -14,11 +14,12 @@ function HomePage() {
             <body className="vsc-initialized ">
                 <main role="main" className='pageLoadAnimation'>
                     <HomePageJumbotron />
-                    <HomeMainSection />
+                    
                 </main>
-                <Footer  />
+                
             </body>
-
+            <HomeMainSection />
+            <Footer  />
         </MainLayout>
     )
 };

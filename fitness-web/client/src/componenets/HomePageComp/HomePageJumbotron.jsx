@@ -7,7 +7,7 @@ function HomePageJumbotron() {
         <div className="container">
           <div className="row">
             <div className="col-md-8">
-              <h1 className="display-3">Hello Trainer!</h1>
+              <h1 className="display-3 fw-bolder">Hello Trainer!</h1>
               <p>
                 Achieve your fitness goals with our cutting-edge programs. Join
                 our community of fitness enthusiasts and embark on a
@@ -31,6 +31,7 @@ function HomePageJumbotron() {
           </div>
         </div>
       </div>
+      
     );
 }
   export default HomePageJumbotron;
