@@ -16,6 +16,7 @@ import {
   MDBDropdownItem,
   MDBCollapse,
 } from "mdb-react-ui-kit";
+import getURL from "../../assets/assetsUrls";
 export function NavigationBar(props) {
   const [showBasic, setShowBasic] = useState(false);
   const [access_token, setAccessToken] = useState(
@@ -29,23 +30,18 @@ export function NavigationBar(props) {
     window.localStorage.removeItem("selectedTrainingInfo");
     navigate("/auth/login");
   };
-
   return (
     <MDBNavbar sticky fixed dark expand="lg" bgColor="dark">
       <MDBContainer fluid>
         <MDBNavbarBrand href={!access_token ? "/" : "/userpage"}>
-          <img
-            width="30"
-            height="30"
-            src="https://queenstreetmedical.co.nz/wp-content/uploads/2023/02/qstfsvglogo.png"
-            alt="Logo"
-          />
+          <img width="30" height="30" src={getURL("logo")} alt="Logo" />
           Fitness
         </MDBNavbarBrand>
         <MDBNavbarToggler
           aria-controls="navbarSupportedContent"
           aria-label="Toggle navigation"
-          onClick={() => setShowBasic(!showBasic)}>
+          onClick={() => setShowBasic(!showBasic)}
+        >
           <MDBIcon icon="bars" fas />
         </MDBNavbarToggler>
 
