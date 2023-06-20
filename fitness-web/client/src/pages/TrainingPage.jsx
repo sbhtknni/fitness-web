@@ -69,7 +69,7 @@ export function TrainingForm() {
   if (!loading && !error) {
     return (
       <MainLayout>
-        <div className="container">
+        <div className="container ">
           <HelpAndTitle
             title="Choose Training Program"
             button_name="Need Help ?"

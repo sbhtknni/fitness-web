@@ -57,20 +57,7 @@ function LoginComponent() {
   };
 
   return (
-    <div
-      style={{
-        backgroundSize: "cover",
-        backgroundPosition: "center",
-        backgroundRepeat: "no-repeat",
-        backgroundAttachment: "fixed",
-        minHeight: "auto",
-        height: "auto",
-        width: "auto",
-        minWidth: "auto",
-        backgroundColor: "#eee",
-      }}>
-      {" "}
-      <MainLayout>
+      <MainLayout >
         <MDBContainer fluid onSubmit={handleSubmit}>
           {/* <div className="p-5 bg-image" style={{ backgroundImage: 'url(https://mdbootstrap.com/img/new/textures/full/171.jpg)', borderRadius: '10px', margin: '2vh', height: '300px' }}></div> */}
           {/* <div style={{  backgroundImage: `url(${background})`, borderRadius: '10px' }} > */}
@@ -123,7 +110,7 @@ function LoginComponent() {
           <Footer />
         </MDBContainer>
       </MainLayout>
-    </div>
+
   );
 }
 
