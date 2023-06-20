@@ -57,6 +57,7 @@ function UserHomePage() {
     const response = await getUser();
     if (response === false) {
       setLoading(false);
+      setError(true);
       return;
     } else {
       const val = response;
@@ -105,6 +106,7 @@ function UserHomePage() {
   }, []); // Empty dependency array to run the effect only once when the component mounts
 
   if (error && !loading) {
+    console.log("Error is ", error);
     return <ErrorPage toRemove={true} />;
   }
   if (loading && !error) {
