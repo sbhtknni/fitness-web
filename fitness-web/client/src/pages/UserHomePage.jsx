@@ -59,6 +59,7 @@ function UserHomePage() {
       setLoading(false);
       return;
     } else {
+      console.log("Repsonse is ", response);
       const val = response;
       setUser(val);
       setAllData(val);
@@ -69,14 +70,14 @@ function UserHomePage() {
   };
 
   const setAllData = async (user) => {
+    console.log("User selectes ", user);
     dates = user.selectedTrainings.map((training) => training.startDate);
     weights = user.selectedTrainings.map((training) => training.weight);
     trainingNames = user.selectedTrainings.map((training) => training.name);
     calculateStatistics(user);
-    
   };
 
-  const calculateStatistics = async (user) => {
+  const calculateStatistics = (user) => {
     // Update property1
     const updatedData = {
       ...data,
@@ -89,17 +90,18 @@ function UserHomePage() {
       popularName: calculatePopularName(trainingNames),
       currentTraining: currentTrainingName(trainingNames),
       weightLoss: calculateWeightLoss(user.selectedTrainings),
-      weightLossPerProgram: calculateWeightLossPerProgram(user.selectedTrainings),
+      weightLossPerProgram: calculateWeightLossPerProgram(
+        user.selectedTrainings
+      ),
     };
-    console.log("Weights are ", weights.length);
-    
+    console.log("Weights are ", calculateWeightLoss(user.selectedTrainings));
+    setLoading(false);
     setData(updatedData);
   };
 
   useEffect(() => {
-    const  fetchAllData =async () => {
+    async function fetchAllData() {
       await fetchUser();
-      setLoading(false);
     }
     fetchAllData();
   }, []); // Empty dependency array to run the effect only once when the component mounts
@@ -111,106 +113,85 @@ function UserHomePage() {
     return <ErrorPage toRemove={false} />
   }
 
-  if (!loading && !error) {
-    weights = user.selectedTrainings.map((training) => training.weight);
-    return (
-      <MainLayout>
-        <section style={{ backgroundColor: "#eee" }}>
-          <MDBContainer className="py-5">
-            <MDBRow>
-              {/* Profile Picture Cube */}
-              <ProfilePicture user={user} />
-              <MDBCol sm="8">
-                {/* User Details Card  */}
+    if (!loading && !error) {
+      return (
+        <MainLayout>
+          <section style={{ backgroundColor: "#eee" }}>
+            <MDBContainer className="py-5">
+              <MDBRow>
+                {/* Profile Picture Cube */}
+                <ProfilePicture user={user} />
+                <MDBCol sm="8">
+                  {/* User Details Card  */}
 
-                <DetailsCard user={user} training={data.currentTraining} />
-                <MDBRow className="row-cols-1 row-cols-md-3 g-4">
-                  {/* Include Max and Min Weight */}
-                </MDBRow>
-              </MDBCol>
-            </MDBRow>
+                  <DetailsCard user={user} training={data.currentTraining} />
+                  <MDBRow className="row-cols-1 row-cols-md-3 g-4">
+                    {/* Include Max and Min Weight */}
+                  </MDBRow>
+                </MDBCol>
+              </MDBRow>
+             
+             
+              <MDBRow className="row-cols-1 row-cols-md-3 g-4">
 
 
-            <MDBRow className="row-cols-1 row-cols-md-3 g-4">
+                <BigCard
+                  title="Weight"
+                  text={`#Max Weight $${data.max} kg$ \n #Min Weight $${data.min} kg$ # ${data.weightLoss} \n `}
+                  img_src={getURL("weight")}
+                />
+                <BigCard
+                  title="Statistics"
+                  text={`#Varience $${data.variance}$ \n #Standard Deviation $${data.standardDeviation}$ \n #Median $${data.median}$ \n`}
+                  img_src={getURL("statistics")}
+                />
+                <BigCard
+                  title=""
+                  text={`#Popular Training  $${data.popularName}$  #Current Training $${data.currentTraining}$  #Weight Loss Per Program ${data.weightLossPerProgram} \n `}
+                  img_src={getURL("workout")}
+                />
+              </MDBRow>
 
-              <BigCard
-                title="Weight"
-                // set text to be 'You need to work one more time to see the data' if weights is empty else set it to the data
-                text={            
-                  weights.length === 0
-                    ? "You need to work one more time to see the data"
-                    : `#Max $${data.max}$ \n #Min $${data.min}$ \n #Average $${data.average}$ \n #Weight Loss $${data.weightLoss}$ \n`
-                }
-                img_src={getURL("weight")}
-              />
-              <BigCard
-                title="Statistics"
-                text={
-                  weights.length === 0
-                    ? "You need to work one more time to see the data"
-                    : `#Varience $${data.variance}$ \n #Standard Deviation $${data.standardDeviation}$ \n #Median $${data.median}$ \n`
-                }
-                img_src={getURL("statistics")}
-              />
-              <BigCard
-                title="Popular Training"
-                text={
-                  weights.length === 0
-                    ? "You need to work one more time to see the data"
-                    : `#Popular Training  $${data.popularName}$  #Current Training $${data.currentTraining}$  #Weight Loss Per Program ${data.weightLossPerProgram} \n `
-                }
-                img_src={getURL("workout")}
-              />
-            </MDBRow>
-
-            <MDBRow className="py-4">
-              <MDBCol sm="7" className="h-100">
-                <MDBRow className="py-2">
+              <MDBRow className="py-4">
+                <MDBCol sm="7" className="h-100">
                   <MDBCard className="h-100">
                     <MDBCardHeader className="fw-bolder text-center">
-                      Weight Linear Graph
+                      Program Distribution
                     </MDBCardHeader>
                     <MDBCardBody>
-                      {weights.length === 0 ? (
-                        <p>You need to work one more time to see the data</p>
-                      ) : (
-                        <ChartTrainigGraph selectedTrainings={user.selectedTrainings} />)}
+                      <ChartTrainigGraph
+                        selectedTrainings={user.selectedTrainings}
+                      />
                     </MDBCardBody>
                   </MDBCard>
-                </MDBRow>
-              </MDBCol>
-              <BigCard
-                title="General information"
-                text={
-                  weights.length === 0
-                    ? "You need to work one more time to see the data"
-                    : `#Varience $${data.variance}$ \n #Standard Deviation $${data.standardDeviation}$`
-                }
-                img_src={getURL("general-info")}
-              />
-            </MDBRow>
+                </MDBCol>
 
-            <MDBRow className="py-2">
-              <MDBCard className="h-100">
-                <MDBCardHeader className="fw-bolder text-center">
-                  Weight Linear Graph
-                </MDBCardHeader>
-                <MDBCardBody>
-                  {weights.length === 0 ? (
-                    <p>You need to work one more time to see the data</p>
-                  ) : (
-                    <GraphComponent selectedTrainings={user.selectedTrainings} />
-                  )}
-                </MDBCardBody>
-              </MDBCard>
-            </MDBRow>
-            <hr />
-            <Footer />
-          </MDBContainer>
-        </section>
-      </MainLayout>
-    );
-  }
+                <BigCard
+                  title="General information"
+                  text={`#Varience $${data.variance}$ \n #Standard Deviation $${data.standardDeviation}$`}
+                  img_src={getURL("general-info")}
+                />
+              </MDBRow>
 
+              <MDBRow className="py-2">
+                <MDBCard  className="h-100">
+                  <MDBCardHeader className="fw-bolder text-center">
+                    Weight Linear Graph
+                  </MDBCardHeader>
+                  <MDBCardBody>
+                    <GraphComponent
+                      selectedTrainings={user.selectedTrainings}
+                    />
+                  </MDBCardBody>
+                </MDBCard>
+              </MDBRow>
+              <hr />
+              <Footer />
+            </MDBContainer>
+          </section>
+        </MainLayout>
+      );
+    }
+  
 }
 export default UserHomePage;
