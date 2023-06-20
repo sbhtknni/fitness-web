@@ -23,7 +23,7 @@ export default function WeightInput(props) {
   return (
     <>
       <div>
-        <MDBValidation className="row g-3" >
+        <MDBValidation className="row g-3" isValidated >
           <MDBValidationItem feedback='Enter Weight to Choose Training ( Max 250 kg )' invalid className="col-md-4">
             <MDBInput
               type="number"
