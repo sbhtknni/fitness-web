@@ -73,8 +73,8 @@ export function NavigationBar(props) {
                   </MDBNavbarLink>
                 </MDBNavbarItem>
                 <MDBNavbarItem>
-                  <MDBNavbarLink href="/TrainingProgramas">
-                    Training Programas
+                  <MDBNavbarLink href="/muscleInformation">
+                    Muscle Information
                   </MDBNavbarLink>
                 </MDBNavbarItem>
                 <MDBNavbarItem>

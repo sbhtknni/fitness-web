@@ -28,7 +28,7 @@ function App() {
           <Route path="training" element={<TrainingForm />} />
           <Route path="auth/login" element={<Login />} />
           <Route path="auth/register" element={<Register />} />
-          <Route path="TrainingProgramas" element={<TrainingProgramas />} />
+          <Route path="muscleInformation" element={<TrainingProgramas />} />
         </Routes>
     </BrowserRouter>
   );
