@@ -62,11 +62,12 @@ background-size: cover;
 
 }
 
-
-
-
 @media (max-width: 900px) {
   .cascading-right {
     margin-right: 0;
   }
+}
+.jumbotron{
+  background-color:#f4f3f8a6;
+
 }
