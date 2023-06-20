@@ -28,7 +28,4 @@ mongoose.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true })
   });
 
 app.listen(3002, () => console.log('Server Running on Port 3002')); //Start Server
-// if logedIn is exist in local storage - colnsol log it
-if (localStorage.getItem('logedIn')) {
-  console.log("local storage has this token");
-}
+
