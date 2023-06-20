@@ -49,19 +49,8 @@ router.post('/login', async (req, res) => {
     const enc = process.env.SECRET_KEY;
 
       // The token contains information about the user's identity.
-    const token = jwt.sign({ id: user._id }, enc);
-    // check if the token is already in the array 'logedIn' in local storage
-    if (localStorage.getItem('logedIn') === token) {
-      console.log("local storage already has this token");
-      return res.status(200).json({ token, userID: user._id, message: "already log in" });
-    }
-    // if the token is not in the array 'logedIn' in local storage
-    console.log("local storage does not have this token");
-    res.status(200).json({ token, userID: user._id, message: "logged in successfully" });
-    
-    // Add the token to array 'logedIn' in local storage
-    localStorage.setItem('logedIn', token);
-    console.log("local storage added new token user: ",localStorage.getItem('logedIn'));
+      const token =jwt.sign({ id: user._id }, enc);
+      res.status(200).json({token  ,userID: user._id ,message: "logged in successfully" });
     } catch (error) {
       res.status(500).json({ message: "Server Error" });
     }
