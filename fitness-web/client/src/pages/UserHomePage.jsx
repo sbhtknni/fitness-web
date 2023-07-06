@@ -1,48 +1,45 @@
+/**
+ * @fileoverview user home page component
+ * this component will show the user his data
+ * the data showen is:
+ * weight statistics
+ * bmi statistics
+ * popular training
+ * Usage percentage of programs graph
+ * Weights Per Training graph
+ * Total Days Per Program graph
+ * table of average weight loss per program
+ */
 import React, { useState, useEffect } from "react";
 import MainLayout from "../layout/MainLayout.jsx";
 import ErrorPage from "./ErrorPage.jsx";
-import Footer from "../componenets/General/Footer.jsx";
-import ProfilePicture from "../componenets/UserPageComp/ProfilePicture.jsx";
 import { getUser } from "../controller/requests.js";
-import GraphComponent from "../componenets/General/GraphComponent.jsx";
-import ChartTrainigGraph from "../componenets/General/ChartTrainingGraph.jsx";
-import DetailsCard from "../componenets/UserPageComp/DetailsCard.jsx";
-import BigCard from "../componenets/UserPageComp/BigCard.jsx";
-import getURL from "../assets/assetsUrls.js";
+import UserHomePageForm from "../componenets/UserHomePageComp/UserHomePageForm.jsx";
 
-
-import {
-  MDBCol,
-  MDBContainer,
-  MDBRow,
-  MDBCard,
-  MDBCardBody,
-  MDBCardHeader,
-} from "mdb-react-ui-kit";
-
+// UserHomePage function
 import {
   calculateAverage,
   calculateMax,
   calculateMin,
-  calculateVariance,
-  calculateStandardDeviation,
-  calculateMedian,
   calculatePopularName,
   currentTrainingName,
   calculateWeightLoss,
   calculateWeightLossPerProgram,
+  calculateNormalWeight,
+  calculateDaysInEachProgram,
 } from "../controller/utils/util_home_page.js";
-
 
 function UserHomePage() {
   const [user, setUser] = useState({});
+  const [height, setHeight] = useState(0);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(true);
+  // data from functions in utils
   const [data, setData] = useState({
     max: 0,
     min: 0,
     average: 0,
-    variance: 0,
+    normalWeight: 0,
     standardDeviation: 0,
     median: 0,
     popularName: "",
@@ -50,153 +47,97 @@ function UserHomePage() {
     weightLoss: 0,
     weightLossPerProgram: "",
     worstProgram: "",
+    averageWeightLossPerProgram: [],
+    weights: [],
   });
-
+// data that will not change in the form
   let weights = [];
   let dates = [];
   let trainingNames = [];
 
+  // fetch user data from server and set first values 
   const fetchUser = async () => {
     const response = await getUser();
     if (response === false) {
       setLoading(false);
-      setError(true);
       return;
     } else {
-      console.log("Repsonse is ", response);
       const val = response;
       setUser(val);
+      setHeight(val.height);
       setAllData(val);
       setError(false);
     }
-
-    // Set loading to false once data is fetched
   };
 
+  // set all data 
   const setAllData = async (user) => {
-    console.log("User selectes ", user);
-    dates = user.selectedTrainings.map((training) => training.startDate);
+    //dates will be map with key of training.startdate and value of training.name
+    dates = user.selectedTrainings.map(
+      (training) => training.startDate + "," + training.name
+    );
     weights = user.selectedTrainings.map((training) => training.weight);
     trainingNames = user.selectedTrainings.map((training) => training.name);
     calculateStatistics(user);
   };
-
-  const calculateStatistics = (user) => {
+  // calculate all statistics from functions in utils
+  const calculateStatistics = async (user) => {
     // Update property1
     const updatedData = {
       ...data,
       max: calculateMax(weights),
       min: calculateMin(weights),
       average: calculateAverage(weights),
-      variance: calculateVariance(weights),
-      standardDeviation: calculateStandardDeviation(weights),
-      median: calculateMedian(weights),
+      normalWeight: calculateNormalWeight(
+        user.height,
+        weights[weights.length - 1]
+      ),
       popularName: calculatePopularName(trainingNames),
       currentTraining: currentTrainingName(trainingNames),
       weightLoss: calculateWeightLoss(user.selectedTrainings),
       weightLossPerProgram: calculateWeightLossPerProgram(
+        user.selectedTrainings,
+        true
+      ),
+      averageWeightLossPerProgram: calculateDaysInEachProgram(
+        dates,
         user.selectedTrainings
       ),
+      weights: weights,
     };
-    console.log("Weights are ", calculateWeightLoss(user.selectedTrainings));
-    setLoading(false);
     setData(updatedData);
   };
-
+// run fetch user when component mounts
   useEffect(() => {
-    async function fetchAllData() {
+    const fetchAllData = async () => {
       await fetchUser();
-    }
+      setLoading(false);
+    };
     fetchAllData();
-  }, []); // Empty dependency array to run the effect only once when the component mounts
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [height]); // Empty dependency array to run the effect only once when the component mounts
 
+  // eror in getting data or log in
   if (error && !loading) {
-    console.log("Error is ", error);
     return <ErrorPage toRemove={true} />;
   }
+  // waiting for data
   if (loading && !error) {
-    return <ErrorPage toRemove={false} />
+    return <ErrorPage toRemove={false} />;
   }
-
-    if (!loading && !error) {
-      return (
-        <MainLayout>
-          <section style={{ backgroundColor: "#eee" }}>
-            <MDBContainer className="py-5">
-              <MDBRow>
-                {/* Profile Picture Cube */}
-                <ProfilePicture user={user} />
-                <MDBCol sm="8">
-                  {/* User Details Card  */}
-
-                  <DetailsCard user={user} training={data.currentTraining} />
-                  <MDBRow className="row-cols-1 row-cols-md-3 g-4">
-                    {/* Include Max and Min Weight */}
-                  </MDBRow>
-                </MDBCol>
-              </MDBRow>
-             
-             
-              <MDBRow className="row-cols-1 row-cols-md-3 g-4">
-
-
-                <BigCard
-                  title="Weight"
-                  text={`#Max Weight $${data.max} kg$ \n #Min Weight $${data.min} kg$ # ${data.weightLoss} \n `}
-                  img_src={getURL("weight")}
-                />
-                <BigCard
-                  title="Statistics"
-                  text={`#Varience $${data.variance}$ \n #Standard Deviation $${data.standardDeviation}$ \n #Median $${data.median}$ \n`}
-                  img_src={getURL("statistics")}
-                />
-                <BigCard
-                  title=""
-                  text={`#Popular Training  $${data.popularName}$  #Current Training $${data.currentTraining}$  #Weight Loss Per Program ${data.weightLossPerProgram} \n `}
-                  img_src={getURL("workout")}
-                />
-              </MDBRow>
-
-              <MDBRow className="py-4">
-                <MDBCol sm="7" className="h-100">
-                  <MDBCard className="h-100">
-                    <MDBCardHeader className="fw-bolder text-center">
-                      Program Distribution
-                    </MDBCardHeader>
-                    <MDBCardBody>
-                      <ChartTrainigGraph
-                        selectedTrainings={user.selectedTrainings}
-                      />
-                    </MDBCardBody>
-                  </MDBCard>
-                </MDBCol>
-
-                <BigCard
-                  title="General information"
-                  text={`#Varience $${data.variance}$ \n #Standard Deviation $${data.standardDeviation}$`}
-                  img_src={getURL("general-info")}
-                />
-              </MDBRow>
-
-              <MDBRow className="py-2">
-                <MDBCard  className="h-100">
-                  <MDBCardHeader className="fw-bolder text-center">
-                    Weight Linear Graph
-                  </MDBCardHeader>
-                  <MDBCardBody>
-                    <GraphComponent
-                      selectedTrainings={user.selectedTrainings}
-                    />
-                  </MDBCardBody>
-                </MDBCard>
-              </MDBRow>
-              <hr />
-              <Footer />
-            </MDBContainer>
-          </section>
-        </MainLayout>
-      );
-    }
-  
+  // data is ready
+  if (!loading && !error) {
+    return (
+      <MainLayout>
+        <UserHomePageForm
+          data={data}
+          user={user}
+          height={height}
+          setHeight={setHeight}
+          fetchUser={fetchUser}
+        />
+      </MainLayout>
+    );
+  }
 }
 export default UserHomePage;

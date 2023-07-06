@@ -1,20 +1,19 @@
+/**
+ * Login Component
+ * This component is used to login to the app
+ * this component is the main component that handles the login process
+ * it uses LoginForm.jsx and LoginModal.jsx
+ */
+
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import LoginForm from "./LoginForm";
 import LoginModal from "./LoginModal";
 import MainLayout from "../../layout/MainLayout";
-import Footer from "..//General/Footer.jsx";
+import Footer from "..//GeneralComp/Footer.jsx";
 import "..//..//assets/App.css";
-
-// bootstrap imports
-import {
-  MDBContainer,
-  MDBRow,
-  MDBCol,
-  MDBCard,
-  MDBCardBody,
-} from "mdb-react-ui-kit";
 import { login } from "../../controller/requests";
+
 
 // Login Function  login to the app
 function LoginComponent() {
@@ -25,16 +24,30 @@ function LoginComponent() {
   const [modalOption, setModalOption] = useState("");
   const [modalMessage, setModalMessage] = useState("");
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+  // Handle the login process
+  const handleSubmit = async (event) => {
+    event.preventDefault();
     try {
       const response = await login(email, password);
+      if (response==="Incorrect Password") {
+        setModalOption("error");
+        setShowModal(true);
+        setModalMessage("Incorrect Username or Password");
+        return;
+      }
+      if (response==="User already logged in") {
+        setModalOption("logged in");
+        setShowModal(true);
+        setModalMessage("User already logged in");
+        return;
+      }
+      // if (response=="User Not Found") {
       // Show modal based on login result
       setShowModal(true);
       setModalOption("success"); // or 'error'
       setModalMessage("Invalid credentials"); // Set the appropriate message
-      window.localStorage.setItem("access_token", response.data.token);
-      window.localStorage.setItem("userId", response.data.userID);
+      window.localStorage.setItem("access_token", response.data.token); // Save the token in local storage
+      window.localStorage.setItem("userId", response.data.userID); // Save the user id in local storage
     } catch (err) {
       setModalOption("error");
       setShowModal(true);
@@ -42,13 +55,15 @@ function LoginComponent() {
     }
   };
 
+  // Handle the email change
   const handleEmailChange = async (e) => {
     setEmail(e.target.value);
   };
-
+  // Handle the password change
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
+  // Close the modal and navigate to user page if login is successful
   const handleModalClose = () => {
     setShowModal(false);
     if (modalOption === "success") {
@@ -57,58 +72,27 @@ function LoginComponent() {
   };
 
   return (
-      <MainLayout >
-        <MDBContainer fluid onSubmit={handleSubmit}>
-          {/* <div className="p-5 bg-image" style={{ backgroundImage: 'url(https://mdbootstrap.com/img/new/textures/full/171.jpg)', borderRadius: '10px', margin: '2vh', height: '300px' }}></div> */}
-          {/* <div style={{  backgroundImage: `url(${background})`, borderRadius: '10px' }} > */}
+    <MainLayout >
 
-          <MDBRow className="d-flex justify-content-center align-items-center ">
-            <MDBCol col="12">
-              <br />
-              <MDBCard
-                className="bg-dark text-white mx-auto mb-10 "
-                style={{
-                  margin: "120px",
-                  borderRadius: "1rem",
-                  maxWidth: "400px",
+      <LoginForm
+        email={email}
+        password={password}
+        handleEmailChange={handleEmailChange}
+        handlePasswordChange={handlePasswordChange}
+        handleSubmit={handleSubmit}
+      />
 
-                }}>
-                <MDBCardBody className="p-5 d-flex flex-column align-items-center mx-auto w-100">
-                  <h2 className="fw-bold mb-2 text-uppercase">Login</h2>
-                  <p className="text-white-50 mb-5">
-                    Please enter your login and password!
-                  </p>
-                  <LoginForm
-                    email={email}
-                    password={password}
-                    handleEmailChange={handleEmailChange}
-                    handlePasswordChange={handlePasswordChange}
-                    handleSubmit={handleSubmit}
-                  />
-                  <div>
-                    <p className="mb-0">
-                      Don't have an account?{" "}
-                      <a href="register" className="text-white-50 fw-bold">
-                        Sign Up
-                      </a>
-                    </p>
-                  </div>
-                </MDBCardBody>
-              </MDBCard>
-            </MDBCol>
-          </MDBRow>
-          <LoginModal
-            showModal={showModal}
-            modalOption={modalOption}
-            modalMessage={modalMessage}
-            handleModalClose={handleModalClose}
-            setShowModal={setShowModal}
-          />
+      <LoginModal
+        showModal={showModal}
+        modalOption={modalOption}
+        modalMessage={modalMessage}
+        handleModalClose={handleModalClose}
+        setShowModal={setShowModal}
+      />
+      <hr />
+      <Footer />
 
-          <hr />
-          <Footer />
-        </MDBContainer>
-      </MainLayout>
+    </MainLayout>
 
   );
 }

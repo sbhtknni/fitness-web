@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+//SCHEMA FOR MUSCLE INFORMATION IN THE DATABASE 
 const MuscleInformationSchema = new mongoose.Schema({
     muscle: { type: String, required: true, unique: true },
     generalInformation: { type: String, required: true },
