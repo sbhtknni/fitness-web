@@ -2,7 +2,7 @@
 
 The website is written in react, jsx, html and css.
 FitnessWeb is an engaging and interactive website that delivers an unparalleled user experience. Our platform is designed to effectively monitor your training progress, provide valuable insights into your physical condition, and offer up-to-date information to support your active lifestyle. Whether you're a seasoned athlete or just starting your fitness journey, FitnessWeb is here to accompany you every step of the way.
-
+The site is deployed to the Internet through "vercel" on the client side and through "render" on the server side.
 Link: https://fitness-web-beige.vercel.app/
 
 
@@ -14,6 +14,8 @@ Expand your understanding of the human body and its intricate muscles through ou
 
 # Personalized Training Program Feedback
 Receive valuable feedback on your training programs tailored specifically to your needs. Our advanced system analyzes your performance data and provides insightful recommendations to enhance the effectiveness of your workouts, helping you achieve your fitness goals faster.
+![Home_page:](https://github.com/sbhtknni/fitness-web/assets/109150591/5bcbb75b-2890-4763-8d77-633aade49b04)
+
 
 # Seamless Accessibility
 FitnessWeb is accessible across both desktop and mobile devices, ensuring that you can effortlessly engage with the platform no matter where you are. Enjoy a consistent and user-friendly experience, allowing you to stay connected and on track at all times.
