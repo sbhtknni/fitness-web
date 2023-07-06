@@ -1,7 +1,7 @@
 import express from "express";
 import { MusclesInformation } from "../models/MuscleInformation.js";
 import { validateToken } from "./validate.js";
-
+// router for muscleInformation
 const router = express.Router();
 
 // Get muscleInformation by muscle name
@@ -16,7 +16,7 @@ router.get("/:muscleName", validateToken, async (req, res) => {
         .status(400)
         .json({ message: "MusclesInformation does not exist" });
     }
-    console.log("MusclesInformation Sent");
+    console.log("MusclesInformation by name Sent");
     return res
       .status(200)
       .json({ musclesInformation, message: "All musclesInformation sent" });
@@ -49,7 +49,7 @@ router.post("/muscleInformation", validateToken, async (req, res) => {
   }
 });
 
-// Get only name from all Training Programas that in the scema
+// Get only name from all Training Programas that in the scema -----------------------------------------
 router.get("/", validateToken, async (req, res) => {
   try {
     const musclesInformation = await MusclesInformation.find({}, { muscle: 1 });

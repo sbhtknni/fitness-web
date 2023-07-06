@@ -1,19 +1,7 @@
 import mongoose from "mongoose";
 
-// const UserSchema = new mongoose.Schema({   
-//     email: {type : String, required : true, unique : true},
-//     password:{type: String,required: true},
-//     firstName: {type : String, required : true},
-//     lastName: {type : String, required : true},
-//     height: {type : Number, required : true, min: Number.MIN_SAFE_INTEGER, max: Number.MAX_SAFE_INTEGER},
-//     weight: {type : Number, reuirqed : true, min: Number.MIN_SAFE_INTEGER, max: Number.MAX_SAFE_INTEGER},
-//     bmi:{type : Number, min: Number.MIN_SAFE_INTEGER, max: Number.MAX_SAFE_INTEGER},
-// });
-
-//setting the scheme called users in database
-// export const UserModel = mongoose.model("users", UserSchema);
-// import mongoose from "mongoose";
-
+//SCHEMA FOR USER IN THE DATABASE
+//SELECTED TRAININGS IS AN ARRAY OF OBJECTS THAT CONTAINS THE TRAINING ID, NAME, WEIGHT, BMI AND START DATE
 const UserSchema = new mongoose.Schema({   
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },

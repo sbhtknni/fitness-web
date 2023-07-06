@@ -5,11 +5,8 @@ import ReactDOM from 'react-dom/client';
 import './assets/index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
-
- 
+ // root is the element in the index.html file
 const root = ReactDOM.createRoot(document.getElementById('root'));
-
 root.render(
     <App />   
 );

@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-
+//SCHEMA FOR TRAINING IN THE DATABASE
 const TrainingSchema = new mongoose.Schema({   
     name: {type : String, required : true , unique : true},
     exercises : [{type : String, required : true}],

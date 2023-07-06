@@ -1,3 +1,11 @@
+
+html, body, section {
+  block-size: 100%;
+}
+
+html {
+  scroll-snap-type: y mandatory;
+}
 img {
   max-width: 100%;
   max-height: 100%;
@@ -9,13 +17,12 @@ iframe {
   position: relative;
 }
 
-.App-logo {
-  height: 40vmin;
+.spin {
   pointer-events: none;
 }
 
 @media (prefers-reduced-motion: no-preference) {
-  .App-logo {
+  .spin {
     animation: App-logo-spin infinite 30s linear;
   }
 }
@@ -53,7 +60,6 @@ iframe {
 
 body {
 /* fallback for old browsers */
-background: #6a11cb;
 background-image: linear-gradient(to top, #898e9d, #9a9ead, #abaebd, #bcbfcd, #ced0de, #d8d9e6, #e2e3ee, #ececf6, #f0f0f7, #f4f3f8, #f7f7fa, #fbfbfb);
 /* set the gradient on all the page */
 background-repeat: no-repeat;
@@ -61,6 +67,13 @@ background-attachment: fixed;
 background-size: cover;
 
 }
+.semi_transperent{
+  background-image: linear-gradient(to top, #898e9d, #9a9ead, #abaebd, #bcbfcd, #ced0de, #d8d9e6, #e2e3ee, #ececf6, #f0f0f7, #f4f3f8, #f7f7fa, #fbfbfb);
+  /* set the gradient on all the page */
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size: cover;
+  }
 
 @media (max-width: 900px) {
   .cascading-right {
@@ -69,5 +82,114 @@ background-size: cover;
 }
 .jumbotron{
   background-color:#f4f3f8a6;
+}
+
+
+.card {
+ border-radius: 20px;
+ transition: all .1s;
+}
+
+
+.card:hover {
+  transform: scale(1.05);
+/* box shadow linear gradien */
+  box-shadow: 0 0 20px #2a6cd683;
 
 }
+
+.speical_btn {
+  width: 20em;
+  height: 3em;
+  border-radius: 30em;
+  font-size: 15px;
+  border: none;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+  box-shadow: 6px 6px 12px #c5c5c5,
+              -6px -6px 12px #ffffff;
+ }
+ 
+ .speical_btn::before {
+  content: '';
+  width: 0;
+  height: 3em;
+  border-radius: 30em;
+  position: absolute;
+  top: 0;
+  left: 0;
+ background-image: linear-gradient(to right, #0fd850 0%, #f9f047 100%);  transition: .5s ease;
+  display: block;
+  z-index: -1;
+ }
+ 
+ .speical_btn:hover::before {
+  width: 20em;
+ }
+ .custom-btn-group {
+  width: 100%; /* Set the desired width here */
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.column {
+  float: left;
+  width: 33.3%;
+  margin-bottom: 16px;
+  padding: 0 8px;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  margin: 8px;
+}
+
+.about-section {
+  padding: 50px;
+  text-align: center;
+  background-color: #474e5d;
+  color: white;
+}
+.jarallax {
+  height: 700px;
+}
+
+@media (max-width: 740px) {
+  html,
+  body,
+  header,
+  .jarallax {
+    height: 100vh;
+  }
+}
+
+@media (min-width: 800px) and (max-width: 850px) { 
+  .jarallax {
+    height: 100vh;
+  }
+}
+
+
+.avatar:hover {
+    transform: scale(1.1);
+    transition: all 0.3s ease-in-out;
+  /* box shadow linear gradien */
+
+  }
+
+  h5 {
+    letter-spacing: 3px;
+}
+.white-text {
+  color: #ececec;
+}
+
+.min-column {
+  flex-basis: 400px;
+  flex-grow: 1;
+}
+
+
+
+  
