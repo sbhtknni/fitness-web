@@ -21,7 +21,8 @@ Receive valuable feedback on your training programs tailored specifically to you
 # Seamless Accessibility
 FitnessWeb is accessible across both desktop and mobile devices, ensuring that you can effortlessly engage with the platform no matter where you are. Enjoy a consistent and user-friendly experience, allowing you to stay connected and on track at all times.
 
-![Screenshot 2023-07-06 192804](https://github.com/sbhtknni/fitness-web/assets/109150591/efc0fe5e-678b-493a-95e0-368af4deac76)![Screenshot 2023-07-06 192833](https://github.com/sbhtknni/fitness-web/assets/109150591/b169f996-af08-400a-92f0-c8464e66aec5)![Screenshot 2023-07-06 192902](https://github.com/sbhtknni/fitness-web/assets/109150591/d62e5dd8-90ba-4ac6-b404-4e9080610beb)
+![Screenshot 2023-07-06 192804](https://github.com/sbhtknni/fitness-web/assets/109150591/efc0fe5e-678b-493a-95e0-368af4deac76)![Screenshot 2023-07-06 192833](https://github.com/sbhtknni/fitness-web/assets/109150591/b169f996-af08-400a-92f0-c8464e66aec5)![Screenshot 2023-07-06 192902](https://github.com/sbhtknni/fitness-web/assets/109150591/d62e5dd8-90ba-4ac6-b404-4e9080610beb)![Screenshot 2023-07-06 193025](https://github.com/sbhtknni/fitness-web/assets/109150591/769b99d1-8594-469e-8b7b-84bcdf435919)
+
 
 
 
