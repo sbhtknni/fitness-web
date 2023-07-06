@@ -1,8 +1,8 @@
-# fitness-web site
+# Fitness-web site
 
-The website is written in react, jsx, html and css.
+The website is written in react, jsx, html and css. <br />
 FitnessWeb is an engaging and interactive website that delivers an unparalleled user experience. Our platform is designed to effectively monitor your training progress, provide valuable insights into your physical condition, and offer up-to-date information to support your active lifestyle. Whether you're a seasoned athlete or just starting your fitness journey, FitnessWeb is here to accompany you every step of the way.
-The site is deployed to the Internet through "vercel" on the client side and through "render" on the server side.
+The site is deployed to the Internet through "vercel" on the client side and through "render" on the server side.<br />  <br /> 
 Link: https://fitness-web-beige.vercel.app/
 
 
@@ -28,4 +28,4 @@ FitnessWeb is accessible across both desktop and mobile devices, ensuring that y
 # Flexible Content Management
 The majority of our site's content is securely stored in a MongoDB database. This setup allows for easy and versatile content updates in the future, ensuring that the platform remains dynamic and relevant to evolving user needs.
 
-Enjoy!
+# Enjoy!
