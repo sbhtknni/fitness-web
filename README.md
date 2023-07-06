@@ -9,6 +9,8 @@ Link: https://fitness-web-beige.vercel.app/
 # Comprehensive Training Monitoring
 With FitnessWeb, you gain full control over your training routines and weights. Effortlessly manage and track your workouts, allowing you to stay on top of your progress and make informed decisions to optimize your performance.
 
+![Screenshot 2023-07-06 193210](https://github.com/sbhtknni/fitness-web/assets/109150591/3fde3a8a-f4d8-43a7-a192-915451f46cfa)
+
 # Muscle Knowledge
 Expand your understanding of the human body and its intricate muscles through our extensive knowledge base. Access a wealth of information on different muscle groups, their functions, and effective techniques to target them during your workouts.
 
@@ -21,11 +23,7 @@ Receive valuable feedback on your training programs tailored specifically to you
 # Seamless Accessibility
 FitnessWeb is accessible across both desktop and mobile devices, ensuring that you can effortlessly engage with the platform no matter where you are. Enjoy a consistent and user-friendly experience, allowing you to stay connected and on track at all times.
 
-![Screenshot 2023-07-06 192804](https://github.com/sbhtknni/fitness-web/assets/109150591/efc0fe5e-678b-493a-95e0-368af4deac76)![Screenshot 2023-07-06 192833](https://github.com/sbhtknni/fitness-web/assets/109150591/b169f996-af08-400a-92f0-c8464e66aec5)![Screenshot 2023-07-06 192902](https://github.com/sbhtknni/fitness-web/assets/109150591/d62e5dd8-90ba-4ac6-b404-4e9080610beb)![Screenshot 2023-07-06 193025](https://github.com/sbhtknni/fitness-web/assets/109150591/769b99d1-8594-469e-8b7b-84bcdf435919)
-
-
-
-
+![Screenshot 2023-07-06 192804](https://github.com/sbhtknni/fitness-web/assets/109150591/efc0fe5e-678b-493a-95e0-368af4deac76)![Screenshot 2023-07-06 192833](https://github.com/sbhtknni/fitness-web/assets/109150591/b169f996-af08-400a-92f0-c8464e66aec5)
 
 # Flexible Content Management
 The majority of our site's content is securely stored in a MongoDB database. This setup allows for easy and versatile content updates in the future, ensuring that the platform remains dynamic and relevant to evolving user needs.
